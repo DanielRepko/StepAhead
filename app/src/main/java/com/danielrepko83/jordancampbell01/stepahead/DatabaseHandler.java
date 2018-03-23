@@ -1,8 +1,11 @@
 package com.danielrepko83.jordancampbell01.stepahead;
 
+import android.content.ContentValues;
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+
+import com.danielrepko83.jordancampbell01.stepahead.Object_Classes.Weight;
 
 /**
  * Created by web on 2018-03-23.
@@ -40,6 +43,17 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
         db.execSQL("DROP TABLE IF EXISTS " + TABLE_WEIGHT);
+    }
+
+    /* CRUD Operations - Weight Table */
+    public void addWeight(Weight weight) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues values = new ContentValues();
+        values.put(COLUMN_POUNDS, weight.getPounds());
+        values.put(COLUMN_KILOGRAMS, weight.getKilograms());
+        values.put(COLUMN_DATE, weight.getDate());
+        db.insert(TABLE_WEIGHT,null, values);
+        db.close();
     }
 
 }
