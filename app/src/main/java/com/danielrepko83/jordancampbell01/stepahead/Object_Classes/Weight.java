@@ -26,4 +26,32 @@ public class Weight {
         this.kilograms = kilograms;
         this.date = date;
     }
+
+    public int getId() {
+        return id;
+    }
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public Double getPounds() {
+        return pounds;
+    }
+    public void setPounds(Double pounds) {
+        this.pounds = pounds;
+    }
+
+    public Double getKilograms() {
+        return kilograms;
+    }
+    public void setKilograms(Double kilograms) {
+        this.kilograms = kilograms;
+    }
+
+    public String getDate() {
+        return date;
+    }
+    public void setDate(String date) {
+        this.date = date;
+    }
 }
