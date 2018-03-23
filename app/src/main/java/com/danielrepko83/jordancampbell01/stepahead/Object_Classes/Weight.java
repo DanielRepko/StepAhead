@@ -1,10 +1,13 @@
 package com.danielrepko83.jordancampbell01.stepahead.Object_Classes;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 /**
  * Created by web on 2018-03-23.
  */
 
-public class Weight {
+public class Weight implements Parcelable {
     private int id;
     private Double pounds;
     private Double kilograms;
@@ -54,4 +57,30 @@ public class Weight {
     public void setDate(String date) {
         this.date = date;
     }
+
+    public int describeContents() {
+        return 0;
+    }
+
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeInt(this.id);
+        dest.writeDouble(this.pounds);
+        dest.writeDouble(this.kilograms);
+        dest.writeString(this.date);
+    }
+
+    protected Weight(Parcel in) {
+        this.id = in.readInt();
+        this.pounds = in.readDouble();
+        this.kilograms = in.readDouble();
+        this.date = in.readString();
+    }
+
+    public static final Parcelable.Creator<Weight> CREATOR = new Parcelable.Creator<Weight>() {
+        public Weight createFromParcel(Parcel source) { return new Weight(source); }
+
+        public Weight[] newArray(int size) {
+            return new Weight[size];
+        }
+    };
 }
