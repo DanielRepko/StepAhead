@@ -63,7 +63,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         SQLiteDatabase db = this.getReadableDatabase();
         Weight weight = null;
         Cursor cursor = db.query(TABLE_WEIGHT,
-                new String[]{COLUMN_ID, COLUMN_KILOGRAMS, COLUMN_POUNDS, COLUMN_DATE},
+                new String[]{COLUMN_ID, COLUMN_POUNDS, COLUMN_KILOGRAMS, COLUMN_DATE},
                 COLUMN_ID + "=?", new String[]{String.valueOf(id)},
                 null,
                 null,
@@ -94,6 +94,15 @@ public class DatabaseHandler extends SQLiteOpenHelper {
             } while(cursor.moveToNext());
         }
         return weightList;
+    }
+
+    public int updateWeight(Weight weight) {
+        SQLiteDatabase db = getWritableDatabase();
+        ContentValues values = new ContentValues();
+        values.put(COLUMN_POUNDS, weight.getPounds());
+        values.put(COLUMN_KILOGRAMS, weight.getKilograms());
+        values.put(COLUMN_DATE, weight.getDate());
+        return db.update(TABLE_WEIGHT, values, COLUMN_ID + "= ?", new String[]{String.valueOf(weight.getId())});
     }
 
 }
