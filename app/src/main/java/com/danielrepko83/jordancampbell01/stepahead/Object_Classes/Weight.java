@@ -82,5 +82,5 @@ public class Weight implements Parcelable {
         public Weight[] newArray(int size) {
             return new Weight[size];
         }
-    };h
+    };
 }

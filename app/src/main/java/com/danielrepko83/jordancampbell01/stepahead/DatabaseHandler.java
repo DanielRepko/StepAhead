@@ -105,4 +105,12 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         return db.update(TABLE_WEIGHT, values, COLUMN_ID + "= ?", new String[]{String.valueOf(weight.getId())});
     }
 
+    public void deleteWeight(int weight) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        db.delete(TABLE_WEIGHT,
+                COLUMN_ID + "= ?",
+                new String[]{String.valueOf(weight)});
+        db.close();
+    }
+
 }
