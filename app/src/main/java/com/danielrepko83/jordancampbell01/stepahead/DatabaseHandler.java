@@ -8,6 +8,8 @@ import android.database.sqlite.SQLiteOpenHelper;
 
 import com.danielrepko83.jordancampbell01.stepahead.Object_Classes.Weight;
 
+import java.util.ArrayList;
+
 /**
  * Created by web on 2018-03-23.
  */
@@ -76,6 +78,21 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         }
         db.close();
         return weight;
+    }
+
+    public ArrayList<Weight> getAllWeights() {
+        ArrayList<Weight> weightList = new ArrayList<>();
+        String query = "SELECT * FROM " + TABLE_WEIGHT;
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = db.rawQuery(query, null);
+        if(cursor.moveToFirst()) {
+            do {
+                weightList.add(new Weight(Integer.parseInt(cursor.getString(0)),
+                        cursor.getDouble(1),
+                        cursor.getDouble(2),
+                        cursor.getString(3)));
+            } while(cursor.moveToNext());
+        }
     }
 
 }
