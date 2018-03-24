@@ -93,6 +93,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
                         cursor.getString(3)));
             } while(cursor.moveToNext());
         }
+        return weightList;
     }
 
 }
