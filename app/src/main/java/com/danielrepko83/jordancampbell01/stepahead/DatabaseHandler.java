@@ -2,6 +2,7 @@ package com.danielrepko83.jordancampbell01.stepahead;
 
 import android.content.ContentValues;
 import android.content.Context;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
@@ -54,6 +55,27 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         values.put(COLUMN_DATE, weight.getDate());
         db.insert(TABLE_WEIGHT,null, values);
         db.close();
+    }
+
+    public Weight getWeight(int id) {
+        SQLiteDatabase db = this.getReadableDatabase();
+        Weight weight = null;
+        Cursor cursor = db.query(TABLE_WEIGHT,
+                new String[]{COLUMN_ID, COLUMN_KILOGRAMS, COLUMN_POUNDS, COLUMN_DATE},
+                COLUMN_ID + "=?", new String[]{String.valueOf(id)},
+                null,
+                null,
+                null,
+                null);
+        if(cursor != null) {
+            cursor.moveToFirst();
+            weight = new Weight(Integer.parseInt(cursor.getString(0)),
+                    cursor.getDouble(1),
+                    cursor.getDouble(2),
+                    cursor.getString(3));
+        }
+        db.close();
+        return weight;
     }
 
 }
