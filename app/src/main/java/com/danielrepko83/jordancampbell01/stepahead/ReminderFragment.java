@@ -7,6 +7,12 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
+import android.widget.EditText;
+import android.widget.Spinner;
+import android.widget.SpinnerAdapter;
+
+import java.util.ArrayList;
 
 
 /**
@@ -65,6 +71,17 @@ public class ReminderFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_reminder, container, false);
+
+        //Grab the current elements on the page
+        Spinner typeSpinner = view.findViewById(R.id.typeSpinner);
+        EditText dateEditText = view.findViewById(R.id.dateEditText);
+        EditText timeEditText = view.findViewById(R.id.timeEditText);
+        EditText descriptionEditText = view.findViewById(R.id.descriptionEditText);
+
+        //Create an ArrayList of Run types, and fill it with the values "Run" and "Weight Check"
+        ArrayList<String> runTypeArrayList = new ArrayList<>();
+        runTypeArrayList.add("Run");
+        runTypeArrayList.add("Weight Check");
 
         
 
