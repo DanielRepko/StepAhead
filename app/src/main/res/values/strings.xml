@@ -9,6 +9,12 @@
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
 
+    <!-- Menu Strings -->
+    <string name="menu_home">Home</string>
+    <string name="menu_journals">Run Journals</string>
+    <string name="menu_weight">Weight Journals</string>
+    <string name="menu_reminder">Create Reminder</string>
+
     <!-- Reminder Strings -->
     <string name="reminder_type">Type</string>
     <string name="reminder_date">Date</string>
