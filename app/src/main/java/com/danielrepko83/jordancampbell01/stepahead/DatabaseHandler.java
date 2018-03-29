@@ -54,7 +54,18 @@ public class DatabaseHandler extends SQLiteOpenHelper {
     /* Create statement for Run Table */
     public static final String CREATE_RUN_TABLE = "CREATE TABLE "+TABLE_RUN+"("
             +COLUMN_ID+" INTEGER PRIMARY KEY NOT NULL,"
-            +COLUMN_DISTANCE+" ";
+            +COLUMN_DISTANCE+" REAL,"
+            +COLUMN_DURATION+" TEXT NOT NULL,"
+            +COLUMN_START_TIME+" TEXT NOT NULL,"
+            +COLUMN_CALORIES+" INTEGER,"
+            +COLUMN_IMAGES+" INTEGER,"
+            +COLUMN_FEELING+" TEXT,"
+            +COLUMN_AREA+" TEXT,"
+            +COLUMN_HEART_RATE+" INTEGER,"
+            +COLUMN_NOTE+" TEXT,"
+            +COLUMN_AVERAGE_PACE+" REAL,"
+            +COLUMN_AVERAGE_SPEED+" REAL,"
+            +COLUMN_WEATHER+" TEXT)";
 
     public DatabaseHandler(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
@@ -62,10 +73,12 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 
     public void onCreate(SQLiteDatabase db) {
         db.execSQL(CREATE_WEIGHT_TABLE);
+        db.execSQL(CREATE_RUN_TABLE);
     }
 
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
         db.execSQL("DROP TABLE IF EXISTS " + TABLE_WEIGHT);
+        db.execSQL("DROP TABLE IF EXISTS " + TABLE_RUN);
     }
 
     /* CRUD Operations - Weight Table */
