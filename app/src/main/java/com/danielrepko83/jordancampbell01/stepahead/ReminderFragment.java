@@ -8,9 +8,11 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.SpinnerAdapter;
+import android.widget.TimePicker;
 
 import java.util.ArrayList;
 
@@ -74,8 +76,8 @@ public class ReminderFragment extends Fragment {
 
         //Grab the current elements on the page
         Spinner typeSpinner = view.findViewById(R.id.typeSpinner);
-        EditText dateEditText = view.findViewById(R.id.dateEditText);
-        EditText timeEditText = view.findViewById(R.id.timeEditText);
+        DatePicker datePicker = view.findViewById(R.id.datePicker);
+        TimePicker timePicker = view.findViewById(R.id.timePicker);
         EditText descriptionEditText = view.findViewById(R.id.descriptionEditText);
 
         //Create an ArrayList of Run types, and fill it with the values "Run" and "Weight Check"
