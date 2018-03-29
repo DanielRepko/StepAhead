@@ -20,6 +20,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 
     /* Table Names */
     public static final String TABLE_WEIGHT = "weight";
+    public static final String TABLE_RUN = "run";
 
     /* Column Names - Shared Columns */
     public static final String COLUMN_ID = "id";
@@ -29,12 +30,31 @@ public class DatabaseHandler extends SQLiteOpenHelper {
     public static final String COLUMN_POUNDS = "lbs";
     public static final String COLUMN_KILOGRAMS = "kg";
 
-    /* Create statements for Tables */
+    /* Column Names - Run Table */
+    public static final String COLUMN_DISTANCE = "distance";
+    public static final String COLUMN_DURATION = "duration";
+    public static final String COLUMN_START_TIME = "startTime";
+    public static final String COLUMN_CALORIES = "calories";
+    public static final String COLUMN_IMAGES = "images";
+    public static final String COLUMN_FEELING = "feeling";
+    public static final String COLUMN_AREA = "area";
+    public static final String COLUMN_HEART_RATE = "heartRate";
+    public static final String COLUMN_NOTE = "note";
+    public static final String COLUMN_AVERAGE_PACE = "averagePace";
+    public static final String COLUMN_AVERAGE_SPEED = "averageSpeed";
+    public static final String COLUMN_WEATHER = "weather";
+
+    /* Create statement for Weight Table */
     public static final String CREATE_WEIGHT_TABLE = "CREATE TABLE " + TABLE_WEIGHT + "("
-            + COLUMN_ID + " INTEGER PRIMARY KEY,"
+            + COLUMN_ID + " INTEGER PRIMARY KEY NOT NULL,"
             + COLUMN_POUNDS + " REAL,"
             + COLUMN_KILOGRAMS + " REAL,"
             + COLUMN_DATE + " TEXT)";
+
+    /* Create statement for Run Table */
+    public static final String CREATE_RUN_TABLE = "CREATE TABLE "+TABLE_RUN+"("
+            +COLUMN_ID+" INTEGER PRIMARY KEY NOT NULL,"
+            +COLUMN_DISTANCE+" ";
 
     public DatabaseHandler(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
