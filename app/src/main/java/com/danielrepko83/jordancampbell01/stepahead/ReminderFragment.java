@@ -83,7 +83,8 @@ public class ReminderFragment extends Fragment {
         runTypeArrayList.add("Run");
         runTypeArrayList.add("Weight Check");
 
-        
+        ArrayAdapter adapter = new ArrayAdapter(getContext(), android.R.layout.simple_list_item_1, runTypeArrayList);
+        typeSpinner.setAdapter(adapter);
 
         return view;
     }
@@ -126,4 +127,6 @@ public class ReminderFragment extends Fragment {
         // TODO: Update argument type and name
         void onFragmentInteraction(Uri uri);
     }
+
+
 }
