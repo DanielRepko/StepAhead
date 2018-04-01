@@ -8,6 +8,10 @@ import java.util.ArrayList;
 
 public class RunJournal {
 
+    /**
+     * PROPERTIES
+     */
+
     private int id;
     private double distance;
     private String startTime;
@@ -20,8 +24,12 @@ public class RunJournal {
     private double avgPace;
     private double avgSpeed;
     private String weather;
-    private int measurement;
+    private int measurement = 0;
 
+
+    /**
+     * CONTRUCTORS
+     */
 
     public RunJournal(){
 
@@ -70,5 +78,126 @@ public class RunJournal {
         this.avgSpeed = avgSpeed;
         this.weather = weather;
         this.measurement = measurement;
+    }
+
+
+    /**
+     * METHODS
+     */
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public double getDistance() {
+        return distance;
+    }
+
+    public void setDistance(double distance) {
+        this.distance = distance;
+    }
+
+    //allows the distance and measurement to be set at the same time
+    public void setDistance(double distance, int measurement) {
+        this.distance = distance;
+        this.setMeasurement(measurement);
+    }
+
+    public String getStartTime() {
+        return startTime;
+    }
+
+    public void setStartTime(String startTime) {
+        this.startTime = startTime;
+    }
+
+    public int getCalories() {
+        return calories;
+    }
+
+    public void setCalories(int calories) {
+        this.calories = calories;
+    }
+
+    public String getFeeling() {
+        return feeling;
+    }
+
+    public void setFeeling(String feeling) {
+        this.feeling = feeling;
+    }
+
+    public String getArea() {
+        return area;
+    }
+
+    public void setArea(String area) {
+        this.area = area;
+    }
+
+    public int getHeartRate() {
+        return heartRate;
+    }
+
+    public void setHeartRate(int heartRate) {
+        this.heartRate = heartRate;
+    }
+
+    public String getNote() {
+        return note;
+    }
+
+    public void setNote(String note) {
+        this.note = note;
+    }
+
+    public double getAvgPace() {
+        return avgPace;
+    }
+
+    public void setAvgPace(double avgPace) {
+        this.avgPace = avgPace;
+    }
+
+    public double getAvgSpeed() {
+        return avgSpeed;
+    }
+
+    public void setAvgSpeed(double avgSpeed) {
+        this.avgSpeed = avgSpeed;
+    }
+
+    public String getWeather() {
+        return weather;
+    }
+
+    public void setWeather(String weather) {
+        this.weather = weather;
+    }
+
+    public int getMeasurement() {
+        return measurement;
+    }
+
+    public void setMeasurement(int measurement) {
+        if(this.measurement == measurement) {
+            this.measurement = measurement;
+        } else {
+            this.measurement = measurement;
+
+            if(this.measurement == 0){
+                double distance = this.getDistance();
+                distance = distance / 0.62137;
+                this.setDistance(distance);
+            } else if(this.measurement == 1){
+                double distance = this.getDistance();
+                distance = distance * 0.62137;
+                this.setDistance(distance);
+            }
+        }
     }
 }
