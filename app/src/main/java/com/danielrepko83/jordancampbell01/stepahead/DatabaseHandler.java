@@ -35,7 +35,6 @@ public class DatabaseHandler extends SQLiteOpenHelper {
     public static final String COLUMN_DURATION = "duration";
     public static final String COLUMN_START_TIME = "startTime";
     public static final String COLUMN_CALORIES = "calories";
-    public static final String COLUMN_IMAGES = "images";
     public static final String COLUMN_FEELING = "feeling";
     public static final String COLUMN_AREA = "area";
     public static final String COLUMN_HEART_RATE = "heartRate";
@@ -58,7 +57,6 @@ public class DatabaseHandler extends SQLiteOpenHelper {
             +COLUMN_DURATION+" TEXT NOT NULL,"
             +COLUMN_START_TIME+" TEXT NOT NULL,"
             +COLUMN_CALORIES+" INTEGER,"
-            +COLUMN_IMAGES+" INTEGER,"
             +COLUMN_FEELING+" TEXT,"
             +COLUMN_AREA+" TEXT,"
             +COLUMN_HEART_RATE+" INTEGER,"
