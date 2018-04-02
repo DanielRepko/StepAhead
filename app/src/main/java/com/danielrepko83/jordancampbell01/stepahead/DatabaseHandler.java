@@ -6,6 +6,7 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
+import com.danielrepko83.jordancampbell01.stepahead.Object_Classes.RunJournal;
 import com.danielrepko83.jordancampbell01.stepahead.Object_Classes.Weight;
 
 import java.util.ArrayList;
@@ -80,6 +81,30 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         db.execSQL("DROP TABLE IF EXISTS " + TABLE_WEIGHT);
         db.execSQL("DROP TABLE IF EXISTS " + TABLE_RUN);
     }
+
+    /* CRUD Operations - Run Table */
+
+    //Add method
+    public void addRun(RunJournal run){
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues values = new ContentValues();
+        values.put(COLUMN_DISTANCE, run.getDistance());
+        values.put(COLUMN_DURATION, run.getDistance());
+        values.put(COLUMN_START_TIME, run.getDistance());
+        values.put(COLUMN_CALORIES, run.getDistance());
+        values.put(COLUMN_FEELING, run.getDistance());
+        values.put(COLUMN_AREA, run.getDistance());
+        values.put(COLUMN_HEART_RATE, run.getDistance());
+        values.put(COLUMN_NOTE, run.getDistance());
+        values.put(COLUMN_AVERAGE_PACE, run.getDistance());
+        values.put(COLUMN_AVERAGE_SPEED, run.getDistance());
+        values.put(COLUMN_WEATHER, run.getDistance());
+        values.put(COLUMN_MEASUREMENT, run.getDistance());
+        db.insert(TABLE_RUN, null, values);
+        db.close();
+    }
+    
+
 
     /* CRUD Operations - Weight Table */
     public void addWeight(Weight weight) {
