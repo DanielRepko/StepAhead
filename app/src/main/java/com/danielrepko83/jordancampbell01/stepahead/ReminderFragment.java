@@ -124,7 +124,7 @@ public class ReminderFragment extends Fragment {
                         new TimePickerDialog.OnTimeSetListener() {
                             public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
                                 String formattedTime = "";
-                                
+
                                 timeEditText.setText(formattedTime);
                             }
                         },
