@@ -1,5 +1,6 @@
 package com.danielrepko83.jordancampbell01.stepahead;
 
+import android.app.DatePickerDialog;
 import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
@@ -15,6 +16,7 @@ import android.widget.SpinnerAdapter;
 import android.widget.TimePicker;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 
 
 /**
@@ -76,8 +78,8 @@ public class ReminderFragment extends Fragment {
 
         //Grab the current elements on the page
         Spinner typeSpinner = view.findViewById(R.id.typeSpinner);
-        DatePicker datePicker = view.findViewById(R.id.datePicker);
-        TimePicker timePicker = view.findViewById(R.id.timePicker);
+        EditText dateEditText = view.findViewById(R.id.dateEditText);
+        EditText timeEditText = view.findViewById(R.id.timeEditText);
         EditText descriptionEditText = view.findViewById(R.id.descriptionEditText);
 
         //Create an ArrayList of Run types, and fill it with the values "Run" and "Weight Check"
@@ -87,6 +89,26 @@ public class ReminderFragment extends Fragment {
 
         ArrayAdapter adapter = new ArrayAdapter(getContext(), android.R.layout.simple_list_item_1, runTypeArrayList);
         typeSpinner.setAdapter(adapter);
+
+        dateEditText.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                Calendar calendar = Calendar.getInstance();
+                int day = calendar.get(Calendar.DAY_OF_MONTH);
+                int month = calendar.get(Calendar.MONTH);
+                int year = calendar.get(Calendar.YEAR);
+
+                DatePickerDialog dialog = new DatePickerDialog(
+                        getContext(),
+                        new DatePickerDialog.OnDateSetListener() {
+                            public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
+                                
+                            }
+                        },
+                        year,
+                        month,
+                        day);
+            }
+        });
 
         return view;
     }
