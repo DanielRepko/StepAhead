@@ -43,6 +43,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
     public static final String COLUMN_AVERAGE_PACE = "averagePace";
     public static final String COLUMN_AVERAGE_SPEED = "averageSpeed";
     public static final String COLUMN_WEATHER = "weather";
+    public static final String COLUMN_MEASUREMENT = "measurement";
 
     /* Create statement for Weight Table */
     public static final String CREATE_WEIGHT_TABLE = "CREATE TABLE " + TABLE_WEIGHT + "("
@@ -65,7 +66,8 @@ public class DatabaseHandler extends SQLiteOpenHelper {
             +COLUMN_NOTE+" TEXT,"
             +COLUMN_AVERAGE_PACE+" REAL,"
             +COLUMN_AVERAGE_SPEED+" REAL,"
-            +COLUMN_WEATHER+" TEXT)";
+            +COLUMN_WEATHER+" TEXT,"
+            +COLUMN_MEASUREMENT+" INTEGER NOT NULL)";
 
     public DatabaseHandler(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
