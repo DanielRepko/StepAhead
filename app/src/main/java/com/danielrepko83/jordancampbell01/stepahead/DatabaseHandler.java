@@ -182,6 +182,14 @@ public class DatabaseHandler extends SQLiteOpenHelper {
                 new String[]{String.valueOf(run.getId())});
     }
 
+    //Delete method
+    public void deleteRun(int run){
+        SQLiteDatabase db = this.getWritableDatabase();
+        db.delete(TABLE_RUN, COLUMN_ID + " = ?",
+                new String[]{String.valueOf(run)});
+        db.close();
+    }
+
 
     /* CRUD Operations - Weight Table */
     public void addWeight(Weight weight) {
