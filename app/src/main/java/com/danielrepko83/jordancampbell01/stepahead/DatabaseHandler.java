@@ -135,6 +135,33 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         return run;
     }
 
+    public ArrayList<RunJournal> getAllRuns(){
+        ArrayList<RunJournal> runList = new ArrayList<>();
+        String query = "SELECT * FROM " + TABLE_RUN;
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = db.rawQuery(query, null);
+        if(cursor.moveToFirst()){
+            do{
+                RunJournal run = new RunJournal(Integer.parseInt(cursor.getString(0)),
+                        Double.parseDouble(cursor.getString(1)),
+                        Double.parseDouble(cursor.getString(2)),
+                        cursor.getString(3),
+                        Integer.parseInt(cursor.getString(4)),
+                        cursor.getString(5),
+                        cursor.getString(6),
+                        Integer.parseInt(cursor.getString(7)),
+                        cursor.getString(8),
+                        Double.parseDouble(cursor.getString(9)),
+                        Double.parseDouble(cursor.getString(10)),
+                        cursor.getString(11),
+                        Integer.parseInt(cursor.getString(12)));
+                runList.add(run);
+            }while(cursor.moveToNext());
+        }
+        db.close();
+        return runList;
+    }
+
 
     /* CRUD Operations - Weight Table */
     public void addWeight(Weight weight) {
