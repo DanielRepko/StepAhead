@@ -78,7 +78,7 @@ public class ReminderFragment extends Fragment {
 
         //Grab the current elements on the page
         Spinner typeSpinner = view.findViewById(R.id.typeSpinner);
-        EditText dateEditText = view.findViewById(R.id.dateEditText);
+        final EditText dateEditText = view.findViewById(R.id.dateEditText);
         EditText timeEditText = view.findViewById(R.id.timeEditText);
         EditText descriptionEditText = view.findViewById(R.id.descriptionEditText);
 
@@ -101,12 +101,14 @@ public class ReminderFragment extends Fragment {
                         getContext(),
                         new DatePickerDialog.OnDateSetListener() {
                             public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
-                                
+                                String formattedDate = month + "/" + dayOfMonth + "/" + year;
+                                dateEditText.setText(formattedDate);
                             }
                         },
                         year,
                         month,
                         day);
+                dialog.show();
             }
         });
 
