@@ -103,7 +103,37 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         db.insert(TABLE_RUN, null, values);
         db.close();
     }
-    
+
+    //Get methods
+    public RunJournal getRun(int id){
+        SQLiteDatabase db = this.getReadableDatabase();
+        RunJournal run = null;
+        //table name, string array of column names, query, String array of values that will be inserted into the query
+        Cursor cursor = db.query(TABLE_RUN,
+                new String[]{COLUMN_ID, COLUMN_DISTANCE, COLUMN_DURATION, COLUMN_START_TIME,
+                            COLUMN_CALORIES, COLUMN_FEELING, COLUMN_AREA, COLUMN_HEART_RATE,
+                            COLUMN_NOTE, COLUMN_AVERAGE_PACE, COLUMN_AVERAGE_SPEED, COLUMN_WEATHER, COLUMN_MEASUREMENT},
+                COLUMN_ID + "=?", new String[]{String.valueOf(id)},
+                null, null, null);
+        if(cursor != null){
+            cursor.moveToFirst();
+            run = new RunJournal(Integer.parseInt(cursor.getString(0)),
+                    Double.parseDouble(cursor.getString(1)),
+                    Double.parseDouble(cursor.getString(2)),
+                    cursor.getString(3),
+                    Integer.parseInt(cursor.getString(4)),
+                    cursor.getString(5),
+                    cursor.getString(6),
+                    Integer.parseInt(cursor.getString(7)),
+                    cursor.getString(8),
+                    Double.parseDouble(cursor.getString(9)),
+                    Double.parseDouble(cursor.getString(10)),
+                    cursor.getString(11),
+                    Integer.parseInt(cursor.getString(12)));
+        }
+        db.close();
+        return run;
+    }
 
 
     /* CRUD Operations - Weight Table */
