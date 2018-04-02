@@ -1,6 +1,7 @@
 package com.danielrepko83.jordancampbell01.stepahead;
 
 import android.app.DatePickerDialog;
+import android.app.TimePickerDialog;
 import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
@@ -12,11 +13,12 @@ import android.widget.ArrayAdapter;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.Spinner;
-import android.widget.SpinnerAdapter;
 import android.widget.TimePicker;
 
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Date;
 
 
 /**
@@ -79,7 +81,7 @@ public class ReminderFragment extends Fragment {
         //Grab the current elements on the page
         Spinner typeSpinner = view.findViewById(R.id.typeSpinner);
         final EditText dateEditText = view.findViewById(R.id.dateEditText);
-        EditText timeEditText = view.findViewById(R.id.timeEditText);
+        final EditText timeEditText = view.findViewById(R.id.timeEditText);
         EditText descriptionEditText = view.findViewById(R.id.descriptionEditText);
 
         //Create an ArrayList of Run types, and fill it with the values "Run" and "Weight Check"
@@ -101,13 +103,34 @@ public class ReminderFragment extends Fragment {
                         getContext(),
                         new DatePickerDialog.OnDateSetListener() {
                             public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
-                                String formattedDate = month + "/" + dayOfMonth + "/" + year;
+                                String formattedDate = (month + 1) + "/" + dayOfMonth + "/" + year;
                                 dateEditText.setText(formattedDate);
                             }
                         },
                         year,
                         month,
                         day);
+                dialog.show();
+            }
+        });
+
+        timeEditText.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                Calendar calendar = Calendar.getInstance();
+                int hour = calendar.get(Calendar.HOUR_OF_DAY);
+                int minute = calendar.get(Calendar.MINUTE);
+
+                TimePickerDialog dialog = new TimePickerDialog(getContext(),
+                        new TimePickerDialog.OnTimeSetListener() {
+                            public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
+                                String formattedTime = "";
+                                
+                                timeEditText.setText(formattedTime);
+                            }
+                        },
+                        hour,
+                        minute,
+                        false);
                 dialog.show();
             }
         });
