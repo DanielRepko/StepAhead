@@ -110,6 +110,14 @@ public class RunJournal {
         this.setMeasurement(measurement);
     }
 
+    public double getDuration() {
+        return duration;
+    }
+
+    public void setDuration(double duration) {
+        this.duration = duration;
+    }
+
     public String getStartTime() {
         return startTime;
     }

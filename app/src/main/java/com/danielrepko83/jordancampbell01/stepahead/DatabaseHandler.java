@@ -89,17 +89,17 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues values = new ContentValues();
         values.put(COLUMN_DISTANCE, run.getDistance());
-        values.put(COLUMN_DURATION, run.getDistance());
-        values.put(COLUMN_START_TIME, run.getDistance());
-        values.put(COLUMN_CALORIES, run.getDistance());
-        values.put(COLUMN_FEELING, run.getDistance());
-        values.put(COLUMN_AREA, run.getDistance());
-        values.put(COLUMN_HEART_RATE, run.getDistance());
-        values.put(COLUMN_NOTE, run.getDistance());
-        values.put(COLUMN_AVERAGE_PACE, run.getDistance());
-        values.put(COLUMN_AVERAGE_SPEED, run.getDistance());
-        values.put(COLUMN_WEATHER, run.getDistance());
-        values.put(COLUMN_MEASUREMENT, run.getDistance());
+        values.put(COLUMN_DURATION, run.getDuration());
+        values.put(COLUMN_START_TIME, run.getStartTime());
+        values.put(COLUMN_CALORIES, run.getCalories());
+        values.put(COLUMN_FEELING, run.getFeeling());
+        values.put(COLUMN_AREA, run.getArea());
+        values.put(COLUMN_HEART_RATE, run.getHeartRate());
+        values.put(COLUMN_NOTE, run.getNote());
+        values.put(COLUMN_AVERAGE_PACE, run.getAvgPace());
+        values.put(COLUMN_AVERAGE_SPEED, run.getAvgSpeed());
+        values.put(COLUMN_WEATHER, run.getWeather());
+        values.put(COLUMN_MEASUREMENT, run.getMeasurement());
         db.insert(TABLE_RUN, null, values);
         db.close();
     }
@@ -160,6 +160,26 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         }
         db.close();
         return runList;
+    }
+
+    //Update method
+    public int updateRun(RunJournal run){
+        SQLiteDatabase db = getWritableDatabase();
+        ContentValues values = new ContentValues();
+        values.put(COLUMN_DISTANCE, run.getDistance());
+        values.put(COLUMN_DURATION, run.getDuration());
+        values.put(COLUMN_START_TIME, run.getStartTime());
+        values.put(COLUMN_CALORIES, run.getCalories());
+        values.put(COLUMN_FEELING, run.getFeeling());
+        values.put(COLUMN_AREA, run.getArea());
+        values.put(COLUMN_HEART_RATE, run.getHeartRate());
+        values.put(COLUMN_NOTE, run.getNote());
+        values.put(COLUMN_AVERAGE_PACE, run.getAvgPace());
+        values.put(COLUMN_AVERAGE_SPEED, run.getAvgSpeed());
+        values.put(COLUMN_WEATHER, run.getWeather());
+        values.put(COLUMN_MEASUREMENT, run.getMeasurement());
+        return db.update(TABLE_RUN, values, COLUMN_ID + "= ?",
+                new String[]{String.valueOf(run.getId())});
     }
 
 
