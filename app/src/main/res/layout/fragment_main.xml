@@ -19,7 +19,7 @@
         android:id="@+id/distanceLabel"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="TextView"
+        android:text="@string/home_page_distance_label_text"
         android:textAlignment="center" />
 
     <LinearLayout
@@ -45,7 +45,7 @@
                 android:id="@+id/durationLabel"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="TextView"
+                android:text="@string/home_page_duration_label_text"
                 android:textAlignment="center" />
         </LinearLayout>
 
@@ -67,7 +67,7 @@
                 android:id="@+id/caloriesLabel"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="TextView"
+                android:text="@string/home_page_calories_label_text"
                 android:textAlignment="center" />
         </LinearLayout>
     </LinearLayout>
@@ -83,13 +83,14 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="Button" />
+            android:text="@string/home_page_start_run_button_text" />
     </LinearLayout>
 
     <Button
         android:id="@+id/cancel"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal" />
+        android:layout_gravity="center_horizontal"
+        android:text="@string/home_page_cancel_button_text" />
 
 </LinearLayout>

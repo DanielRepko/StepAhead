@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">StepAhead</string>
+    <string name="app_name">Step Ahead</string>
 
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
@@ -8,4 +8,13 @@
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    <!-- Home Page -->
+    <string name="home_page_distance_label_text">Distance(km)</string>
+    <string name="home_page_duration_label_text">Duration</string>
+    <string name="home_page_calories_label_text">Calories</string>
+    <string name="home_page_start_run_button_text">Start Run</string>
+    <string name="home_page_pause_button_text">Pause</string>
+    <string name="home_page_finish_button_text">Finish</string>
+    <string name="home_page_cancel_button_text">Cancel</string>
 </resources>
