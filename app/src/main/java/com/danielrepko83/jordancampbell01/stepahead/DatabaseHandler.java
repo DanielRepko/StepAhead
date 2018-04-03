@@ -21,6 +21,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
     /* Table Names */
     public static final String TABLE_WEIGHT = "weight";
     public static final String TABLE_RUN = "run";
+    public static final String TABLE_PICTURE = "picture";
 
     /* Column Names - Shared Columns */
     public static final String COLUMN_ID = "id";
@@ -44,6 +45,10 @@ public class DatabaseHandler extends SQLiteOpenHelper {
     public static final String COLUMN_AVERAGE_SPEED = "averageSpeed";
     public static final String COLUMN_WEATHER = "weather";
     public static final String COLUMN_MEASUREMENT = "measurement";
+
+    /* Column Names - Picture Table */
+    public static final String COLUMN_RESOURCE = "resource";
+    public static final String COLUMN_RUN_ID = "runId";
 
     /* Create statement for Weight Table */
     public static final String CREATE_WEIGHT_TABLE = "CREATE TABLE " + TABLE_WEIGHT + "("
@@ -69,6 +74,11 @@ public class DatabaseHandler extends SQLiteOpenHelper {
             +COLUMN_WEATHER+" TEXT,"
             +COLUMN_MEASUREMENT+" INTEGER NOT NULL)";
 
+    public static final String CREATE_PICTURE_TABLE = "CREATE TABLE "+TABLE_PICTURE+"("
+            +COLUMN_RUN_ID+" INTEGER REFERENCES "+TABLE_RUN+"("+COLUMN_ID+"),"
+            +COLUMN_RESOURCE+" TEXT)";
+
+
     public DatabaseHandler(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
     }
@@ -76,11 +86,13 @@ public class DatabaseHandler extends SQLiteOpenHelper {
     public void onCreate(SQLiteDatabase db) {
         db.execSQL(CREATE_WEIGHT_TABLE);
         db.execSQL(CREATE_RUN_TABLE);
+        db.execSQL(CREATE_PICTURE_TABLE);
     }
 
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
         db.execSQL("DROP TABLE IF EXISTS " + TABLE_WEIGHT);
         db.execSQL("DROP TABLE IF EXISTS " + TABLE_RUN);
+        db.execSQL("DROP TABLE IF EXISTS " + TABLE_PICTURE);
     }
 
     /* CRUD Operations - Weight Table */

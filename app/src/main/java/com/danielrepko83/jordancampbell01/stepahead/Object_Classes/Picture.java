@@ -22,6 +22,11 @@ public class Picture {
 
     }
 
+    /**
+     * The Picture class is used to hold image resources to be used with Run Journals
+     * @param id the id of the picture in the database
+     * @param resource the resource code of the image
+     */
     public Picture(int id, String resource) {
         this.id = id;
         this.resource = resource;
