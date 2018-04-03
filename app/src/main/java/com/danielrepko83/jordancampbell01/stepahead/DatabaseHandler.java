@@ -107,6 +107,37 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         db.close();
     }
 
+    //Get methods
+    public Picture getPicture(int id) {
+        SQLiteDatabase db = this.getReadableDatabase();
+        Picture picture = null;
+        Cursor cursor = db.query(TABLE_PICTURE,
+                new String[]{COLUMN_RUN_ID, COLUMN_RESOURCE},
+                COLUMN_ID + "=?", new String[]{String.valueOf(id)},
+                null, null, null, null);
+        if(cursor != null) {
+            cursor.moveToFirst();
+            picture = new Picture(Integer.parseInt(cursor.getString(0)),
+                    cursor.getString(1));
+        }
+        db.close();
+        return picture;
+    }
+
+    public ArrayList<Picture> getAllPictures() {
+        ArrayList<Picture> picList = new ArrayList<>();
+        String query = "SELECT * FROM " + TABLE_PICTURE;
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = db.rawQuery(query, null);
+        if(cursor.moveToFirst()) {
+            do {
+                picList.add(new Picture(Integer.parseInt(cursor.getString(0)),
+                        cursor.getString(1)));
+            } while(cursor.moveToNext());
+        }
+        return picList;
+    }
+
     /* CRUD Operations - Weight Table */
     public void addWeight(Weight weight) {
         SQLiteDatabase db = this.getWritableDatabase();
