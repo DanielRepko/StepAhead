@@ -80,14 +80,14 @@ public class ReminderFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_reminder, container, false);
 
         //Grab the current elements on the page
-        Spinner typeSpinner = view.findViewById(R.id.typeSpinner);
+        final Spinner typeSpinner = view.findViewById(R.id.typeSpinner);
         final EditText dateEditText = view.findViewById(R.id.dateEditText);
         final EditText timeEditText = view.findViewById(R.id.timeEditText);
         EditText descriptionEditText = view.findViewById(R.id.descriptionEditText);
         Button submitButton = view.findViewById(R.id.submitButton);
 
         //Create an ArrayList of Run types, and fill it with the values "Run" and "Weight Check"
-        ArrayList<String> runTypeArrayList = new ArrayList<>();
+        final ArrayList<String> runTypeArrayList = new ArrayList<>();
         runTypeArrayList.add("Run");
         runTypeArrayList.add("Weight Check");
 
@@ -127,9 +127,15 @@ public class ReminderFragment extends Fragment {
                             public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
                                 String formattedTime = "";
                                 if(hourOfDay > 12) {
-                                    formattedTime += hourOfDay-12 + ":" + minute;
+                                    formattedTime += hourOfDay-12 + ":";
                                 } else {
-                                    formattedTime += hourOfDay + ":" + minute;
+                                    formattedTime += hourOfDay + ":";
+                                }
+
+                                if(minute < 10) {
+                                    formattedTime += "0" + minute;
+                                } else {
+                                    formattedTime += minute;
                                 }
 
                                 if(hourOfDay >= 12 && hourOfDay < 24) {
@@ -150,7 +156,40 @@ public class ReminderFragment extends Fragment {
 
         submitButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
+                //Grab the selected run type
+                int runTypeId = typeSpinner.getSelectedItemPosition();
+                String selectedRunType = runTypeArrayList.get(runTypeId);
+
+                //Grab the date the user selected, and split it into an array
+                //0 is month, 1 is day, 2 is year
+                String selectedDate = dateEditText.getText().toString();
+                String[] dateArray = selectedDate.split("/");
+
+                //Convert the dateArray to ints
+                ArrayList<Integer> dateArrayInt = new ArrayList<>();
+                dateArrayInt.add(Integer.parseInt(dateArray[0]));
+                dateArrayInt.add(Integer.parseInt(dateArray[1]));
+                dateArrayInt.add(Integer.parseInt(dateArray[2]));
+
+                //Grab the time, and spllit it into an array
+                //0 is hour, 1 is minute, 2 is AM/PM
+                String selectedTime = timeEditText.getText().toString();
+                String[] timeArray = selectedTime.split(":| ");
+
+                //Convert the timeArray to ints
+                ArrayList<Integer> timeArrayInt = new ArrayList<>();
+                timeArrayInt.add(Integer.parseInt(timeArray[0]));
+                timeArrayInt.add(Integer.parseInt(timeArray[1]));
+
+                //If the AM/PM value is PM, add 12 to the hour value, unless the value is already 12.
+                //If the AM/PM value is AM and the hour is 12, add 12
+                if(timeArray[2] == "PM" && timeArrayInt.get(0) > 12 || timeArray[2] == "AM" && timeArrayInt.get(0) == 12) {
+                    timeArrayInt.set(0, timeArrayInt.get(0) + 12);
+                }
+
                 
+
+
             }
         });
 
