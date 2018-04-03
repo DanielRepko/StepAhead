@@ -93,8 +93,12 @@ public class MainActivity extends AppCompatActivity
         // Handle navigation view item clicks here.
         int id = item.getItemId();
 
+        FragmentTransaction trans = fm.beginTransaction();
+
         if (id == R.id.nav_home) {
-            // Handle the camera action
+            trans.replace(R.id.content, new MainFragment());
+            trans.addToBackStack(null);
+            trans.commit();
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
