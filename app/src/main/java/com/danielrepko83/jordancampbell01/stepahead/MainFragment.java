@@ -96,23 +96,43 @@ public class MainFragment extends Fragment {
             }
         });
 
+        //Cancel click listener
         cancel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                //create an alert asking the user if they want to cancel the run
                 new AlertDialog.Builder(getContext())
                         .setTitle(R.string.home_page_alert_title)
                         .setMessage(R.string.home_page_alert_message)
                         .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
+                                //if yes, get rid of the pause, finish cancel buttons and show the startRun button
                                 startRun.setVisibility(View.VISIBLE);
                                 cancel.setVisibility(View.GONE);
                                 pause.setVisibility(View.GONE);
                                 finish.setVisibility(View.GONE);
                             }
                         })
+                        //if no, do nothing
                         .setNegativeButton("No", null)
                         .show();
+            }
+        });
+
+        //Pause click listener
+        pause.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //check if the run is already paused
+                if(pause.getText().toString().equals("Pause")){
+                    //if not, pause recording
+                    pause.setText(R.string.home_page_resume_button_text);
+
+                } else {
+                    //if it is paused, then resume recording
+                    pause.setText(R.string.home_page_pause_button_text);
+                }
             }
         });
 
