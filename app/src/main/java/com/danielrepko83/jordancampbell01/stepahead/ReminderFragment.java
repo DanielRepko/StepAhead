@@ -4,8 +4,10 @@ import android.app.AlertDialog;
 import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
 import android.content.Context;
+import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.provider.CalendarContract;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -106,7 +108,12 @@ public class ReminderFragment extends Fragment {
                         getContext(),
                         new DatePickerDialog.OnDateSetListener() {
                             public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
-                                String formattedDate = (month + 1) + "/" + dayOfMonth + "/" + year;
+                                String formattedDate = "";
+                                if(month < 9) {
+                                    formattedDate += "0" + (month + 1) + "/" + dayOfMonth + "/" + year;
+                                } else {
+                                    formattedDate += (month + 1) + "/" + dayOfMonth + "/" + year;
+                                }
                                 dateEditText.setText(formattedDate);
                             }
                         },
@@ -129,6 +136,8 @@ public class ReminderFragment extends Fragment {
                                 String formattedTime = "";
                                 if(hourOfDay > 12) {
                                     formattedTime += hourOfDay-12 + ":";
+                                } else if(hourOfDay == 0) {
+                                    formattedTime += hourOfDay+12 + ":";
                                 } else {
                                     formattedTime += hourOfDay + ":";
                                 }
@@ -139,7 +148,7 @@ public class ReminderFragment extends Fragment {
                                     formattedTime += minute;
                                 }
 
-                                if(hourOfDay >= 12 && hourOfDay < 24) {
+                                if(hourOfDay >= 12) {
                                     formattedTime += " PM";
                                 } else {
                                     formattedTime += " AM";
@@ -187,31 +196,56 @@ public class ReminderFragment extends Fragment {
                 //Grab the time, and spllit it into an array
                 //0 is hour, 1 is minute, 2 is AM/PM
                 String selectedTime = timeEditText.getText().toString();
-                ArrayList<Integer> timeArrayInt;
+                String[] timeArray;
+                ArrayList<Integer> timeArrayInt = new ArrayList<>();
 
                 //If the user didn't set a time, skip all the time based code.
                 //It's an optional field that the user doesn't have to enter
                 if(!selectedTime.isEmpty()) {
-                    String[] timeArray = selectedTime.split(":| ");
+                    timeArray = selectedTime.split(":| ");
 
                     //Convert the timeArray to ints
-                    timeArrayInt = new ArrayList<>();
                     timeArrayInt.add(Integer.parseInt(timeArray[0]));
                     timeArrayInt.add(Integer.parseInt(timeArray[1]));
 
                     //If the AM/PM value is PM, add 12 to the hour value, unless the value is already 12.
-                    //If the AM/PM value is AM and the hour is 12, add 12
-                    if (timeArray[2] == "PM" && timeArrayInt.get(0) > 12 || timeArray[2] == "AM" && timeArrayInt.get(0) == 12) {
-                        timeArrayInt.set(0, timeArrayInt.get(0) + 12);
+                    if((timeArray[2].equals("PM") && timeArrayInt.get(0) < 12)) {
+                        timeArrayInt.set(0, (timeArrayInt.get(0) + 12));
                     }
+
+                    if((timeArray[2].equals("AM") && timeArrayInt.get(0) == 12)) {
+                        timeArrayInt.set(0, (timeArrayInt.get(0) - 12));
+                    }
+
+                    //If the AM/PM value is AM and the hour is 12, subtract 12
                 }
 
                 //Grab the description the user set
                 //We don't need to format this one, but it's not an issue if the user didn't set it.
                 String selectedDescription = descriptionEditText.getText().toString();
-                
 
+                //We have everything we need, let's make the intent!
+                Intent intent = new Intent(Intent.ACTION_INSERT);
+                intent.setData(CalendarContract.Events.CONTENT_URI);
+                intent.putExtra(CalendarContract.Events.TITLE, selectedRunType);
 
+                //We need to set the date/time using milliseconds from epoch.
+                //Convert the date to epoch, and if set, convert the time to epoch and add it
+                //If the time is not set, set this as an all day event
+                /*
+                    NOTICE:
+                    LEAVE THE -1900. FOR SOME REASON THE YEAR PROPERTY OF DATE ISN'T THE YEAR YOU WANT. IT'S NUMBER OF YEARS AFTER EPOCH.
+                    IF YOU WANT IT TO BE THE DATE YOU WANT, YOU HAVE TO SUBTRACT THE YEAR OF EPOCH, AKA 1900.
+                    IT TOOK ME AN HOUR TO REALIZE THIS.
+                 */
+                Date date;
+                if(selectedTime.isEmpty()) {
+                    date = new Date(dateArrayInt.get(2) - 1900, dateArrayInt.get(0) - 1, dateArrayInt.get(1));
+                } else {
+                    date = new Date(dateArrayInt.get(2) - 1900, dateArrayInt.get(0) - 1, dateArrayInt.get(1), timeArrayInt.get(0), timeArrayInt.get(1));
+                }
+                intent.putExtra(CalendarContract.EXTRA_EVENT_BEGIN_TIME, date.getTime());
+                getContext().startActivity(intent);
             }
         });
 
