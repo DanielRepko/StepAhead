@@ -6,6 +6,7 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
+import com.danielrepko83.jordancampbell01.stepahead.Object_Classes.Picture;
 import com.danielrepko83.jordancampbell01.stepahead.Object_Classes.Weight;
 
 import java.util.ArrayList;
@@ -93,6 +94,17 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         db.execSQL("DROP TABLE IF EXISTS " + TABLE_WEIGHT);
         db.execSQL("DROP TABLE IF EXISTS " + TABLE_RUN);
         db.execSQL("DROP TABLE IF EXISTS " + TABLE_PICTURE);
+    }
+
+    /* CRUD Operations - Picture Table */
+
+    //Add method
+    public void addPicture(Picture picture) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues values = new ContentValues();
+        values.put(COLUMN_POUNDS, picture.getResource());
+        db.insert(TABLE_PICTURE,null, values);
+        db.close();
     }
 
     /* CRUD Operations - Weight Table */
