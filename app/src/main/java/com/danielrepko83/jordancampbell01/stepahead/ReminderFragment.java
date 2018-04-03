@@ -1,5 +1,6 @@
 package com.danielrepko83.jordancampbell01.stepahead;
 
+import android.app.AlertDialog;
 import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
 import android.content.Context;
@@ -83,7 +84,7 @@ public class ReminderFragment extends Fragment {
         final Spinner typeSpinner = view.findViewById(R.id.typeSpinner);
         final EditText dateEditText = view.findViewById(R.id.dateEditText);
         final EditText timeEditText = view.findViewById(R.id.timeEditText);
-        EditText descriptionEditText = view.findViewById(R.id.descriptionEditText);
+        final EditText descriptionEditText = view.findViewById(R.id.descriptionEditText);
         Button submitButton = view.findViewById(R.id.submitButton);
 
         //Create an ArrayList of Run types, and fill it with the values "Run" and "Weight Check"
@@ -163,6 +164,18 @@ public class ReminderFragment extends Fragment {
                 //Grab the date the user selected, and split it into an array
                 //0 is month, 1 is day, 2 is year
                 String selectedDate = dateEditText.getText().toString();
+
+                //Make sure the user actually set a date. Otherwise, display an alert and abort
+                if(selectedDate.isEmpty()) {
+                    new AlertDialog.Builder(getContext())
+                            .setTitle("Error")
+                            .setMessage("Please select a date for the reminder.")
+                            .setIcon(android.R.drawable.ic_dialog_alert)
+                            .setNeutralButton("Ok", null)
+                            .show();
+                    return;
+                }
+
                 String[] dateArray = selectedDate.split("/");
 
                 //Convert the dateArray to ints
@@ -187,7 +200,8 @@ public class ReminderFragment extends Fragment {
                     timeArrayInt.set(0, timeArrayInt.get(0) + 12);
                 }
 
-                
+                //Grab the description the user set
+                String selectedDescription = descriptionEditText.getText().toString();
 
 
             }
