@@ -8,8 +8,7 @@
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
-
-<<<<<<< HEAD
+    
     <!-- Menu Strings -->
     <string name="menu_home">Home</string>
     <string name="menu_journals">Run Journals</string>
@@ -22,7 +21,7 @@
     <string name="reminder_time">Time</string>
     <string name="reminder_description">Description</string>
     <string name="reminder_create">Create Reminder</string>
-=======
+
     <!-- Home Page -->
     <string name="home_page_distance_label_text">Distance(km)</string>
     <string name="home_page_duration_label_text">Duration</string>
@@ -34,5 +33,4 @@
     <string name="home_page_cancel_button_text">Cancel</string>
     <string name="home_page_alert_title">Cancel Run</string>
     <string name="home_page_alert_message">Are you sure you want to cancel this run? Any recorded info will be discarded and a run journal will not be created.</string>
->>>>>>> staging
 </resources>
