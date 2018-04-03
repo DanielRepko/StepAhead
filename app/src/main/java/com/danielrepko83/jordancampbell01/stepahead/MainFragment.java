@@ -1,9 +1,11 @@
 package com.danielrepko83.jordancampbell01.stepahead;
 
 import android.content.Context;
+import android.content.DialogInterface;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v7.app.AlertDialog;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -76,17 +78,41 @@ public class MainFragment extends Fragment {
         TextView durationLabel = view.findViewById(R.id.durationLabel);
         TextView calories = view.findViewById(R.id.calories);
         TextView caloriesLabel = view.findViewById(R.id.caloriesLabel);
-        Button startRun = view.findViewById(R.id.startRun);
-        Button cancel = view.findViewById(R.id.cancel);
-        Button pause = view.findViewById(R.id.pause);
-        Button finish = view.findViewById(R.id.finish);
+        final Button startRun = view.findViewById(R.id.startRun);
+        final Button cancel = view.findViewById(R.id.cancel);
+        final Button pause = view.findViewById(R.id.pause);
+        final Button finish = view.findViewById(R.id.finish);
 
 
         //Start Run click listener
         startRun.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                //hide the startRun button and show the pause, finish, and cancel buttons
+                startRun.setVisibility(View.GONE);
+                cancel.setVisibility(View.VISIBLE);
+                pause.setVisibility(View.VISIBLE);
+                finish.setVisibility(View.VISIBLE);
+            }
+        });
 
+        cancel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                new AlertDialog.Builder(getContext())
+                        .setTitle(R.string.home_page_alert_title)
+                        .setMessage(R.string.home_page_alert_message)
+                        .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                startRun.setVisibility(View.VISIBLE);
+                                cancel.setVisibility(View.GONE);
+                                pause.setVisibility(View.GONE);
+                                finish.setVisibility(View.GONE);
+                            }
+                        })
+                        .setNegativeButton("No", null)
+                        .show();
             }
         });
 
