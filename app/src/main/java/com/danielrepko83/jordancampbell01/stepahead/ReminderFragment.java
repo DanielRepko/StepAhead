@@ -124,6 +124,17 @@ public class ReminderFragment extends Fragment {
                         new TimePickerDialog.OnTimeSetListener() {
                             public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
                                 String formattedTime = "";
+                                if(hourOfDay > 12) {
+                                    formattedTime += hourOfDay-12 + ":" + minute;
+                                } else {
+                                    formattedTime += hourOfDay + ":" + minute;
+                                }
+
+                                if(hourOfDay >= 12 && hourOfDay < 24) {
+                                    formattedTime += " PM";
+                                } else {
+                                    formattedTime += " AM";
+                                }
 
                                 timeEditText.setText(formattedTime);
                             }
