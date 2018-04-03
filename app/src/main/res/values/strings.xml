@@ -15,6 +15,9 @@
     <string name="home_page_calories_label_text">Calories</string>
     <string name="home_page_start_run_button_text">Start Run</string>
     <string name="home_page_pause_button_text">Pause</string>
+    <string name="home_page_resume_button_text">Resume</string>
     <string name="home_page_finish_button_text">Finish</string>
     <string name="home_page_cancel_button_text">Cancel</string>
+    <string name="home_page_alert_title">Cancel Run</string>
+    <string name="home_page_alert_message">Are you sure you want to cancel this run? Any recorded info will be discarded and a run journal will not be created.</string>
 </resources>

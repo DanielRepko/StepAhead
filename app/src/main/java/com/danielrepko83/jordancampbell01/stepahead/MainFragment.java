@@ -1,13 +1,17 @@
 package com.danielrepko83.jordancampbell01.stepahead;
 
 import android.content.Context;
+import android.content.DialogInterface;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v7.app.AlertDialog;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-
+import android.widget.Button;
+import android.widget.LinearLayout;
+import android.widget.TextView;
 
 
 /**
@@ -27,6 +31,7 @@ public class MainFragment extends Fragment {
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
+
 
     private OnFragmentInteractionListener mListener;
 
@@ -65,7 +70,73 @@ public class MainFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_main, container, false);
+        View view = inflater.inflate(R.layout.fragment_main, container, false);
+
+        TextView distance = view.findViewById(R.id.distance);
+        TextView distanceLabel = view.findViewById(R.id.distanceLabel);
+        TextView duration = view.findViewById(R.id.duration);
+        TextView durationLabel = view.findViewById(R.id.durationLabel);
+        TextView calories = view.findViewById(R.id.calories);
+        TextView caloriesLabel = view.findViewById(R.id.caloriesLabel);
+        final Button startRun = view.findViewById(R.id.startRun);
+        final Button cancel = view.findViewById(R.id.cancel);
+        final Button pause = view.findViewById(R.id.pause);
+        final Button finish = view.findViewById(R.id.finish);
+
+
+        //Start Run click listener
+        startRun.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //hide the startRun button and show the pause, finish, and cancel buttons
+                startRun.setVisibility(View.GONE);
+                cancel.setVisibility(View.VISIBLE);
+                pause.setVisibility(View.VISIBLE);
+                finish.setVisibility(View.VISIBLE);
+            }
+        });
+
+        //Cancel click listener
+        cancel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //create an alert asking the user if they want to cancel the run
+                new AlertDialog.Builder(getContext())
+                        .setTitle(R.string.home_page_alert_title)
+                        .setMessage(R.string.home_page_alert_message)
+                        .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                //if yes, get rid of the pause, finish cancel buttons and show the startRun button
+                                startRun.setVisibility(View.VISIBLE);
+                                cancel.setVisibility(View.GONE);
+                                pause.setVisibility(View.GONE);
+                                finish.setVisibility(View.GONE);
+                            }
+                        })
+                        //if no, do nothing
+                        .setNegativeButton("No", null)
+                        .show();
+            }
+        });
+
+        //Pause click listener
+        pause.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //check if the run is already paused
+                if(pause.getText().toString().equals("Pause")){
+                    //if not, pause recording
+                    pause.setText(R.string.home_page_resume_button_text);
+
+                } else {
+                    //if it is paused, then resume recording
+                    pause.setText(R.string.home_page_pause_button_text);
+                }
+            }
+        });
+
+        return view;
     }
 
     // TODO: Rename method, update argument and hook method into UI event
