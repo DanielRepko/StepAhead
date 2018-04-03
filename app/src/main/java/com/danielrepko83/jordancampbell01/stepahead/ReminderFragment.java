@@ -10,6 +10,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.Spinner;
@@ -83,6 +84,7 @@ public class ReminderFragment extends Fragment {
         final EditText dateEditText = view.findViewById(R.id.dateEditText);
         final EditText timeEditText = view.findViewById(R.id.timeEditText);
         EditText descriptionEditText = view.findViewById(R.id.descriptionEditText);
+        Button submitButton = view.findViewById(R.id.submitButton);
 
         //Create an ArrayList of Run types, and fill it with the values "Run" and "Weight Check"
         ArrayList<String> runTypeArrayList = new ArrayList<>();
@@ -143,6 +145,12 @@ public class ReminderFragment extends Fragment {
                         minute,
                         false);
                 dialog.show();
+            }
+        });
+
+        submitButton.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                
             }
         });
 
