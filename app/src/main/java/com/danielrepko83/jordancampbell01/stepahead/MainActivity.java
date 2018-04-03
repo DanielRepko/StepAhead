@@ -18,7 +18,8 @@ import android.view.MenuItem;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener,
-                    ReminderFragment.OnFragmentInteractionListener {
+                    ReminderFragment.OnFragmentInteractionListener,
+                    MainFragment.OnFragmentInteractionListener{
 
     FragmentManager fm;
 
@@ -30,6 +31,11 @@ public class MainActivity extends AppCompatActivity
         setSupportActionBar(toolbar);
 
         fm = getSupportFragmentManager();
+        if(savedInstanceState == null){
+            FragmentTransaction trans = fm.beginTransaction();
+            trans.replace(R.id.content, new MainFragment());
+            trans.commit();
+        }
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
@@ -88,18 +94,16 @@ public class MainActivity extends AppCompatActivity
         // Handle navigation view item clicks here.
         int id = item.getItemId();
 
-        FragmentTransaction transaction = fm.beginTransaction();
+        FragmentTransaction trans = fm.beginTransaction();
 
         if (id == R.id.nav_home) {
-
-        } else if (id == R.id.nav_journals) {
-
-        } else if (id == R.id.nav_weight) {
-
+            trans.replace(R.id.content, new MainFragment());
+            trans.addToBackStack(null);
+            trans.commit();
         } else if (id == R.id.nav_reminder) {
-            transaction.replace(R.id.content, new ReminderFragment());
-            transaction.addToBackStack(null);
-            transaction.commit();
+            trans.replace(R.id.content, new ReminderFragment());
+            trans.addToBackStack(null);
+            trans.commit();
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
