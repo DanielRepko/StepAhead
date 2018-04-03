@@ -18,6 +18,7 @@ import android.view.MenuItem;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener,
+                    ReminderFragment.OnFragmentInteractionListener,
                     MainFragment.OnFragmentInteractionListener{
 
     FragmentManager fm;
@@ -97,6 +98,10 @@ public class MainActivity extends AppCompatActivity
 
         if (id == R.id.nav_home) {
             trans.replace(R.id.content, new MainFragment());
+            trans.addToBackStack(null);
+            trans.commit();
+        } else if (id == R.id.nav_reminder) {
+            trans.replace(R.id.content, new ReminderFragment());
             trans.addToBackStack(null);
             trans.commit();
         }
