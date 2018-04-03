@@ -14,6 +14,7 @@ public class RunJournal {
 
     private int id;
     private double distance;
+    private double duration;
     private String startTime;
     private int calories;
     //private ArrayList<Picture> pictures;
@@ -35,10 +36,11 @@ public class RunJournal {
 
     }
 
-    public RunJournal(int id, double distance, String startTime, int calories, String feeling, String area, int heartRate,
+    public RunJournal(int id, double distance, double duration, String startTime, int calories, String feeling, String area, int heartRate,
                       String note, double avgPace, double avgSpeed, String weather, int measurement) {
         this.id = id;
         this.distance = distance;
+        this.duration = duration;
         this.startTime = startTime;
         this.calories = calories;
         this.feeling = feeling;
@@ -65,9 +67,10 @@ public class RunJournal {
      * @param weather the weather during the run
      * @param measurement a binary value indicating whether the distance is in km(0) or miles(1)
      */
-    public RunJournal(double distance, String startTime, int calories, String feeling, String area, int heartRate,
+    public RunJournal(double distance, double duration, String startTime, int calories, String feeling, String area, int heartRate,
                       String note, double avgPace, double avgSpeed, String weather, int measurement) {
         this.distance = distance;
+        this.duration = duration;
         this.startTime = startTime;
         this.calories = calories;
         this.feeling = feeling;
@@ -105,6 +108,14 @@ public class RunJournal {
     public void setDistance(double distance, int measurement) {
         this.distance = distance;
         this.setMeasurement(measurement);
+    }
+
+    public double getDuration() {
+        return duration;
+    }
+
+    public void setDuration(double duration) {
+        this.duration = duration;
     }
 
     public String getStartTime() {

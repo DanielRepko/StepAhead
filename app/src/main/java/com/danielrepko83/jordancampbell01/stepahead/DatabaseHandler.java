@@ -6,6 +6,7 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
+import com.danielrepko83.jordancampbell01.stepahead.Object_Classes.RunJournal;
 import com.danielrepko83.jordancampbell01.stepahead.Object_Classes.Weight;
 
 import java.util.ArrayList;
@@ -35,7 +36,6 @@ public class DatabaseHandler extends SQLiteOpenHelper {
     public static final String COLUMN_DURATION = "duration";
     public static final String COLUMN_START_TIME = "startTime";
     public static final String COLUMN_CALORIES = "calories";
-    public static final String COLUMN_IMAGES = "images";
     public static final String COLUMN_FEELING = "feeling";
     public static final String COLUMN_AREA = "area";
     public static final String COLUMN_HEART_RATE = "heartRate";
@@ -59,7 +59,6 @@ public class DatabaseHandler extends SQLiteOpenHelper {
             +COLUMN_DURATION+" TEXT NOT NULL,"
             +COLUMN_START_TIME+" TEXT NOT NULL,"
             +COLUMN_CALORIES+" INTEGER,"
-            +COLUMN_IMAGES+" INTEGER,"
             +COLUMN_FEELING+" TEXT,"
             +COLUMN_AREA+" TEXT,"
             +COLUMN_HEART_RATE+" INTEGER,"
@@ -82,6 +81,115 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         db.execSQL("DROP TABLE IF EXISTS " + TABLE_WEIGHT);
         db.execSQL("DROP TABLE IF EXISTS " + TABLE_RUN);
     }
+
+    /* CRUD Operations - Run Table */
+
+    //Add method
+    public void addRun(RunJournal run){
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues values = new ContentValues();
+        values.put(COLUMN_DISTANCE, run.getDistance());
+        values.put(COLUMN_DURATION, run.getDuration());
+        values.put(COLUMN_START_TIME, run.getStartTime());
+        values.put(COLUMN_CALORIES, run.getCalories());
+        values.put(COLUMN_FEELING, run.getFeeling());
+        values.put(COLUMN_AREA, run.getArea());
+        values.put(COLUMN_HEART_RATE, run.getHeartRate());
+        values.put(COLUMN_NOTE, run.getNote());
+        values.put(COLUMN_AVERAGE_PACE, run.getAvgPace());
+        values.put(COLUMN_AVERAGE_SPEED, run.getAvgSpeed());
+        values.put(COLUMN_WEATHER, run.getWeather());
+        values.put(COLUMN_MEASUREMENT, run.getMeasurement());
+        db.insert(TABLE_RUN, null, values);
+        db.close();
+    }
+
+    //Get methods
+    public RunJournal getRun(int id){
+        SQLiteDatabase db = this.getReadableDatabase();
+        RunJournal run = null;
+        //table name, string array of column names, query, String array of values that will be inserted into the query
+        Cursor cursor = db.query(TABLE_RUN,
+                new String[]{COLUMN_ID, COLUMN_DISTANCE, COLUMN_DURATION, COLUMN_START_TIME,
+                            COLUMN_CALORIES, COLUMN_FEELING, COLUMN_AREA, COLUMN_HEART_RATE,
+                            COLUMN_NOTE, COLUMN_AVERAGE_PACE, COLUMN_AVERAGE_SPEED, COLUMN_WEATHER, COLUMN_MEASUREMENT},
+                COLUMN_ID + "=?", new String[]{String.valueOf(id)},
+                null, null, null);
+        if(cursor != null){
+            cursor.moveToFirst();
+            run = new RunJournal(Integer.parseInt(cursor.getString(0)),
+                    Double.parseDouble(cursor.getString(1)),
+                    Double.parseDouble(cursor.getString(2)),
+                    cursor.getString(3),
+                    Integer.parseInt(cursor.getString(4)),
+                    cursor.getString(5),
+                    cursor.getString(6),
+                    Integer.parseInt(cursor.getString(7)),
+                    cursor.getString(8),
+                    Double.parseDouble(cursor.getString(9)),
+                    Double.parseDouble(cursor.getString(10)),
+                    cursor.getString(11),
+                    Integer.parseInt(cursor.getString(12)));
+        }
+        db.close();
+        return run;
+    }
+
+    public ArrayList<RunJournal> getAllRuns(){
+        ArrayList<RunJournal> runList = new ArrayList<>();
+        String query = "SELECT * FROM " + TABLE_RUN;
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = db.rawQuery(query, null);
+        if(cursor.moveToFirst()){
+            do{
+                RunJournal run = new RunJournal(Integer.parseInt(cursor.getString(0)),
+                        Double.parseDouble(cursor.getString(1)),
+                        Double.parseDouble(cursor.getString(2)),
+                        cursor.getString(3),
+                        Integer.parseInt(cursor.getString(4)),
+                        cursor.getString(5),
+                        cursor.getString(6),
+                        Integer.parseInt(cursor.getString(7)),
+                        cursor.getString(8),
+                        Double.parseDouble(cursor.getString(9)),
+                        Double.parseDouble(cursor.getString(10)),
+                        cursor.getString(11),
+                        Integer.parseInt(cursor.getString(12)));
+                runList.add(run);
+            }while(cursor.moveToNext());
+        }
+        db.close();
+        return runList;
+    }
+
+    //Update method
+    public int updateRun(RunJournal run){
+        SQLiteDatabase db = getWritableDatabase();
+        ContentValues values = new ContentValues();
+        values.put(COLUMN_DISTANCE, run.getDistance());
+        values.put(COLUMN_DURATION, run.getDuration());
+        values.put(COLUMN_START_TIME, run.getStartTime());
+        values.put(COLUMN_CALORIES, run.getCalories());
+        values.put(COLUMN_FEELING, run.getFeeling());
+        values.put(COLUMN_AREA, run.getArea());
+        values.put(COLUMN_HEART_RATE, run.getHeartRate());
+        values.put(COLUMN_NOTE, run.getNote());
+        values.put(COLUMN_AVERAGE_PACE, run.getAvgPace());
+        values.put(COLUMN_AVERAGE_SPEED, run.getAvgSpeed());
+        values.put(COLUMN_WEATHER, run.getWeather());
+        values.put(COLUMN_MEASUREMENT, run.getMeasurement());
+        return db.update(TABLE_RUN, values, COLUMN_ID + "= ?",
+                new String[]{String.valueOf(run.getId())});
+    }
+
+    //Delete method
+    public void deleteRun(int run){
+        SQLiteDatabase db = this.getWritableDatabase();
+        db.delete(TABLE_RUN, COLUMN_ID + " = ?",
+                new String[]{String.valueOf(run)});
+        db.close();
+    }
+
 
     /* CRUD Operations - Weight Table */
     public void addWeight(Weight weight) {
