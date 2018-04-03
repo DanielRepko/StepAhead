@@ -241,10 +241,17 @@ public class ReminderFragment extends Fragment {
                 Date date;
                 if(selectedTime.isEmpty()) {
                     date = new Date(dateArrayInt.get(2) - 1900, dateArrayInt.get(0) - 1, dateArrayInt.get(1));
+                    intent.putExtra(CalendarContract.EXTRA_EVENT_ALL_DAY, true);
                 } else {
                     date = new Date(dateArrayInt.get(2) - 1900, dateArrayInt.get(0) - 1, dateArrayInt.get(1), timeArrayInt.get(0), timeArrayInt.get(1));
                 }
                 intent.putExtra(CalendarContract.EXTRA_EVENT_BEGIN_TIME, date.getTime());
+
+                //If a description was set, add it to the intent
+                if(!selectedDescription.isEmpty()) {
+                    intent.putExtra(CalendarContract.Events.DESCRIPTION, selectedDescription);
+                }
+
                 getContext().startActivity(intent);
             }
         });
