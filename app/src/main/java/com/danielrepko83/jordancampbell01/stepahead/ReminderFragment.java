@@ -187,21 +187,29 @@ public class ReminderFragment extends Fragment {
                 //Grab the time, and spllit it into an array
                 //0 is hour, 1 is minute, 2 is AM/PM
                 String selectedTime = timeEditText.getText().toString();
-                String[] timeArray = selectedTime.split(":| ");
+                ArrayList<Integer> timeArrayInt;
 
-                //Convert the timeArray to ints
-                ArrayList<Integer> timeArrayInt = new ArrayList<>();
-                timeArrayInt.add(Integer.parseInt(timeArray[0]));
-                timeArrayInt.add(Integer.parseInt(timeArray[1]));
+                //If the user didn't set a time, skip all the time based code.
+                //It's an optional field that the user doesn't have to enter
+                if(!selectedTime.isEmpty()) {
+                    String[] timeArray = selectedTime.split(":| ");
 
-                //If the AM/PM value is PM, add 12 to the hour value, unless the value is already 12.
-                //If the AM/PM value is AM and the hour is 12, add 12
-                if(timeArray[2] == "PM" && timeArrayInt.get(0) > 12 || timeArray[2] == "AM" && timeArrayInt.get(0) == 12) {
-                    timeArrayInt.set(0, timeArrayInt.get(0) + 12);
+                    //Convert the timeArray to ints
+                    timeArrayInt = new ArrayList<>();
+                    timeArrayInt.add(Integer.parseInt(timeArray[0]));
+                    timeArrayInt.add(Integer.parseInt(timeArray[1]));
+
+                    //If the AM/PM value is PM, add 12 to the hour value, unless the value is already 12.
+                    //If the AM/PM value is AM and the hour is 12, add 12
+                    if (timeArray[2] == "PM" && timeArrayInt.get(0) > 12 || timeArray[2] == "AM" && timeArrayInt.get(0) == 12) {
+                        timeArrayInt.set(0, timeArrayInt.get(0) + 12);
+                    }
                 }
 
                 //Grab the description the user set
+                //We don't need to format this one, but it's not an issue if the user didn't set it.
                 String selectedDescription = descriptionEditText.getText().toString();
+                
 
 
             }
