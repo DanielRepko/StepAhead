@@ -78,6 +78,17 @@ public class MainFragment extends Fragment {
         TextView caloriesLabel = view.findViewById(R.id.caloriesLabel);
         Button startRun = view.findViewById(R.id.startRun);
         Button cancel = view.findViewById(R.id.cancel);
+        Button pause = view.findViewById(R.id.pause);
+        Button finish = view.findViewById(R.id.finish);
+
+
+        //Start Run click listener
+        startRun.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
 
         return view;
     }

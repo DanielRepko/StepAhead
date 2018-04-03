@@ -91,6 +91,17 @@
         android:orientation="horizontal">
 
         <Button
+            android:id="@+id/pause"
+            android:layout_width="@dimen/home_page_pause_finish_button_width"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="@dimen/home_page_pause_finish_dividing_margin"
+            android:paddingBottom="@dimen/home_page_start_run_button_top_bottom_padding"
+            android:paddingTop="@dimen/home_page_start_run_button_top_bottom_padding"
+            android:text="@string/home_page_pause_button_text"
+            android:textSize="30sp"
+            android:visibility="gone" />
+
+        <Button
             android:id="@+id/startRun"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
@@ -100,6 +111,17 @@
             android:paddingTop="@dimen/home_page_start_run_button_top_bottom_padding"
             android:text="@string/home_page_start_run_button_text"
             android:textSize="45sp" />
+
+        <Button
+            android:id="@+id/finish"
+            android:layout_width="@dimen/home_page_pause_finish_button_width"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/home_page_pause_finish_dividing_margin"
+            android:paddingBottom="@dimen/home_page_start_run_button_top_bottom_padding"
+            android:paddingTop="@dimen/home_page_start_run_button_top_bottom_padding"
+            android:text="@string/home_page_finish_button_text"
+            android:textSize="30sp"
+            android:visibility="gone" />
     </LinearLayout>
 
     <Button
@@ -109,6 +131,7 @@
         android:layout_gravity="center_horizontal"
         android:layout_marginTop="@dimen/home_page_cancel_button_top_margin"
         android:text="@string/home_page_cancel_button_text"
-        android:textSize="18sp" />
+        android:textSize="18sp"
+        android:visibility="gone" />
 
 </LinearLayout>
