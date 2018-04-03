@@ -14,6 +14,7 @@
         android:id="@+id/distance"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/home_page_distance_top_margin"
         android:text="0.00"
         android:textAlignment="center"
         android:textSize="@dimen/home_page_distance_text_size" />
@@ -29,11 +30,12 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/home_page_calorie_duration_layout_top_margin"
         android:orientation="horizontal">
 
         <LinearLayout
             android:id="@+id/DURATION"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:orientation="vertical">
@@ -57,7 +59,7 @@
 
         <LinearLayout
             android:id="@+id/CALORIES"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:orientation="vertical">
@@ -84,7 +86,8 @@
         android:id="@+id/CONTROLBUTTONS"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:gravity="center"
+        android:layout_marginTop="@dimen/home_page_controlbuttons_layout_top_margin"
+        android:gravity="center_horizontal"
         android:orientation="horizontal">
 
         <Button
@@ -104,6 +107,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
+        android:layout_marginTop="@dimen/home_page_cancel_button_top_margin"
         android:text="@string/home_page_cancel_button_text"
         android:textSize="18sp" />
 

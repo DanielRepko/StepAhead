@@ -17,5 +17,9 @@
 
     <dimen name="home_page_start_run_button_left_right_padding">20dp</dimen>
     <dimen name="home_page_start_run_button_top_bottom_padding">25dp</dimen>
+    <dimen name="home_page_distance_top_margin">40dp</dimen>
+    <dimen name="home_page_calorie_duration_layout_top_margin">20dp</dimen>
+    <dimen name="home_page_controlbuttons_layout_top_margin">60dp</dimen>
+    <dimen name="home_page_cancel_button_top_margin">45dp</dimen>
 
 </resources>
