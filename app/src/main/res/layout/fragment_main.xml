@@ -1,0 +1,137 @@
+<!-- The home page is where the user will be able to record their runs -->
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_marginLeft="@dimen/all_pages_side_margin"
+    android:layout_marginRight="@dimen/all_pages_side_margin"
+    android:orientation="vertical"
+    tools:context="com.danielrepko83.jordancampbell01.stepahead.MainFragment">
+
+
+    <TextView
+        android:id="@+id/distance"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/home_page_distance_top_margin"
+        android:text="0.00"
+        android:textAlignment="center"
+        android:textSize="@dimen/home_page_distance_text_size" />
+
+    <TextView
+        android:id="@+id/distanceLabel"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/home_page_distance_label_text"
+        android:textAlignment="center"
+        android:textSize="@dimen/home_page_distance_label_text_size" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/home_page_calorie_duration_layout_top_margin"
+        android:orientation="horizontal">
+
+        <LinearLayout
+            android:id="@+id/DURATION"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/duration"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="00:00"
+                android:textAlignment="center"
+                android:textSize="@dimen/home_page_duration_calories_text_size" />
+
+            <TextView
+                android:id="@+id/durationLabel"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/home_page_duration_label_text"
+                android:textAlignment="center"
+                android:textSize="@dimen/home_page_duration_calories_label_text_size" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/CALORIES"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/calories"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="0"
+                android:textAlignment="center"
+                android:textSize="@dimen/home_page_duration_calories_text_size" />
+
+            <TextView
+                android:id="@+id/caloriesLabel"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/home_page_calories_label_text"
+                android:textAlignment="center"
+                android:textSize="@dimen/home_page_duration_calories_label_text_size" />
+        </LinearLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/CONTROLBUTTONS"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/home_page_controlbuttons_layout_top_margin"
+        android:gravity="center_horizontal"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/pause"
+            android:layout_width="@dimen/home_page_pause_finish_button_width"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="@dimen/home_page_pause_finish_dividing_margin"
+            android:paddingBottom="@dimen/home_page_start_run_button_top_bottom_padding"
+            android:paddingTop="@dimen/home_page_start_run_button_top_bottom_padding"
+            android:text="@string/home_page_pause_button_text"
+            android:textSize="30sp"
+            android:visibility="gone" />
+
+        <Button
+            android:id="@+id/startRun"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:paddingBottom="@dimen/home_page_start_run_button_top_bottom_padding"
+            android:paddingLeft="@dimen/home_page_start_run_button_left_right_padding"
+            android:paddingRight="@dimen/home_page_start_run_button_left_right_padding"
+            android:paddingTop="@dimen/home_page_start_run_button_top_bottom_padding"
+            android:text="@string/home_page_start_run_button_text"
+            android:textSize="45sp" />
+
+        <Button
+            android:id="@+id/finish"
+            android:layout_width="@dimen/home_page_pause_finish_button_width"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/home_page_pause_finish_dividing_margin"
+            android:paddingBottom="@dimen/home_page_start_run_button_top_bottom_padding"
+            android:paddingTop="@dimen/home_page_start_run_button_top_bottom_padding"
+            android:text="@string/home_page_finish_button_text"
+            android:textSize="30sp"
+            android:visibility="gone" />
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/cancel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="@dimen/home_page_cancel_button_top_margin"
+        android:text="@string/home_page_cancel_button_text"
+        android:textSize="18sp"
+        android:visibility="gone" />
+
+</LinearLayout>
