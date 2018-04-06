@@ -107,6 +107,10 @@ public class MainActivity extends AppCompatActivity
             trans.replace(R.id.content, new ReminderFragment());
             trans.addToBackStack(null);
             trans.commit();
+        } else if (id == R.id.nav_weight) {
+            trans.replace(R.id.content, new WeightFragment());
+            trans.addToBackStack(null);
+            trans.commit();
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
