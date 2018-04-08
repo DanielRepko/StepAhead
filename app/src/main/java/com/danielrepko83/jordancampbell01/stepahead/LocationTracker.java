@@ -6,19 +6,17 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.os.IBinder;
 import android.support.v4.app.NotificationCompat;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 public class LocationTracker extends Service {
 
-    private View view;
-
     public LocationTracker() {
     }
 
-    public LocationTracker(View view){
-        this.view = view;
-    }
 
     @Override
     public IBinder onBind(Intent intent) {
@@ -29,11 +27,11 @@ public class LocationTracker extends Service {
     @Override
     public void onCreate(){
         super.onCreate();
+        changeText();
     }
 
-    private void changeText(){
-        TextView distance = view.findViewById(R.id.distance);
-        distance.setText("it works");
+    public void changeText(){
+       MainFragment.distance.setText("it is working");
     }
 
 

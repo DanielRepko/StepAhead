@@ -1,10 +1,15 @@
 package com.danielrepko83.jordancampbell01.stepahead;
 
+import android.Manifest;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Bundle;
+import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AlertDialog;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -22,7 +27,7 @@ import android.widget.TextView;
  * Use the {@link MainFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class MainFragment extends Fragment {
+public class MainFragment extends Fragment{
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -32,12 +37,13 @@ public class MainFragment extends Fragment {
     private String mParam1;
     private String mParam2;
 
-
     private OnFragmentInteractionListener mListener;
 
     public MainFragment() {
         // Required empty public constructor
     }
+
+
 
     /**
      * Use this factory method to create a new instance of
@@ -64,15 +70,20 @@ public class MainFragment extends Fragment {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
+
     }
 
+    private static final int PERMISSIONS_REQUEST = 1;
+
+
+    public static TextView distance;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_main, container, false);
 
-        TextView distance = view.findViewById(R.id.distance);
+        distance = view.findViewById(R.id.distance);
         TextView distanceLabel = view.findViewById(R.id.distanceLabel);
         TextView duration = view.findViewById(R.id.duration);
         TextView durationLabel = view.findViewById(R.id.durationLabel);
@@ -83,7 +94,6 @@ public class MainFragment extends Fragment {
         final Button pause = view.findViewById(R.id.pause);
         final Button finish = view.findViewById(R.id.finish);
 
-
         //Start Run click listener
         startRun.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -93,8 +103,22 @@ public class MainFragment extends Fragment {
                 cancel.setVisibility(View.VISIBLE);
                 pause.setVisibility(View.VISIBLE);
                 finish.setVisibility(View.VISIBLE);
+
+                int permission = ContextCompat.checkSelfPermission(getActivity(),
+                        Manifest.permission.ACCESS_FINE_LOCATION);
+                if(permission == PackageManager.PERMISSION_GRANTED){
+
+                } else {
+                    ActivityCompat.requestPermissions(getActivity(),
+                            new String[]{Manifest.permission.ACCESS_FINE_LOCATION},
+                            PERMISSIONS_REQUEST);
+                }
+                getActivity().startService(new Intent(getActivity(), LocationTracker.class));
+
             }
         });
+
+
 
         //Cancel click listener
         cancel.setOnClickListener(new View.OnClickListener() {
@@ -138,6 +162,7 @@ public class MainFragment extends Fragment {
 
         return view;
     }
+
 
     // TODO: Rename method, update argument and hook method into UI event
     public void onButtonPressed(Uri uri) {
