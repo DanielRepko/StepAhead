@@ -111,12 +111,20 @@ public class DatabaseHandler extends SQLiteOpenHelper {
     /* CRUD Operations - Picture Table */
 
     //Add method
-    public void addPicture(Picture picture) {
+    public int addPicture(Picture picture) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues values = new ContentValues();
         values.put(COLUMN_RESOURCE, picture.getResource());
         db.insert(TABLE_PICTURE,null, values);
-        db.close();
+        db = this.getReadableDatabase();
+        Cursor cursor = db.rawQuery("SELECT last_insert_rowid()", null);
+        if(cursor.moveToFirst()) {
+            int picId = Integer.parseInt(cursor.getString(0));
+            System.out.println("Record ID " + picId);
+            db.close();
+            return picId;
+        }
+        return -1;
     }
 
     //Get methods
