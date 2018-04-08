@@ -4,6 +4,8 @@ import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -28,6 +30,7 @@ public class WeightListFragment extends Fragment {
     private String mParam2;
 
     private OnFragmentInteractionListener mListener;
+    FragmentManager fm;
 
     public WeightListFragment() {
         // Required empty public constructor
@@ -64,7 +67,17 @@ public class WeightListFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_weight_list, container, false);
+        View view = inflater.inflate(R.layout.fragment_weight_list, container, false);
+
+        MainActivity.fab.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                FragmentTransaction trans = fm.beginTransaction();
+                trans.replace(R.id.fragmentStorage, new WeightGraphFragment());
+                trans.commit();
+            }
+        });
+
+        return view;
     }
 
     // TODO: Rename method, update argument and hook method into UI event
