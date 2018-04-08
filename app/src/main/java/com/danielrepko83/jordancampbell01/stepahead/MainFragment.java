@@ -18,6 +18,8 @@ import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.google.android.gms.location.LocationRequest;
+
 
 /**
  * A simple {@link Fragment} subclass.
@@ -75,7 +77,7 @@ public class MainFragment extends Fragment{
 
     private static final int PERMISSIONS_REQUEST = 1;
 
-
+    Intent trackerIntent;
     public static TextView distance;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -93,6 +95,9 @@ public class MainFragment extends Fragment{
         final Button cancel = view.findViewById(R.id.cancel);
         final Button pause = view.findViewById(R.id.pause);
         final Button finish = view.findViewById(R.id.finish);
+
+        trackerIntent = new Intent(getActivity(), LocationTracker.class);
+
 
         //Start Run click listener
         startRun.setOnClickListener(new View.OnClickListener() {
@@ -113,7 +118,7 @@ public class MainFragment extends Fragment{
                             new String[]{Manifest.permission.ACCESS_FINE_LOCATION},
                             PERMISSIONS_REQUEST);
                 }
-                getActivity().startService(new Intent(getActivity(), LocationTracker.class));
+                getActivity().startService(trackerIntent);
 
             }
         });
@@ -124,6 +129,7 @@ public class MainFragment extends Fragment{
         cancel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
                 //create an alert asking the user if they want to cancel the run
                 new AlertDialog.Builder(getContext())
                         .setTitle(R.string.home_page_alert_title)
@@ -136,6 +142,9 @@ public class MainFragment extends Fragment{
                                 cancel.setVisibility(View.GONE);
                                 pause.setVisibility(View.GONE);
                                 finish.setVisibility(View.GONE);
+                                //stop tracking location
+                                //getActivity().stopService(trackerIntent);
+
                             }
                         })
                         //if no, do nothing
