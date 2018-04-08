@@ -78,6 +78,7 @@ public class WeightListFragment extends Fragment {
                 trans.commit();
             }
         });
+        MainActivity.fab.setImageResource(R.drawable.ic_show_chart_black_24dp);
         MainActivity.fab.show();
 
         return view;

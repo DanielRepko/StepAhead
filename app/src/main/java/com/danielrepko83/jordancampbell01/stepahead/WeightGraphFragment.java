@@ -78,6 +78,8 @@ public class WeightGraphFragment extends Fragment {
                 trans.commit();
             }
         });
+        MainActivity.fab.setImageResource(R.drawable.ic_list_black_24dp);
+        MainActivity.fab.show();
 
         return view;
     }
