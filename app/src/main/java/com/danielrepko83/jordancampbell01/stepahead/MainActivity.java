@@ -25,7 +25,7 @@ public class MainActivity extends AppCompatActivity
                     WeightGraphFragment.OnFragmentInteractionListener {
 
     FragmentManager fm;
-    public FloatingActionButton fab;
+    static FloatingActionButton fab;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
