@@ -76,6 +76,7 @@ public class WeightListFragment extends Fragment {
                 trans.commit();
             }
         });
+        MainActivity.fab.show();
 
         return view;
     }
