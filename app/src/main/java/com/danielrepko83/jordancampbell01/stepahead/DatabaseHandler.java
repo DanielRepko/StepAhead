@@ -150,6 +150,26 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         return picList;
     }
 
+    public ArrayList<Picture> getAllPictures(int runId) {
+        ArrayList<Picture> picList = new ArrayList<>();
+        String selectQuery = "SELECT * FROM "+TABLE_RUN_PICTURE+" WHERE "+COLUMN_RUN_ID+" = "+runId;
+        SQLiteDatabase db = this.getWritableDatabase();
+        Cursor cursor = db.rawQuery(selectQuery, null);
+        if(cursor.moveToFirst()){
+            do{
+                String innerQuery = "SELECT * FROM "+TABLE_PICTURE+" WHERE "+COLUMN_ID+" = "+cursor.getInt(1);
+                Cursor innerCursor = db.rawQuery(innerQuery, null);
+                if(innerCursor.moveToFirst()){
+                    do{
+                        Picture picture = new Picture(Integer.parseInt(innerCursor.getString(0)), innerCursor.getString(1));
+                        picList.add(picture);
+                    }while(innerCursor.moveToNext());
+                }
+            }while(cursor.moveToNext());
+        }
+        return picList;
+    }
+
     //Delete method
     public void deletePicture(int picture) {
         SQLiteDatabase db = this.getWritableDatabase();
