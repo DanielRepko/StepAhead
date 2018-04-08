@@ -25,6 +25,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
     public static final String TABLE_WEIGHT = "weight";
     public static final String TABLE_RUN = "run";
     public static final String TABLE_PICTURE = "picture";
+    public static final String TABLE_RUN_PICTURE = "run_picture";
 
     /* Column Names - Shared Columns */
     public static final String COLUMN_ID = "id";
@@ -51,6 +52,10 @@ public class DatabaseHandler extends SQLiteOpenHelper {
     /* Column Names - Picture Table */
     public static final String COLUMN_RESOURCE = "resource";
 
+    /* Column Names - RunPicture Table */
+    public static final String COLUMN_RUN_ID = "runId";
+    public static final String COLUMN_PICTURE_ID = "pictureId";
+
     /* Create statement for Weight Table */
     public static final String CREATE_WEIGHT_TABLE = "CREATE TABLE " + TABLE_WEIGHT + "("
             + COLUMN_ID + " INTEGER PRIMARY KEY NOT NULL,"
@@ -74,9 +79,15 @@ public class DatabaseHandler extends SQLiteOpenHelper {
             +COLUMN_WEATHER+" TEXT,"
             +COLUMN_MEASUREMENT+" INTEGER NOT NULL)";
 
+    /* Create statement for Picture table */
     public static final String CREATE_PICTURE_TABLE = "CREATE TABLE "+TABLE_PICTURE+"("
             +COLUMN_ID+" INTEGER PRIMARY KEY NOT NULL,"
             +COLUMN_RESOURCE+" TEXT)";
+
+    /* Create statement for RunPicture Table */
+    public static final String CREATE_RUN_PICTURE_TABLE = "CREATE TABLE "+TABLE_RUN_PICTURE+"("
+            +COLUMN_RUN_ID+" INTEGER REFERENCES "+TABLE_RUN+"("+COLUMN_ID+"),"
+            +COLUMN_PICTURE_ID+" INTEGER REFERENCES "+TABLE_PICTURE+"("+COLUMN_ID+"))";
 
 
     public DatabaseHandler(Context context) {
@@ -87,12 +98,14 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         db.execSQL(CREATE_WEIGHT_TABLE);
         db.execSQL(CREATE_RUN_TABLE);
         db.execSQL(CREATE_PICTURE_TABLE);
+        db.execSQL(CREATE_RUN_PICTURE_TABLE);
     }
 
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
         db.execSQL("DROP TABLE IF EXISTS " + TABLE_WEIGHT);
         db.execSQL("DROP TABLE IF EXISTS " + TABLE_RUN);
         db.execSQL("DROP TABLE IF EXISTS " + TABLE_PICTURE);
+        db.execSQL("DROP TABLE IF EXISTS " + TABLE_RUN_PICTURE);
     }
 
     /* CRUD Operations - Picture Table */
