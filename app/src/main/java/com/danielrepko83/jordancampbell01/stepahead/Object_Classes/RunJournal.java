@@ -17,7 +17,6 @@ public class RunJournal {
     private double duration;
     private String startTime;
     private int calories;
-    //private ArrayList<Picture> pictures;
     private String feeling;
     private String area;
     private int heartRate;

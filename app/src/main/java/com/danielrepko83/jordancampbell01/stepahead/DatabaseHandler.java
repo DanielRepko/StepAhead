@@ -25,6 +25,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
     public static final String TABLE_WEIGHT = "weight";
     public static final String TABLE_RUN = "run";
     public static final String TABLE_PICTURE = "picture";
+    public static final String TABLE_RUN_PICTURE = "run_picture";
 
     /* Column Names - Shared Columns */
     public static final String COLUMN_ID = "id";
@@ -50,7 +51,10 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 
     /* Column Names - Picture Table */
     public static final String COLUMN_RESOURCE = "resource";
+
+    /* Column Names - RunPicture Table */
     public static final String COLUMN_RUN_ID = "runId";
+    public static final String COLUMN_PICTURE_ID = "pictureId";
 
     /* Create statement for Weight Table */
     public static final String CREATE_WEIGHT_TABLE = "CREATE TABLE " + TABLE_WEIGHT + "("
@@ -75,10 +79,15 @@ public class DatabaseHandler extends SQLiteOpenHelper {
             +COLUMN_WEATHER+" TEXT,"
             +COLUMN_MEASUREMENT+" INTEGER NOT NULL)";
 
+    /* Create statement for Picture table */
     public static final String CREATE_PICTURE_TABLE = "CREATE TABLE "+TABLE_PICTURE+"("
             +COLUMN_ID+" INTEGER PRIMARY KEY NOT NULL,"
-            +COLUMN_RUN_ID+" INTEGER REFERENCES "+TABLE_RUN+"("+COLUMN_ID+"),"
             +COLUMN_RESOURCE+" TEXT)";
+
+    /* Create statement for RunPicture Table */
+    public static final String CREATE_RUN_PICTURE_TABLE = "CREATE TABLE "+TABLE_RUN_PICTURE+"("
+            +COLUMN_RUN_ID+" INTEGER REFERENCES "+TABLE_RUN+"("+COLUMN_ID+"),"
+            +COLUMN_PICTURE_ID+" INTEGER REFERENCES "+TABLE_PICTURE+"("+COLUMN_ID+"))";
 
 
     public DatabaseHandler(Context context) {
@@ -89,24 +98,33 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         db.execSQL(CREATE_WEIGHT_TABLE);
         db.execSQL(CREATE_RUN_TABLE);
         db.execSQL(CREATE_PICTURE_TABLE);
+        db.execSQL(CREATE_RUN_PICTURE_TABLE);
     }
 
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
         db.execSQL("DROP TABLE IF EXISTS " + TABLE_WEIGHT);
         db.execSQL("DROP TABLE IF EXISTS " + TABLE_RUN);
         db.execSQL("DROP TABLE IF EXISTS " + TABLE_PICTURE);
+        db.execSQL("DROP TABLE IF EXISTS " + TABLE_RUN_PICTURE);
     }
 
     /* CRUD Operations - Picture Table */
 
     //Add method
-    public void addPicture(Picture picture) {
+    public int addPicture(Picture picture) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues values = new ContentValues();
-        values.put(COLUMN_RUN_ID, picture.getRunId());
         values.put(COLUMN_RESOURCE, picture.getResource());
         db.insert(TABLE_PICTURE,null, values);
-        db.close();
+        db = this.getReadableDatabase();
+        Cursor cursor = db.rawQuery("SELECT last_insert_rowid()", null);
+        if(cursor.moveToFirst()) {
+            int picId = Integer.parseInt(cursor.getString(0));
+            System.out.println("Record ID " + picId);
+            db.close();
+            return picId;
+        }
+        return -1;
     }
 
     //Get methods
@@ -114,14 +132,13 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         SQLiteDatabase db = this.getReadableDatabase();
         Picture picture = null;
         Cursor cursor = db.query(TABLE_PICTURE,
-                new String[]{COLUMN_ID, COLUMN_RUN_ID, COLUMN_RESOURCE},
+                new String[]{COLUMN_ID, COLUMN_RESOURCE},
                 COLUMN_ID + "=?", new String[]{String.valueOf(id)},
                 null, null, null, null);
         if(cursor != null) {
             cursor.moveToFirst();
             picture = new Picture(Integer.parseInt(cursor.getString(0)),
-                    Integer.parseInt(cursor.getString(1)),
-                    cursor.getString(2));
+                    cursor.getString(1));
         }
         db.close();
         return picture;
@@ -135,9 +152,28 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         if(cursor.moveToFirst()) {
             do {
                 picList.add(new Picture(Integer.parseInt(cursor.getString(0)),
-                        Integer.parseInt(cursor.getString(1)),
-                        cursor.getString(2)));
+                        cursor.getString(1)));
             } while(cursor.moveToNext());
+        }
+        return picList;
+    }
+
+    public ArrayList<Picture> getRunPictures(int runId) {
+        ArrayList<Picture> picList = new ArrayList<>();
+        String selectQuery = "SELECT * FROM "+TABLE_RUN_PICTURE+" WHERE "+COLUMN_RUN_ID+" = "+runId;
+        SQLiteDatabase db = this.getWritableDatabase();
+        Cursor cursor = db.rawQuery(selectQuery, null);
+        if(cursor.moveToFirst()){
+            do{
+                String innerQuery = "SELECT * FROM "+TABLE_PICTURE+" WHERE "+COLUMN_ID+" = "+cursor.getInt(1);
+                Cursor innerCursor = db.rawQuery(innerQuery, null);
+                if(innerCursor.moveToFirst()){
+                    do{
+                        Picture picture = new Picture(Integer.parseInt(innerCursor.getString(0)), innerCursor.getString(1));
+                        picList.add(picture);
+                    }while(innerCursor.moveToNext());
+                }
+            }while(cursor.moveToNext());
         }
         return picList;
     }
@@ -322,6 +358,16 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         db.delete(TABLE_WEIGHT,
                 COLUMN_ID + "= ?",
                 new String[]{String.valueOf(weight)});
+        db.close();
+    }
+
+    /* Add method for the RunPictureTable */
+    public void addRunPicture(int runId, int picId){
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues values = new ContentValues();
+        values.put(COLUMN_RUN_ID, runId);
+        values.put(COLUMN_PICTURE_ID, picId);
+        db.insert(TABLE_RUN_PICTURE, null, values);
         db.close();
     }
 
