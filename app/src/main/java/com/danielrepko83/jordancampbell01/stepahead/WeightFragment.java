@@ -13,6 +13,11 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.FrameLayout;
 
+import com.danielrepko83.jordancampbell01.stepahead.Object_Classes.Weight;
+
+import java.util.Calendar;
+import java.util.Date;
+
 
 /**
  * A simple {@link Fragment} subclass.
@@ -81,8 +86,16 @@ public class WeightFragment extends Fragment {
 
         submitButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                int enteredNumber = Integer.parseInt(weightEditText.getText().toString());
+                //Grab the weight the user entered. If the user didn't enter one, abort weight entry.
+                Double enteredNumber;
+                try {
+                    enteredNumber = Double.parseDouble(weightEditText.getText().toString());
+                } catch(Exception e) {
+                    return;
+                }
 
+                Date date = Calendar.getInstance().getTime();
+                Weight weight = new Weight(enteredNumber, date.toString());
             }
         });
 
