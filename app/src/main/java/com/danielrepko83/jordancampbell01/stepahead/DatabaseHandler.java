@@ -333,4 +333,14 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         db.close();
     }
 
+    /* Add method for the RunPictureTable */
+    public void addRunPicture(int runId, int picId){
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues values = new ContentValues();
+        values.put(COLUMN_RUN_ID, runId);
+        values.put(COLUMN_PICTURE_ID, picId);
+        db.insert(TABLE_RUN_PICTURE, null, values);
+        db.close();
+    }
+
 }
