@@ -35,6 +35,6 @@
 
 
     <!-- Weight Strings -->
-    <string name="weight_hint">Enter Weight</string>
+    <string name="weight_hint">Enter Weight (lbs)</string>
     <string name="weight_add">Add</string>
 </resources>
