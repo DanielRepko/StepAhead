@@ -9,6 +9,9 @@ import android.support.v4.app.FragmentTransaction;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.FrameLayout;
 
 
 /**
@@ -30,6 +33,10 @@ public class WeightFragment extends Fragment {
     private String mParam2;
 
     private OnFragmentInteractionListener mListener;
+
+    EditText weightEditText;
+    Button submitButton;
+    FrameLayout fragmentStorage;
 
     public WeightFragment() {
         // Required empty public constructor
@@ -68,7 +75,9 @@ public class WeightFragment extends Fragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_weight, container, false);
 
-        
+        weightEditText = view.findViewById(R.id.weightEditText);
+        submitButton = view.findViewById(R.id.submitButton);
+        fragmentStorage = view.findViewById(R.id.fragmentStorage);
 
         return view;
     }
