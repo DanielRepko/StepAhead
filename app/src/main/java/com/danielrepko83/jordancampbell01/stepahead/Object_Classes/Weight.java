@@ -10,23 +10,20 @@ import android.os.Parcelable;
 public class Weight implements Parcelable {
     private int id;
     private Double pounds;
-    private Double kilograms;
     private String date;
 
     public Weight() {
 
     }
 
-    public Weight(Double pounds, Double kilograms, String date) {
+    public Weight(Double pounds, String date) {
         this.pounds = pounds;
-        this.kilograms = kilograms;
         this.date = date;
     }
 
-    public Weight(int id, Double pounds, Double kilograms, String date) {
+    public Weight(int id, Double pounds, String date) {
         this.id = id;
         this.pounds = pounds;
-        this.kilograms = kilograms;
         this.date = date;
     }
 
@@ -44,13 +41,6 @@ public class Weight implements Parcelable {
         this.pounds = pounds;
     }
 
-    public Double getKilograms() {
-        return kilograms;
-    }
-    public void setKilograms(Double kilograms) {
-        this.kilograms = kilograms;
-    }
-
     public String getDate() {
         return date;
     }
@@ -65,14 +55,12 @@ public class Weight implements Parcelable {
     public void writeToParcel(Parcel dest, int flags) {
         dest.writeInt(this.id);
         dest.writeDouble(this.pounds);
-        dest.writeDouble(this.kilograms);
         dest.writeString(this.date);
     }
 
     protected Weight(Parcel in) {
         this.id = in.readInt();
         this.pounds = in.readDouble();
-        this.kilograms = in.readDouble();
         this.date = in.readString();
     }
 

@@ -79,6 +79,13 @@ public class WeightFragment extends Fragment {
         submitButton = view.findViewById(R.id.submitButton);
         fragmentStorage = view.findViewById(R.id.fragmentStorage);
 
+        submitButton.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                int enteredNumber = Integer.parseInt(weightEditText.getText().toString());
+
+            }
+        });
+
         return view;
     }
 
