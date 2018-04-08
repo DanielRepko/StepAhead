@@ -69,6 +69,8 @@ public class WeightListFragment extends Fragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_weight_list, container, false);
 
+        fm = getFragmentManager();
+
         MainActivity.fab.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 FragmentTransaction trans = fm.beginTransaction();
