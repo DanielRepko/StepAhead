@@ -150,7 +150,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         return picList;
     }
 
-    public ArrayList<Picture> getAllPictures(int runId) {
+    public ArrayList<Picture> getRunPictures(int runId) {
         ArrayList<Picture> picList = new ArrayList<>();
         String selectQuery = "SELECT * FROM "+TABLE_RUN_PICTURE+" WHERE "+COLUMN_RUN_ID+" = "+runId;
         SQLiteDatabase db = this.getWritableDatabase();
