@@ -96,6 +96,10 @@ public class WeightFragment extends Fragment {
 
                 Date date = Calendar.getInstance().getTime();
                 Weight weight = new Weight(enteredNumber, date.toString());
+
+                DatabaseHandler db = new DatabaseHandler(getContext());
+                db.addWeight(weight);
+                db.close();
             }
         });
 
