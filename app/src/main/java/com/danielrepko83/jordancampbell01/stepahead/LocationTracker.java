@@ -6,6 +6,7 @@ import android.app.Service;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.pm.PackageManager;
+import android.location.Location;
 import android.os.IBinder;
 import android.support.v4.app.NotificationCompat;
 import android.support.v4.content.ContextCompat;
@@ -25,6 +26,7 @@ public class LocationTracker extends Service {
 
     private double currentDistance;
     private TextView distanceLabel;
+    private Location lastLocation;
 
     /**
      * LocationTracker extends Service and allows for location tracking
@@ -41,6 +43,7 @@ public class LocationTracker extends Service {
     public IBinder onBind(Intent intent) {
         // TODO: Return the communication channel to the service.
         return null;
+
     }
 
     @Override
@@ -49,6 +52,9 @@ public class LocationTracker extends Service {
         requestLocationUpdates();
     }
 
+    /**
+     * this method starts the location tracking
+     */
     public void requestLocationUpdates(){
         LocationRequest request = new LocationRequest();
         request.setInterval(10000);
@@ -61,15 +67,28 @@ public class LocationTracker extends Service {
             client.requestLocationUpdates(request, new LocationCallback(){
                 @Override
                 public void onLocationResult(LocationResult locationResult) {
-                    System.out.println(locationResult);
+                    Location location = locationResult.getLastLocation();
+                    //check if this is the first location update
+                    if(lastLocation != null){
+                        //if not calculate the distance from the last location update
+                        currentDistance+=location.distanceTo(lastLocation) / 1000;
+                        System.out.println(currentDistance);
+                        distanceLabel.setText(String.format("%.2f",currentDistance));
+                        lastLocation = location;
+                    } else {
+                        //if so just set the last location
+                        lastLocation = location;
+                    }
 
-
-                    //distanceLabel.setText(currentDistance+"");
                 }
             }, null);
         }
     }
 
+    public void stopTracking(){
+        FusedLocationProviderClient client = LocationServices.getFusedLocationProviderClient(this);
+        client.removeLocationUpdates(new LocationCallback());
+    }
 
 
 }

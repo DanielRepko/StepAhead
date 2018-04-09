@@ -1,6 +1,7 @@
 package com.danielrepko83.jordancampbell01.stepahead;
 
 import android.Manifest;
+import android.app.Activity;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -96,8 +97,8 @@ public class MainFragment extends Fragment{
         final Button pause = view.findViewById(R.id.pause);
         final Button finish = view.findViewById(R.id.finish);
 
-        trackerIntent = new Intent(getActivity(), LocationTracker.class);
-
+        final LocationTracker tracker = new LocationTracker();
+        trackerIntent = new Intent(getActivity(), tracker.getClass());
 
         //Start Run click listener
         startRun.setOnClickListener(new View.OnClickListener() {
@@ -118,6 +119,7 @@ public class MainFragment extends Fragment{
                             new String[]{Manifest.permission.ACCESS_FINE_LOCATION},
                             PERMISSIONS_REQUEST);
                 }
+
                 getActivity().startService(trackerIntent);
 
             }
@@ -145,6 +147,7 @@ public class MainFragment extends Fragment{
                                 //stop tracking location
                                 //getActivity().stopService(trackerIntent);
 
+                                tracker.stopTracking();
                             }
                         })
                         //if no, do nothing
@@ -157,6 +160,7 @@ public class MainFragment extends Fragment{
         pause.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
                 //check if the run is already paused
                 if(pause.getText().toString().equals("Pause")){
                     //if not, pause recording
@@ -165,6 +169,7 @@ public class MainFragment extends Fragment{
                 } else {
                     //if it is paused, then resume recording
                     pause.setText(R.string.home_page_pause_button_text);
+
                 }
             }
         });
