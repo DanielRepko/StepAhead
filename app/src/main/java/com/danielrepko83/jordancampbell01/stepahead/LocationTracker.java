@@ -16,6 +16,8 @@ import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.google.android.gms.common.api.GoogleApiClient;
+import com.google.android.gms.location.FusedLocationProviderApi;
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationCallback;
 import com.google.android.gms.location.LocationRequest;
@@ -27,6 +29,8 @@ public class LocationTracker extends Service {
     private double currentDistance;
     private TextView distanceLabel;
     private Location lastLocation;
+    private boolean checkLocation = true;
+    private LocationCallback callBack;
 
     /**
      * LocationTracker extends Service and allows for location tracking
@@ -56,39 +60,53 @@ public class LocationTracker extends Service {
      * this method starts the location tracking
      */
     public void requestLocationUpdates(){
-        LocationRequest request = new LocationRequest();
-        request.setInterval(10000);
-        request.setFastestInterval(5000);
-        request.setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY);
-        FusedLocationProviderClient client = LocationServices.getFusedLocationProviderClient(this);
-        int permission = ContextCompat.checkSelfPermission(this,
-                Manifest.permission.ACCESS_FINE_LOCATION);
-        if(permission == PackageManager.PERMISSION_GRANTED) {
-            client.requestLocationUpdates(request, new LocationCallback(){
-                @Override
-                public void onLocationResult(LocationResult locationResult) {
-                    Location location = locationResult.getLastLocation();
-                    //check if this is the first location update
-                    if(lastLocation != null){
-                        //if not calculate the distance from the last location update
-                        currentDistance+=location.distanceTo(lastLocation) / 1000;
-                        System.out.println(currentDistance);
-                        distanceLabel.setText(String.format("%.2f",currentDistance));
-                        lastLocation = location;
-                    } else {
-                        //if so just set the last location
-                        lastLocation = location;
+            LocationRequest request = new LocationRequest();
+            request.setInterval(10000);
+            request.setFastestInterval(5000);
+            request.setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY);
+            final FusedLocationProviderClient client = LocationServices.getFusedLocationProviderClient(this);
+            int permission = ContextCompat.checkSelfPermission(this,
+                    Manifest.permission.ACCESS_FINE_LOCATION);
+            if (permission == PackageManager.PERMISSION_GRANTED) {
+                callBack = new LocationCallback(){
+                    @Override
+                    public void onLocationResult(LocationResult locationResult) {
+                        //check if the location updates should be running
+                        if(checkLocation) {
+                            //if so, track location and calculate distance traveled
+                            Location location = locationResult.getLastLocation();
+                            //check if this is the first location update
+                            if (lastLocation != null) {
+                                //if not calculate the distance from the last location update
+                                currentDistance += location.distanceTo(lastLocation) / 1000;
+                                System.out.println(currentDistance);
+                                distanceLabel.setText(String.format("%.2f", currentDistance));
+                                lastLocation = location;
+                            } else {
+                                //if so just set the last location
+                                lastLocation = location;
+                            }
+                        } else {
+                            //if not, remove location updates
+                            client.removeLocationUpdates(callBack);
+                            stopSelf();
+                        }
                     }
-
+                };
+                    client.requestLocationUpdates(request, callBack, null);{
                 }
-            }, null);
-        }
+            }
     }
 
     public void stopTracking(){
         FusedLocationProviderClient client = LocationServices.getFusedLocationProviderClient(this);
         client.removeLocationUpdates(new LocationCallback());
+
     }
 
-
+    @Override
+    public void onDestroy() {
+        checkLocation = false;
+        super.onDestroy();
+    }
 }

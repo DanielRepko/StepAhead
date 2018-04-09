@@ -78,8 +78,8 @@ public class MainFragment extends Fragment{
 
     private static final int PERMISSIONS_REQUEST = 1;
 
-    Intent trackerIntent;
     public static TextView distance;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -97,8 +97,7 @@ public class MainFragment extends Fragment{
         final Button pause = view.findViewById(R.id.pause);
         final Button finish = view.findViewById(R.id.finish);
 
-        final LocationTracker tracker = new LocationTracker();
-        trackerIntent = new Intent(getActivity(), tracker.getClass());
+        final Intent trackerIntent = new Intent(getActivity(), LocationTracker.class);
 
         //Start Run click listener
         startRun.setOnClickListener(new View.OnClickListener() {
@@ -145,9 +144,8 @@ public class MainFragment extends Fragment{
                                 pause.setVisibility(View.GONE);
                                 finish.setVisibility(View.GONE);
                                 //stop tracking location
-                                //getActivity().stopService(trackerIntent);
+                                getActivity().stopService(trackerIntent);
 
-                                tracker.stopTracking();
                             }
                         })
                         //if no, do nothing
