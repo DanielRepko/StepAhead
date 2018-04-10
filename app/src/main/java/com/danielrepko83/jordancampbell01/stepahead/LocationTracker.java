@@ -145,6 +145,9 @@ public class LocationTracker extends Service {
         lastLocation = null;
         currentDistance = 0;
 
+        durationLabel.setText("0:00");
+        timeSwapBuff = 0L;
+
         customHandler.removeCallbacks(updateTimerThread);
 
         super.onDestroy();

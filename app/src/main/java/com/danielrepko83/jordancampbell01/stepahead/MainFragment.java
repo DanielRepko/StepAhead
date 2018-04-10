@@ -145,6 +145,12 @@ public class MainFragment extends Fragment{
                                 cancel.setVisibility(View.GONE);
                                 pause.setVisibility(View.GONE);
                                 finish.setVisibility(View.GONE);
+
+                                if(pause.getText().equals("Resume")){
+                                    pause.setText("Pause");
+                                    LocationTracker.pause();
+                                }
+
                                 //stop tracking location
                                 getActivity().stopService(trackerIntent);
 
