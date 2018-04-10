@@ -42,7 +42,6 @@ public class LocationTracker extends Service {
     private static long timeInMillis = 0L;
     private static long timeSwapBuff = 0L;
     private static long updatedTime = 0L;
-
     /**
      * LocationTracker extends Service and allows for location tracking
      * with real time updates, and can do this even when the app is in the
@@ -68,6 +67,7 @@ public class LocationTracker extends Service {
     public void onCreate(){
         super.onCreate();
         requestLocationUpdates();
+        startTime = SystemClock.uptimeMillis();
         customHandler.postDelayed(updateTimerThread, 0);
     }
 
@@ -112,11 +112,12 @@ public class LocationTracker extends Service {
         if(paused == true){
             //unpause the tracker
             paused = false;
+            startTime = SystemClock.uptimeMillis();
             customHandler.postDelayed(updateTimerThread, 0);
         } else {
             //otherwise pause tracker
             paused = true;
-            timeSwapBuff = timeInMillis;
+            timeSwapBuff+= timeInMillis;
             customHandler.removeCallbacks(updateTimerThread);
         }
     }
@@ -125,10 +126,7 @@ public class LocationTracker extends Service {
         @Override
         public void run() {
             timeInMillis = SystemClock.uptimeMillis() - startTime;
-
-            //accounting for time paused since this
-            //timer is based off the System time
-            updatedTime = timeSwapBuff + timeInMillis;
+            updatedTime =  timeInMillis + timeSwapBuff;
 
             int secs = (int) (updatedTime / 1000);
             int mins = secs / 60;
