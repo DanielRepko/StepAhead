@@ -79,6 +79,8 @@ public class MainFragment extends Fragment{
     private static final int PERMISSIONS_REQUEST = 1;
 
     public static TextView distance;
+    public static TextView duration;
+    public static TextView calories;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -88,9 +90,9 @@ public class MainFragment extends Fragment{
 
         distance = view.findViewById(R.id.distance);
         TextView distanceLabel = view.findViewById(R.id.distanceLabel);
-        TextView duration = view.findViewById(R.id.duration);
+        duration = view.findViewById(R.id.duration);
         TextView durationLabel = view.findViewById(R.id.durationLabel);
-        TextView calories = view.findViewById(R.id.calories);
+        calories = view.findViewById(R.id.calories);
         TextView caloriesLabel = view.findViewById(R.id.caloriesLabel);
         final Button startRun = view.findViewById(R.id.startRun);
         final Button cancel = view.findViewById(R.id.cancel);
