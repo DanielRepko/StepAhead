@@ -1,6 +1,8 @@
 package com.danielrepko83.jordancampbell01.stepahead;
 
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -23,6 +25,28 @@ public class CustomAdapterWeight extends RecyclerView.Adapter {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.weight_recycler_view, parent, false);
         final CustomViewHolder viewHolder = new CustomViewHolder(view);
         context = parent.getContext();
+
+        view.setOnLongClickListener(new View.OnLongClickListener() {
+            public boolean onLongClick(View v) {
+                new AlertDialog.Builder(context)
+                        .setTitle("Delete Weight Entry")
+                        .setMessage("WARNING: Are you sure you want to delete this? This cannot be undone.")
+                        .setIcon(android.R.drawable.ic_dialog_alert)
+                        .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int which) {
+                                int weight = viewHolder.getAdapterPosition();
+                                DatabaseHandler db = new DatabaseHandler(context);
+                                db.deleteWeight(weights.get(weight).getId());
+                                weights.remove(weight);
+                                notifyItemRemoved(weight);
+                            }
+                        })
+                        .setNegativeButton("No", null)
+                        .show();
+                return false;
+            }
+        });
+
         return viewHolder;
     }
 
