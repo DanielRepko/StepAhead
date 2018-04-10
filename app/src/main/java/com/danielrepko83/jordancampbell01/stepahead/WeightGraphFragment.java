@@ -1,6 +1,7 @@
 package com.danielrepko83.jordancampbell01.stepahead;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -10,7 +11,13 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.androidplot.ui.widget.TextLabelWidget;
+import com.androidplot.xy.BarFormatter;
+import com.androidplot.xy.BoundaryMode;
+import com.androidplot.xy.LineAndPointFormatter;
+import com.androidplot.xy.PointLabelFormatter;
 import com.androidplot.xy.SimpleXYSeries;
+import com.androidplot.xy.StepMode;
 import com.androidplot.xy.XYPlot;
 import com.androidplot.xy.XYSeries;
 import com.danielrepko83.jordancampbell01.stepahead.Object_Classes.Weight;
@@ -98,12 +105,21 @@ public class WeightGraphFragment extends Fragment {
         //Convert the Weight ArrayList into two ArrayLists, one for the actual weight and one for the id
         ArrayList<Double> weightValues = new ArrayList<>();
         ArrayList<Integer> weightIds = new ArrayList<>();
-        for(int i = 0; i < weightValues.size(); i++) {
+        for(int i = 0; i < weights.size(); i++) {
             weightValues.add(weights.get(i).getPounds());
             weightIds.add(weights.get(i).getId());
         }
-        XYSeries weightSeries = new SimpleXYSeries(weightValues, weightIds, "Weight Entries");
-        
+
+        //Create an XYSeries that uses the values and ids. An XYSeries is a series of points on the graph
+        XYSeries weightSeries = new SimpleXYSeries(weightIds, weightValues, "Weight Entries");
+
+        //Create a LineAndPointFormatter to provide to the graph so it knows how to format the information
+        LineAndPointFormatter formatter = new LineAndPointFormatter();
+
+        //Add the weightSeries to the graph
+        weightGraph.addSeries(weightSeries, formatter);
+        weightGraph.setDomainStep(StepMode.SUBDIVIDE, 10);
+        weightGraph.setRangeStep(StepMode.SUBDIVIDE, 10);
 
         return view;
     }
