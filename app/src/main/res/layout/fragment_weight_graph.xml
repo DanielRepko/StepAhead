@@ -5,9 +5,16 @@
     android:orientation="vertical"
     tools:context="com.danielrepko83.jordancampbell01.stepahead.WeightGraphFragment">
 
+    <!--
     <TextView
         android:id="@+id/textView6"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Graph" />
+    -->
+
+    <com.androidplot.xy.XYPlot
+        android:id="@+id/weightGraph"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
 </LinearLayout>
