@@ -77,15 +77,14 @@ public class WeightListFragment extends Fragment {
 
         fm = getFragmentManager();
 
-        MainActivity.fab.setOnClickListener(new View.OnClickListener() {
+        WeightFragment.swapButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
+                WeightFragment.swapButton.setText("View in List Mode");
                 FragmentTransaction trans = fm.beginTransaction();
                 trans.replace(R.id.fragmentStorage, new WeightGraphFragment());
                 trans.commit();
             }
         });
-        MainActivity.fab.setImageResource(R.drawable.ic_show_chart_black_24dp);
-        MainActivity.fab.show();
 
         //Grab the RecyclerView so we can modify it's content
         RecyclerView list = view.findViewById(R.id.weightRecyclerView);

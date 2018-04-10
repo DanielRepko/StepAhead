@@ -71,15 +71,14 @@ public class WeightGraphFragment extends Fragment {
 
         fm = getFragmentManager();
 
-        MainActivity.fab.setOnClickListener(new View.OnClickListener() {
+        WeightFragment.swapButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
+                WeightFragment.swapButton.setText("View in Graph Mode");
                 FragmentTransaction trans = fm.beginTransaction();
                 trans.replace(R.id.fragmentStorage, new WeightListFragment());
                 trans.commit();
             }
         });
-        MainActivity.fab.setImageResource(R.drawable.ic_list_black_24dp);
-        MainActivity.fab.show();
 
         return view;
     }

@@ -40,7 +40,7 @@ public class WeightFragment extends Fragment {
     private OnFragmentInteractionListener mListener;
 
     EditText weightEditText;
-    Button swapButton;
+    static Button swapButton;
     FrameLayout fragmentStorage;
 
     public WeightFragment() {
