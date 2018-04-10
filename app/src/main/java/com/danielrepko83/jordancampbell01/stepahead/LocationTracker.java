@@ -68,6 +68,7 @@ public class LocationTracker extends Service {
     public void onCreate(){
         super.onCreate();
         requestLocationUpdates();
+        customHandler.postDelayed(updateTimerThread, 0);
     }
 
     /**
@@ -145,6 +146,9 @@ public class LocationTracker extends Service {
         distanceLabel.setText("0.00");
         lastLocation = null;
         currentDistance = 0;
+
+        customHandler.removeCallbacks(updateTimerThread);
+
         super.onDestroy();
     }
 }
