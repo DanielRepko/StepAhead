@@ -165,10 +165,12 @@ public class MainFragment extends Fragment{
                 if(pause.getText().toString().equals("Pause")){
                     //if not, pause recording
                     pause.setText(R.string.home_page_resume_button_text);
+                    LocationTracker.paused = true;
 
                 } else {
                     //if it is paused, then resume recording
                     pause.setText(R.string.home_page_pause_button_text);
+                    LocationTracker.paused = false;
 
                 }
             }

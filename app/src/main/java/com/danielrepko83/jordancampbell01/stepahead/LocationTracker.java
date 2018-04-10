@@ -31,6 +31,7 @@ public class LocationTracker extends Service {
     private Location lastLocation;
     private boolean checkLocation = true;
     private LocationCallback callBack;
+    public static boolean paused = false;
 
     /**
      * LocationTracker extends Service and allows for location tracking
