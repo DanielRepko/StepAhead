@@ -10,6 +10,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.androidplot.xy.XYPlot;
+
 
 /**
  * A simple {@link Fragment} subclass.
@@ -31,6 +33,8 @@ public class WeightGraphFragment extends Fragment {
 
     private OnFragmentInteractionListener mListener;
     FragmentManager fm;
+
+    XYPlot weightGraph;
 
     public WeightGraphFragment() {
         // Required empty public constructor
@@ -79,6 +83,9 @@ public class WeightGraphFragment extends Fragment {
                 trans.commit();
             }
         });
+
+        weightGraph = view.findViewById(R.id.weightGraph);
+
 
         return view;
     }
