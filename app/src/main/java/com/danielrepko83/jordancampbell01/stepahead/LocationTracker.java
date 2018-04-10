@@ -71,25 +71,17 @@ public class LocationTracker extends Service {
                 callBack = new LocationCallback(){
                     @Override
                     public void onLocationResult(LocationResult locationResult) {
-                        //check if the location updates should be running
-                        if(checkLocation) {
-                            //if so, track location and calculate distance traveled
-                            Location location = locationResult.getLastLocation();
-                            //check if this is the first location update
-                            if (lastLocation != null) {
-                                //if not calculate the distance from the last location update
-                                currentDistance += location.distanceTo(lastLocation) / 1000;
-                                System.out.println(currentDistance);
-                                distanceLabel.setText(String.format("%.2f", currentDistance));
-                                lastLocation = location;
-                            } else {
-                                //if so just set the last location
-                                lastLocation = location;
-                            }
+                        Location location = locationResult.getLastLocation();
+                        //check if this is the first location update
+                        if (lastLocation != null) {
+                            //if not calculate the distance from the last location update
+                            currentDistance += location.distanceTo(lastLocation) / 1000;
+                            System.out.println(currentDistance);
+                            distanceLabel.setText(String.format("%.2f", currentDistance));
+                            lastLocation = location;
                         } else {
-                            //if not, remove location updates
-                            client.removeLocationUpdates(callBack);
-                            stopSelf();
+                            //if so just set the last location
+                            lastLocation = location;
                         }
                     }
                 };
@@ -106,7 +98,12 @@ public class LocationTracker extends Service {
 
     @Override
     public void onDestroy() {
+        FusedLocationProviderClient client = LocationServices.getFusedLocationProviderClient(this);
+        client.removeLocationUpdates(callBack);
         checkLocation = false;
+        distanceLabel.setText("0.00");
+        lastLocation = null;
+        currentDistance = 0;
         super.onDestroy();
     }
 }
