@@ -21,10 +21,14 @@ public class CustomAdapterWeight extends RecyclerView.Adapter {
     }
 
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
-
+        
     }
 
     public int getItemCount() {
-        return 0;
+        if(weights != null){
+            return weights.size();
+        } else {
+            return 0;
+        }
     }
 }
