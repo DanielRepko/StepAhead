@@ -23,7 +23,10 @@ public class CustomAdapterWeight extends RecyclerView.Adapter {
     }
 
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
-
+        Weight weight = weights.get(position);
+        String weightText = weight.getPounds().toString() + " lbs";
+        ((CustomViewHolder) holder).weight.setText(weightText);
+        ((CustomViewHolder) holder).date.setText(weight.getDate());
     }
 
     public int getItemCount() {
