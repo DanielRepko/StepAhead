@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -96,6 +97,10 @@ public class WeightListFragment extends Fragment {
         //Create a new CustomAdapterWeight, provide it the weightArrayList, and set the list's adapter to this new adapter
         CustomAdapterWeight adapter = new CustomAdapterWeight(weightArrayList);
         list.setAdapter(adapter);
+
+        //Set the RecyclerView's LayoutManager to a new LinearLayoutManager
+        LinearLayoutManager layoutManager = new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false);
+        list.setLayoutManager(layoutManager);
 
         return view;
     }
