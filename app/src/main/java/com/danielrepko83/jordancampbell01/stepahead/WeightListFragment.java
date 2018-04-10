@@ -6,9 +6,14 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
+import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+
+import com.danielrepko83.jordancampbell01.stepahead.Object_Classes.Weight;
+
+import java.util.ArrayList;
 
 
 /**
@@ -80,6 +85,13 @@ public class WeightListFragment extends Fragment {
         });
         MainActivity.fab.setImageResource(R.drawable.ic_show_chart_black_24dp);
         MainActivity.fab.show();
+
+        //Grab the RecyclerView so we can modify it's content
+        RecyclerView list = view.findViewById(R.id.weightRecyclerView);
+
+        //Create a new DatabaseHandler, retrieve all the entries from the weight table, and store it in an ArrayList of Weights
+        DatabaseHandler db = new DatabaseHandler(getContext());
+        ArrayList<Weight> weightArrayList = db.getAllWeights();
 
         return view;
     }
