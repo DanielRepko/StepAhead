@@ -40,7 +40,7 @@ public class WeightFragment extends Fragment {
     private OnFragmentInteractionListener mListener;
 
     EditText weightEditText;
-    Button submitButton;
+    static Button swapButton;
     FrameLayout fragmentStorage;
 
     public WeightFragment() {
@@ -81,10 +81,10 @@ public class WeightFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_weight, container, false);
 
         weightEditText = view.findViewById(R.id.weightEditText);
-        submitButton = view.findViewById(R.id.submitButton);
+        swapButton = view.findViewById(R.id.swapButton);
         fragmentStorage = view.findViewById(R.id.fragmentStorage);
 
-        submitButton.setOnClickListener(new View.OnClickListener() {
+        MainActivity.fab.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 //Grab the weight the user entered. If the user didn't enter one, abort weight entry.
                 Double enteredNumber;
@@ -100,8 +100,16 @@ public class WeightFragment extends Fragment {
                 DatabaseHandler db = new DatabaseHandler(getContext());
                 db.addWeight(weight);
                 db.close();
+
+                weightEditText.setText(null);
+
+                FragmentTransaction trans = getChildFragmentManager().beginTransaction();
+                trans.replace(R.id.fragmentStorage, new WeightListFragment());
+                trans.commit();
             }
         });
+        MainActivity.fab.setImageResource(R.drawable.ic_add_black_24dp);
+        MainActivity.fab.show();
 
         return view;
     }
