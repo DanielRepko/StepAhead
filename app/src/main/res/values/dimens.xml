@@ -24,4 +24,7 @@
     <dimen name="home_page_pause_finish_dividing_margin">20dp</dimen>
     <dimen name="home_page_pause_finish_button_width">150dp</dimen>
 
+    <!-- Weight Pages -->
+    <dimen name="weight_text_size">20sp</dimen>
+
 </resources>
