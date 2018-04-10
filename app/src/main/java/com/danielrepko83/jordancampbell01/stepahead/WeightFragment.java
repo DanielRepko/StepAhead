@@ -100,6 +100,12 @@ public class WeightFragment extends Fragment {
                 DatabaseHandler db = new DatabaseHandler(getContext());
                 db.addWeight(weight);
                 db.close();
+
+                weightEditText.setText(null);
+
+                FragmentTransaction trans = getChildFragmentManager().beginTransaction();
+                trans.replace(R.id.fragmentStorage, new WeightListFragment());
+                trans.commit();
             }
         });
 
