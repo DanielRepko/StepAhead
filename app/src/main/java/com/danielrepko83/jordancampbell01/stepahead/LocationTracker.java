@@ -29,9 +29,8 @@ public class LocationTracker extends Service {
     private double currentDistance;
     private TextView distanceLabel;
     private Location lastLocation;
-    private boolean checkLocation = true;
     private LocationCallback callBack;
-    public static boolean paused = false;
+    private static boolean paused = false;
 
     /**
      * LocationTracker extends Service and allows for location tracking
@@ -108,7 +107,6 @@ public class LocationTracker extends Service {
     public void onDestroy() {
         FusedLocationProviderClient client = LocationServices.getFusedLocationProviderClient(this);
         client.removeLocationUpdates(callBack);
-        checkLocation = false;
         distanceLabel.setText("0.00");
         lastLocation = null;
         currentDistance = 0;
