@@ -10,7 +10,12 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.androidplot.xy.SimpleXYSeries;
 import com.androidplot.xy.XYPlot;
+import com.androidplot.xy.XYSeries;
+import com.danielrepko83.jordancampbell01.stepahead.Object_Classes.Weight;
+
+import java.util.ArrayList;
 
 
 /**
@@ -85,7 +90,20 @@ public class WeightGraphFragment extends Fragment {
         });
 
         weightGraph = view.findViewById(R.id.weightGraph);
+        DatabaseHandler db = new DatabaseHandler(getContext());
 
+        //Grab all the Weight objects from the database
+        ArrayList<Weight> weights = db.getAllWeights();
+
+        //Convert the Weight ArrayList into two ArrayLists, one for the actual weight and one for the id
+        ArrayList<Double> weightValues = new ArrayList<>();
+        ArrayList<Integer> weightIds = new ArrayList<>();
+        for(int i = 0; i < weightValues.size(); i++) {
+            weightValues.add(weights.get(i).getPounds());
+            weightIds.add(weights.get(i).getId());
+        }
+        XYSeries weightSeries = new SimpleXYSeries(weightValues, weightIds, "Weight Entries");
+        
 
         return view;
     }
