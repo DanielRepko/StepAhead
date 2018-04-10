@@ -36,12 +36,12 @@ public class LocationTracker extends Service {
     private static boolean paused = false;
 
     //properties for
-    private long startTime = 0L;
-    private TextView durationLabel;
-    private Handler customHandler = new Handler();
-    long timeInMillis = 0L;
-    long timeSwapBuff = 0L;
-    long updatedTime = 0L;
+    private static long startTime = 0L;
+    private static TextView durationLabel;
+    private static Handler customHandler = new Handler();
+    private static long timeInMillis = 0L;
+    private static long timeSwapBuff = 0L;
+    private static long updatedTime = 0L;
 
     /**
      * LocationTracker extends Service and allows for location tracking
@@ -111,13 +111,16 @@ public class LocationTracker extends Service {
         if(paused == true){
             //unpause the tracker
             paused = false;
+            customHandler.postDelayed(updateTimerThread, 0);
         } else {
             //otherwise pause tracker
             paused = true;
+            timeSwapBuff = timeInMillis;
+            customHandler.removeCallbacks(updateTimerThread);
         }
     }
 
-    private Runnable updateTimerThread = new Runnable() {
+    private static Runnable updateTimerThread = new Runnable() {
         @Override
         public void run() {
             timeInMillis = SystemClock.uptimeMillis() - startTime;
@@ -129,7 +132,7 @@ public class LocationTracker extends Service {
             int secs = (int) (updatedTime / 1000);
             int mins = secs / 60;
             secs = secs % 60;
-            System.out.println(mins+":"+String.format("%02d",secs));
+            durationLabel.setText(mins+":"+String.format("%02d",secs));
             customHandler.postDelayed(this,0);
 
         }
