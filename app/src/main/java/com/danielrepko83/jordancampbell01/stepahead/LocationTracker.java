@@ -7,7 +7,9 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.pm.PackageManager;
 import android.location.Location;
+import android.os.Handler;
 import android.os.IBinder;
+import android.os.SystemClock;
 import android.support.v4.app.NotificationCompat;
 import android.support.v4.content.ContextCompat;
 import android.view.LayoutInflater;
@@ -26,20 +28,32 @@ import com.google.android.gms.location.LocationServices;
 
 public class LocationTracker extends Service {
 
+    //properties for location tracking
     private double currentDistance;
     private TextView distanceLabel;
     private Location lastLocation;
     private LocationCallback callBack;
     private static boolean paused = false;
 
+    //properties for
+    private long startTime = 0L;
+    private TextView durationLabel;
+    private Handler customHandler = new Handler();
+    long timeInMillis = 0L;
+    long timeSwapBuff = 0L;
+    long updatedTime = 0L;
+
     /**
      * LocationTracker extends Service and allows for location tracking
      * with real time updates, and can do this even when the app is in the
-     * background
+     * background. It also gives functionality to the home screen timer
      */
     public LocationTracker() {
         this.distanceLabel = MainFragment.distance;
         currentDistance = Double.parseDouble(distanceLabel.getText().toString());
+
+        startTime = SystemClock.uptimeMillis();
+        durationLabel = MainFragment.duration;
     }
 
 
@@ -102,6 +116,24 @@ public class LocationTracker extends Service {
             paused = true;
         }
     }
+
+    private Runnable updateTimerThread = new Runnable() {
+        @Override
+        public void run() {
+            timeInMillis = SystemClock.uptimeMillis() - startTime;
+
+            //accounting for time paused since this
+            //timer is based off the System time
+            updatedTime = timeSwapBuff + timeInMillis;
+
+            int secs = (int) (updatedTime / 1000);
+            int mins = secs / 60;
+            secs = secs % 60;
+            System.out.println(mins+":"+String.format("%02d",secs));
+            customHandler.postDelayed(this,0);
+
+        }
+    };
 
     @Override
     public void onDestroy() {
