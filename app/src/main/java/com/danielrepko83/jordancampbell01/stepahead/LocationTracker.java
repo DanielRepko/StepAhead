@@ -72,22 +72,23 @@ public class LocationTracker extends Service {
                 callBack = new LocationCallback(){
                     @Override
                     public void onLocationResult(LocationResult locationResult) {
-                        Location location = locationResult.getLastLocation();
-                        //check if this is the first location update
-                        if (lastLocation != null) {
-                            //if not calculate the distance from the last location update
-                            currentDistance += location.distanceTo(lastLocation) / 1000;
-                            System.out.println(currentDistance);
-                            distanceLabel.setText(String.format("%.2f", currentDistance));
-                            lastLocation = location;
-                        } else {
-                            //if so just set the last location
-                            lastLocation = location;
+                        if(!paused) {
+                            Location location = locationResult.getLastLocation();
+                            //check if this is the first location update
+                            if (lastLocation != null) {
+                                //if not calculate the distance from the last location update
+                                currentDistance += location.distanceTo(lastLocation) / 1000;
+                                System.out.println(currentDistance);
+                                distanceLabel.setText(String.format("%.2f", currentDistance));
+                                lastLocation = location;
+                            } else {
+                                //if so just set the last location
+                                lastLocation = location;
+                            }
                         }
                     }
                 };
-                    client.requestLocationUpdates(request, callBack, null);{
-                }
+                client.requestLocationUpdates(request, callBack, null);
             }
     }
 
