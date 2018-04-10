@@ -2,7 +2,9 @@ package com.danielrepko83.jordancampbell01.stepahead;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
+import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import com.danielrepko83.jordancampbell01.stepahead.Object_Classes.Weight;
 
@@ -29,6 +31,17 @@ public class CustomAdapterWeight extends RecyclerView.Adapter {
             return weights.size();
         } else {
             return 0;
+        }
+    }
+
+    class CustomViewHolder extends RecyclerView.ViewHolder {
+        protected TextView weight;
+        protected TextView date;
+
+        public CustomViewHolder(View view) {
+            super(view);
+            this.weight = view.findViewById(R.id.weightTextView);
+            this.date = view.findViewById(R.id.dateTextView);
         }
     }
 }
