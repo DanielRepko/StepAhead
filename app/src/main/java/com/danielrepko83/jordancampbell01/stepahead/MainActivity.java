@@ -19,10 +19,13 @@ import android.view.MenuItem;
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener,
                     ReminderFragment.OnFragmentInteractionListener,
-                    MainFragment.OnFragmentInteractionListener{
+                    MainFragment.OnFragmentInteractionListener,
+                    WeightFragment.OnFragmentInteractionListener,
+                    WeightListFragment.OnFragmentInteractionListener,
+                    WeightGraphFragment.OnFragmentInteractionListener {
 
     FragmentManager fm;
-
+    static FloatingActionButton fab;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -37,7 +40,7 @@ public class MainActivity extends AppCompatActivity
             trans.commit();
         }
 
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
+        fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -45,6 +48,7 @@ public class MainActivity extends AppCompatActivity
                         .setAction("Action", null).show();
             }
         });
+        fab.hide();
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
@@ -102,6 +106,10 @@ public class MainActivity extends AppCompatActivity
             trans.commit();
         } else if (id == R.id.nav_reminder) {
             trans.replace(R.id.content, new ReminderFragment());
+            trans.addToBackStack(null);
+            trans.commit();
+        } else if (id == R.id.nav_weight) {
+            trans.replace(R.id.content, new WeightFragment());
             trans.addToBackStack(null);
             trans.commit();
         }

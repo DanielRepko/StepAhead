@@ -12,5 +12,9 @@
             android:id="@+id/nav_reminder"
             android:icon="@drawable/ic_event_note_black_24dp"
             android:title="@string/menu_reminder" />
+        <item
+            android:id="@+id/nav_weight"
+            android:icon="@drawable/ic_list_black_24dp"
+            android:title="@string/menu_weight" />
     </group>
 </menu>

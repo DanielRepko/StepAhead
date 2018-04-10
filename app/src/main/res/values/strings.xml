@@ -32,5 +32,10 @@
     <string name="home_page_finish_button_text">Finish</string>
     <string name="home_page_cancel_button_text">Cancel</string>
     <string name="home_page_alert_title">Cancel Run</string>
-    <string name="home_page_alert_message">Are you sure you want to cancel this run? Any recorded info will be discarded and a run journal will not be created.</string>
+    <string name="home_page_alert_message">Are you sure you want to cancel this run? Any recoded info will be discarded and a run journal will not be created.</string>
+
+
+    <!-- Weight Strings -->
+    <string name="weight_hint">Enter Weight (lbs)</string>
+    <string name="weight_add">Add</string>
 </resources>
