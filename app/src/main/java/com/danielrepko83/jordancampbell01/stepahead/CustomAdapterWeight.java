@@ -2,6 +2,7 @@ package com.danielrepko83.jordancampbell01.stepahead;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
@@ -19,7 +20,10 @@ public class CustomAdapterWeight extends RecyclerView.Adapter {
     }
 
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        return null;
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.weight_recycler_view, parent, false);
+        final CustomViewHolder viewHolder = new CustomViewHolder(view);
+        context = parent.getContext();
+        return viewHolder;
     }
 
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
