@@ -7,7 +7,9 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.pm.PackageManager;
 import android.location.Location;
+import android.os.Handler;
 import android.os.IBinder;
+import android.os.SystemClock;
 import android.support.v4.app.NotificationCompat;
 import android.support.v4.content.ContextCompat;
 import android.view.LayoutInflater;
@@ -26,20 +28,31 @@ import com.google.android.gms.location.LocationServices;
 
 public class LocationTracker extends Service {
 
+    //properties for location tracking
     private double currentDistance;
     private TextView distanceLabel;
     private Location lastLocation;
-    private boolean checkLocation = true;
     private LocationCallback callBack;
+    private static boolean paused = false;
 
+    //properties for
+    private static long startTime = 0L;
+    private static TextView durationLabel;
+    private static Handler customHandler = new Handler();
+    private static long timeInMillis = 0L;
+    private static long timeSwapBuff = 0L;
+    private static long updatedTime = 0L;
     /**
      * LocationTracker extends Service and allows for location tracking
      * with real time updates, and can do this even when the app is in the
-     * background
+     * background. It also gives functionality to the home screen timer
      */
     public LocationTracker() {
         this.distanceLabel = MainFragment.distance;
         currentDistance = Double.parseDouble(distanceLabel.getText().toString());
+
+        startTime = SystemClock.uptimeMillis();
+        durationLabel = MainFragment.duration;
     }
 
 
@@ -54,6 +67,8 @@ public class LocationTracker extends Service {
     public void onCreate(){
         super.onCreate();
         requestLocationUpdates();
+        startTime = SystemClock.uptimeMillis();
+        customHandler.postDelayed(updateTimerThread, 0);
     }
 
     /**
@@ -71,9 +86,7 @@ public class LocationTracker extends Service {
                 callBack = new LocationCallback(){
                     @Override
                     public void onLocationResult(LocationResult locationResult) {
-                        //check if the location updates should be running
-                        if(checkLocation) {
-                            //if so, track location and calculate distance traveled
+                        if(!paused) {
                             Location location = locationResult.getLastLocation();
                             //check if this is the first location update
                             if (lastLocation != null) {
@@ -86,27 +99,57 @@ public class LocationTracker extends Service {
                                 //if so just set the last location
                                 lastLocation = location;
                             }
-                        } else {
-                            //if not, remove location updates
-                            client.removeLocationUpdates(callBack);
-                            stopSelf();
                         }
                     }
                 };
-                    client.requestLocationUpdates(request, callBack, null);{
-                }
+                client.requestLocationUpdates(request, callBack, null);
             }
     }
 
-    public void stopTracking(){
-        FusedLocationProviderClient client = LocationServices.getFusedLocationProviderClient(this);
-        client.removeLocationUpdates(new LocationCallback());
 
+    public static void pause(){
+        //if tracker is already paused
+        if(paused == true){
+            //unpause the tracker
+            paused = false;
+            startTime = SystemClock.uptimeMillis();
+            customHandler.postDelayed(updateTimerThread, 0);
+        } else {
+            //otherwise pause tracker
+            paused = true;
+            timeSwapBuff+= timeInMillis;
+            customHandler.removeCallbacks(updateTimerThread);
+        }
     }
+
+    private static Runnable updateTimerThread = new Runnable() {
+        @Override
+        public void run() {
+            timeInMillis = SystemClock.uptimeMillis() - startTime;
+            updatedTime =  timeInMillis + timeSwapBuff;
+
+            int secs = (int) (updatedTime / 1000);
+            int mins = secs / 60;
+            secs = secs % 60;
+            durationLabel.setText(mins+":"+String.format("%02d",secs));
+            customHandler.postDelayed(this,0);
+
+        }
+    };
 
     @Override
     public void onDestroy() {
-        checkLocation = false;
+        FusedLocationProviderClient client = LocationServices.getFusedLocationProviderClient(this);
+        client.removeLocationUpdates(callBack);
+        distanceLabel.setText("0.00");
+        lastLocation = null;
+        currentDistance = 0;
+
+        durationLabel.setText("0:00");
+        timeSwapBuff = 0L;
+
+        customHandler.removeCallbacks(updateTimerThread);
+
         super.onDestroy();
     }
 }
