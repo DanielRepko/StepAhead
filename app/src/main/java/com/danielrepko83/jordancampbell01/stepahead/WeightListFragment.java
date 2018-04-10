@@ -93,6 +93,10 @@ public class WeightListFragment extends Fragment {
         DatabaseHandler db = new DatabaseHandler(getContext());
         ArrayList<Weight> weightArrayList = db.getAllWeights();
 
+        //Create a new CustomAdapterWeight, provide it the weightArrayList, and set the list's adapter to this new adapter
+        CustomAdapterWeight adapter = new CustomAdapterWeight(weightArrayList);
+        list.setAdapter(adapter);
+
         return view;
     }
 
