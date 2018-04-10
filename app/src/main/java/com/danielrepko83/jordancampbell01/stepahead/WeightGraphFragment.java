@@ -114,7 +114,7 @@ public class WeightGraphFragment extends Fragment {
         XYSeries weightSeries = new SimpleXYSeries(weightIds, weightValues, "Weight Entries");
 
         //Create a LineAndPointFormatter to provide to the graph so it knows how to format the information
-        LineAndPointFormatter formatter = new LineAndPointFormatter();
+        LineAndPointFormatter formatter = new LineAndPointFormatter(Color.RED, Color.RED, Color.TRANSPARENT, null);
 
         //Add the weightSeries to the graph
         weightGraph.addSeries(weightSeries, formatter);
