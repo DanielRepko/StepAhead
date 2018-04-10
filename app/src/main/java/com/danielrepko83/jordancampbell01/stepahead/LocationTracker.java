@@ -92,10 +92,16 @@ public class LocationTracker extends Service {
             }
     }
 
-    public void stopTracking(){
-        FusedLocationProviderClient client = LocationServices.getFusedLocationProviderClient(this);
-        client.removeLocationUpdates(new LocationCallback());
 
+    public static void pause(){
+        //if tracker is already paused
+        if(paused == true){
+            //unpause the tracker
+            paused = false;
+        } else {
+            //otherwise pause tracker
+            paused = true;
+        }
     }
 
     @Override
