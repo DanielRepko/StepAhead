@@ -18,6 +18,7 @@ import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.danielrepko83.jordancampbell01.stepahead.Object_Classes.Weight;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.location.FusedLocationProviderApi;
 import com.google.android.gms.location.FusedLocationProviderClient;
@@ -35,13 +36,17 @@ public class LocationTracker extends Service {
     private LocationCallback callBack;
     private static boolean paused = false;
 
-    //properties for
+    //properties for timer
     private static long startTime = 0L;
     private static TextView durationLabel;
     private static Handler customHandler = new Handler();
     private static long timeInMillis = 0L;
     private static long timeSwapBuff = 0L;
     private static long updatedTime = 0L;
+
+    //properties for calorie tracking
+    private static Weight weight;
+
     /**
      * LocationTracker extends Service and allows for location tracking
      * with real time updates, and can do this even when the app is in the
@@ -53,6 +58,10 @@ public class LocationTracker extends Service {
 
         startTime = SystemClock.uptimeMillis();
         durationLabel = MainFragment.duration;
+
+        DatabaseHandler db = new DatabaseHandler(distanceLabel.getContext());
+        Weight weight = db.getLastWeight();
+        db.close();
     }
 
 
@@ -86,6 +95,7 @@ public class LocationTracker extends Service {
                 callBack = new LocationCallback(){
                     @Override
                     public void onLocationResult(LocationResult locationResult) {
+                        //check to see if the pause button has been pressed
                         if(!paused) {
                             Location location = locationResult.getLastLocation();
                             //check if this is the first location update
@@ -127,6 +137,8 @@ public class LocationTracker extends Service {
         public void run() {
             timeInMillis = SystemClock.uptimeMillis() - startTime;
             updatedTime =  timeInMillis + timeSwapBuff;
+
+
 
             int secs = (int) (updatedTime / 1000);
             int mins = secs / 60;

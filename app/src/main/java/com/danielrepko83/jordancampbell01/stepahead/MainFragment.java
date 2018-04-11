@@ -19,6 +19,7 @@ import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.danielrepko83.jordancampbell01.stepahead.Object_Classes.Weight;
 import com.google.android.gms.location.LocationRequest;
 
 
