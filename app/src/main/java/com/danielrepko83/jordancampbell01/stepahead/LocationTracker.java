@@ -106,9 +106,10 @@ public class LocationTracker extends Service {
                             if (lastLocation != null) {
                                 //if not calculate the distance from the last location update
                                 currentDistance += location.distanceTo(lastLocation) / 1000;
-                                System.out.println(currentDistance);
                                 distanceLabel.setText(String.format("%.2f", currentDistance));
                                 lastLocation = location;
+
+
                             } else {
                                 //if so just set the last location
                                 lastLocation = location;
@@ -176,6 +177,7 @@ public class LocationTracker extends Service {
 
         calories = 0;
         calorieLabel.setText("0");
+        intervalCheck = 0;
 
         super.onDestroy();
     }
