@@ -46,6 +46,8 @@ public class LocationTracker extends Service {
 
     //properties for calorie tracking
     private static Weight weight;
+    private static TextView calorieLabel;
+    private static int calories = 0;
 
     /**
      * LocationTracker extends Service and allows for location tracking
@@ -59,6 +61,7 @@ public class LocationTracker extends Service {
         startTime = SystemClock.uptimeMillis();
         durationLabel = MainFragment.duration;
 
+        calorieLabel = MainFragment.calories;
         DatabaseHandler db = new DatabaseHandler(distanceLabel.getContext());
         Weight weight = db.getLastWeight();
         db.close();
@@ -138,7 +141,9 @@ public class LocationTracker extends Service {
             timeInMillis = SystemClock.uptimeMillis() - startTime;
             updatedTime =  timeInMillis + timeSwapBuff;
 
+            if(weight != null){
 
+            }
 
             int secs = (int) (updatedTime / 1000);
             int mins = secs / 60;
@@ -159,8 +164,10 @@ public class LocationTracker extends Service {
 
         durationLabel.setText("0:00");
         timeSwapBuff = 0L;
-
         customHandler.removeCallbacks(updateTimerThread);
+
+        calories = 0;
+        calorieLabel.setText("0");
 
         super.onDestroy();
     }
