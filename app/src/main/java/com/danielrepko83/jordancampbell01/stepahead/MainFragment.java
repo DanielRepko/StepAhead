@@ -8,6 +8,8 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Environment;
+import android.provider.MediaStore;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
 import android.support.v4.content.ContextCompat;
@@ -20,6 +22,11 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.google.android.gms.location.LocationRequest;
+
+import java.io.File;
+import java.io.IOException;
+
+import static android.app.Activity.RESULT_OK;
 
 
 /**
@@ -81,6 +88,9 @@ public class MainFragment extends Fragment{
     public static TextView distance;
     public static TextView duration;
     public static TextView calories;
+
+    private static final int CAMERA_INTENT_LABEL = 1;
+    private String imageLocation;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -185,7 +195,49 @@ public class MainFragment extends Fragment{
             }
         });
 
+        MainActivity.fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                File picture = null;
+                try{
+                    picture = createTempImageFile();
+                }catch(IOException e){
+                    e.printStackTrace();
+                }
+
+                Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+                intent.putExtra(MediaStore.EXTRA_OUTPUT, Uri.fromFile(picture));
+                if(intent.resolveActivity(getActivity().getPackageManager())!= null) {
+                    startActivityForResult(intent, CAMERA_INTENT_LABEL);
+                }
+            }
+        });
+
         return view;
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        //check to see if it is the camera and if is responding with an OK status
+        
+    }
+
+    /**
+     * this creates a temp file to be used
+     * by the camera to save a photo
+     */
+    File createTempImageFile() throws IOException {
+        //Create the name of the image
+        String fileName = "run_journal_pic_2018" + System.currentTimeMillis();
+        //Grab the directory we want to save the image in
+        File directory =
+                Environment.
+                        getExternalStoragePublicDirectory(
+                                Environment.DIRECTORY_PICTURES);
+        File picture  = File.createTempFile(fileName, ".jpg", directory);
+        imageLocation = picture.getAbsolutePath();
+        return picture;
     }
 
 
