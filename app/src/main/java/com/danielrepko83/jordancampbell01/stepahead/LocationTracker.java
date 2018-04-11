@@ -47,7 +47,8 @@ public class LocationTracker extends Service {
     //properties for calorie tracking
     private static Weight weight;
     private static TextView calorieLabel;
-    private static int calories = 0;
+    private static double calories = 0;
+    private static int intervalCheck = 0;
 
     /**
      * LocationTracker extends Service and allows for location tracking
@@ -63,7 +64,7 @@ public class LocationTracker extends Service {
 
         calorieLabel = MainFragment.calories;
         DatabaseHandler db = new DatabaseHandler(distanceLabel.getContext());
-        Weight weight = db.getLastWeight();
+        weight = db.getLastWeight();
         db.close();
     }
 
@@ -141,15 +142,22 @@ public class LocationTracker extends Service {
             timeInMillis = SystemClock.uptimeMillis() - startTime;
             updatedTime =  timeInMillis + timeSwapBuff;
 
-            if(weight != null){
-
-            }
-
             int secs = (int) (updatedTime / 1000);
             int mins = secs / 60;
             secs = secs % 60;
             durationLabel.setText(mins+":"+String.format("%02d",secs));
             customHandler.postDelayed(this,0);
+
+            if(weight != null){
+                //check if 20 seconds have passed (thats how often I want it to update)
+                if(((secs % 20) == 0) && (secs > intervalCheck) || ((secs % 20) == 0) && (mins > 0) && (secs < intervalCheck)){
+                    //don't need to calculate for weight in kg because they
+                    //technically weigh the same whether it is lbs or kg
+                    calories+= 0.03 * weight.getPounds();
+                    calorieLabel.setText(Math.round(calories)+"");
+                    intervalCheck = secs;
+                }
+            }
 
         }
     };
@@ -171,4 +179,6 @@ public class LocationTracker extends Service {
 
         super.onDestroy();
     }
+
+
 }
