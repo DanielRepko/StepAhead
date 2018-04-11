@@ -88,6 +88,9 @@ public class MainFragment extends Fragment{
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_main, container, false);
 
+        MainActivity.fab.show();
+        MainActivity.fab.setImageResource(R.drawable.ic_photo_camera_black_24dp);
+
         distance = view.findViewById(R.id.distance);
         TextView distanceLabel = view.findViewById(R.id.distanceLabel);
         duration = view.findViewById(R.id.duration);
