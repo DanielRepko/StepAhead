@@ -20,11 +20,13 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.android.gms.location.LocationRequest;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 
 import static android.app.Activity.RESULT_OK;
 
@@ -91,15 +93,14 @@ public class MainFragment extends Fragment{
 
     private static final int CAMERA_INTENT_LABEL = 1;
     private String imageLocation;
+    //this ArrayList will hold all of image resources to be used inside of CreateRunFragment
+    public static ArrayList<String> runPictures;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_main, container, false);
-
-        MainActivity.fab.show();
-        MainActivity.fab.setImageResource(R.drawable.ic_photo_camera_black_24dp);
 
         distance = view.findViewById(R.id.distance);
         TextView distanceLabel = view.findViewById(R.id.distanceLabel);
@@ -111,6 +112,7 @@ public class MainFragment extends Fragment{
         final Button cancel = view.findViewById(R.id.cancel);
         final Button pause = view.findViewById(R.id.pause);
         final Button finish = view.findViewById(R.id.finish);
+        runPictures = new ArrayList<>();
 
         final Intent trackerIntent = new Intent(getActivity(), LocationTracker.class);
 
@@ -124,15 +126,21 @@ public class MainFragment extends Fragment{
                 pause.setVisibility(View.VISIBLE);
                 finish.setVisibility(View.VISIBLE);
 
+                //show the fab button
+                MainActivity.fab.show();
+                MainActivity.fab.setImageResource(R.drawable.ic_photo_camera_black_24dp);
+
+                //asking permission for location
                 int permission = ContextCompat.checkSelfPermission(getActivity(),
                         Manifest.permission.ACCESS_FINE_LOCATION);
                 if(permission == PackageManager.PERMISSION_GRANTED){
-
                 } else {
                     ActivityCompat.requestPermissions(getActivity(),
                             new String[]{Manifest.permission.ACCESS_FINE_LOCATION},
                             PERMISSIONS_REQUEST);
                 }
+
+
 
                 getActivity().startService(trackerIntent);
 
@@ -158,6 +166,11 @@ public class MainFragment extends Fragment{
                                 cancel.setVisibility(View.GONE);
                                 pause.setVisibility(View.GONE);
                                 finish.setVisibility(View.GONE);
+
+                                //hide the fab button
+                                //user should not be able to take
+                                //a picture when a run is not active
+                                MainActivity.fab.hide();
 
                                 if(pause.getText().equals("Resume")){
                                     pause.setText("Pause");
@@ -198,18 +211,108 @@ public class MainFragment extends Fragment{
         MainActivity.fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                File picture = null;
-                try{
-                    picture = createTempImageFile();
-                }catch(IOException e){
-                    e.printStackTrace();
+
+                int cameraPermission = ContextCompat.checkSelfPermission(getActivity(),
+                        Manifest.permission.CAMERA);
+                //check to see if camera permission is granted
+                if(cameraPermission != PackageManager.PERMISSION_GRANTED){
+                    //has the user already denied this permission previously
+                    if(ActivityCompat.shouldShowRequestPermissionRationale(getActivity(),
+                            Manifest.permission.CAMERA)){
+
+                        //if so, tell the user why the app needs this permission
+                        new AlertDialog.Builder(getContext())
+                                .setTitle(R.string.permission_title_camera)
+                                .setMessage(R.string.permission_description_camera)
+                                .setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+                                    @Override
+                                    public void onClick(DialogInterface dialog, int which) {
+                                        ActivityCompat.requestPermissions(getActivity(),
+                                                new String[]{Manifest.permission.CAMERA},
+                                                PERMISSIONS_REQUEST);
+                                    }
+                                }).show();
+
+                    } else {
+                        //if not, just ask for the permission
+                        ActivityCompat.requestPermissions(getActivity(),
+                                new String[]{Manifest.permission.CAMERA},
+                                PERMISSIONS_REQUEST);
+                    }
+                } else {
+                    //if so, then check to see if write permission is granted
+                    int writePermission = ContextCompat.checkSelfPermission(getActivity(),
+                            Manifest.permission.WRITE_EXTERNAL_STORAGE);
+                    if(writePermission != PackageManager.PERMISSION_GRANTED){
+                        //has the user already denied this permission previously
+                        if(ActivityCompat.shouldShowRequestPermissionRationale(getActivity(),
+                                Manifest.permission.WRITE_EXTERNAL_STORAGE)){
+                            //if so, tell the user why the app needs this permission
+                            new AlertDialog.Builder(getContext())
+                                    .setTitle(R.string.permission_title_write_storage)
+                                    .setMessage(R.string.permission_description_write_storage)
+                                    .setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+                                        @Override
+                                        public void onClick(DialogInterface dialog, int which) {
+                                            ActivityCompat.requestPermissions(getActivity(),
+                                                    new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE},
+                                                    PERMISSIONS_REQUEST);
+                                        }
+                                    }).show();
+
+                        } else {
+                            //if not, just ask for the permission
+                            ActivityCompat.requestPermissions(getActivity(),
+                                    new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE},
+                                    PERMISSIONS_REQUEST);
+                        }
+                    } else {
+                        //if so, then check to see if read permission is granted
+                        int readPermission = ContextCompat.checkSelfPermission(getActivity(),
+                                Manifest.permission.READ_EXTERNAL_STORAGE);
+                        if(readPermission != PackageManager.PERMISSION_GRANTED){
+                            //has the user already denied this permission previously
+                            if(ActivityCompat.shouldShowRequestPermissionRationale(getActivity(),
+                                    Manifest.permission.READ_EXTERNAL_STORAGE)){
+                                //if so, tell the user why the app needs this permission
+                                new AlertDialog.Builder(getContext())
+                                        .setTitle(R.string.permission_title_read_storage)
+                                        .setMessage(R.string.permission_description_read_storage)
+                                        .setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+                                            @Override
+                                            public void onClick(DialogInterface dialog, int which) {
+                                                ActivityCompat.requestPermissions(getActivity(),
+                                                        new String[]{Manifest.permission.READ_EXTERNAL_STORAGE},
+                                                        PERMISSIONS_REQUEST);
+                                            }
+                                        }).show();
+
+                            } else {
+                                //if not, just ask for the permission
+                                ActivityCompat.requestPermissions(getActivity(),
+                                        new String[]{Manifest.permission.READ_EXTERNAL_STORAGE},
+                                        PERMISSIONS_REQUEST);
+                            }
+                        } else {
+                            //if all permissions are granted
+                            File picture = null;
+                            try{
+                                picture = createTempImageFile();
+                            }catch(IOException e){
+                                e.printStackTrace();
+                            }
+
+                            Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+                            intent.putExtra(MediaStore.EXTRA_OUTPUT, Uri.fromFile(picture));
+                            if(intent.resolveActivity(getActivity().getPackageManager())!= null) {
+                                startActivityForResult(intent, CAMERA_INTENT_LABEL);
+                            }
+                        }
+
+                    }
+
                 }
 
-                Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-                intent.putExtra(MediaStore.EXTRA_OUTPUT, Uri.fromFile(picture));
-                if(intent.resolveActivity(getActivity().getPackageManager())!= null) {
-                    startActivityForResult(intent, CAMERA_INTENT_LABEL);
-                }
             }
         });
 
@@ -220,7 +323,18 @@ public class MainFragment extends Fragment{
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         //check to see if it is the camera and if is responding with an OK status
-        
+        if(requestCode == CAMERA_INTENT_LABEL && resultCode == RESULT_OK){
+            //add the image location to runPictures
+            runPictures.add(imageLocation);
+            Toast.makeText(getContext(),
+                    "Photo added to run",
+                    Toast.LENGTH_SHORT).show();
+        } else {
+            Toast.makeText(getContext(),
+                    "Photo not added to run",
+                    Toast.LENGTH_SHORT).show();
+        }
+
     }
 
     /**

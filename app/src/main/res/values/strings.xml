@@ -34,6 +34,18 @@
     <string name="home_page_alert_title">Cancel Run</string>
     <string name="home_page_alert_message">Are you sure you want to cancel this run? Any recoded info will be discarded and a run journal will not be created.</string>
 
+    <string name="permission_title_camera">Use Phone Camera</string>
+    <string name="permission_description_camera">The Step Ahead app includes a feature that allows you take pictures during your run
+        that can then be attached to the journal for that run. Access to the phone camera is needed to accomplish this</string>
+
+    <string name="permission_title_write_storage">Create Files on Phone</string>
+    <string name="permission_description_write_storage">In order for the camera feature to work, the Step Ahead app needs to
+        be able to store the images it takes on your device.</string>
+
+    <string name="permission_title_read_storage">Read Files on Phone</string>
+    <string name="permission_description_read_storage">In order for the Step Ahead app to associate picture taken with your run journals,
+        it needs to be able to access those picture on your device.</string>
+
 
     <!-- Weight Strings -->
     <string name="weight_hint">Enter Weight (lbs)</string>
