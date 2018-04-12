@@ -267,50 +267,20 @@ public class MainFragment extends Fragment{
                                     PERMISSIONS_REQUEST);
                         }
                     } else {
-                        //if so, then check to see if read permission is granted
-                        int readPermission = ContextCompat.checkSelfPermission(getActivity(),
-                                Manifest.permission.READ_EXTERNAL_STORAGE);
-                        if(readPermission != PackageManager.PERMISSION_GRANTED){
-                            //has the user already denied this permission previously
-                            if(ActivityCompat.shouldShowRequestPermissionRationale(getActivity(),
-                                    Manifest.permission.READ_EXTERNAL_STORAGE)){
-                                //if so, tell the user why the app needs this permission
-                                new AlertDialog.Builder(getContext())
-                                        .setTitle(R.string.permission_title_read_storage)
-                                        .setMessage(R.string.permission_description_read_storage)
-                                        .setPositiveButton("Ok", new DialogInterface.OnClickListener() {
-                                            @Override
-                                            public void onClick(DialogInterface dialog, int which) {
-                                                ActivityCompat.requestPermissions(getActivity(),
-                                                        new String[]{Manifest.permission.READ_EXTERNAL_STORAGE},
-                                                        PERMISSIONS_REQUEST);
-                                            }
-                                        }).show();
-
-                            } else {
-                                //if not, just ask for the permission
-                                ActivityCompat.requestPermissions(getActivity(),
-                                        new String[]{Manifest.permission.READ_EXTERNAL_STORAGE},
-                                        PERMISSIONS_REQUEST);
-                            }
-                        } else {
-                            //if all permissions are granted
-                            File picture = null;
-                            try{
-                                picture = createTempImageFile();
-                            }catch(IOException e){
-                                e.printStackTrace();
-                            }
-
-                            Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-                            intent.putExtra(MediaStore.EXTRA_OUTPUT, Uri.fromFile(picture));
-                            if(intent.resolveActivity(getActivity().getPackageManager())!= null) {
-                                startActivityForResult(intent, CAMERA_INTENT_LABEL);
-                            }
+                        //if all permissions are granted
+                        File picture = null;
+                        try{
+                            picture = createTempImageFile();
+                        }catch(IOException e){
+                            e.printStackTrace();
                         }
 
+                        Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+                        intent.putExtra(MediaStore.EXTRA_OUTPUT, Uri.fromFile(picture));
+                        if(intent.resolveActivity(getActivity().getPackageManager())!= null) {
+                            startActivityForResult(intent, CAMERA_INTENT_LABEL);
+                        }
                     }
-
                 }
 
             }

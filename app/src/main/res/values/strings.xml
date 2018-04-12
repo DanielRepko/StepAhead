@@ -42,9 +42,6 @@
     <string name="permission_description_write_storage">In order for the camera feature to work, the Step Ahead app needs to
         be able to store the images it takes on your device.</string>
 
-    <string name="permission_title_read_storage">Read Files on Phone</string>
-    <string name="permission_description_read_storage">In order for the Step Ahead app to associate picture taken with your run journals,
-        it needs to be able to access those picture on your device.</string>
 
 
     <!-- Weight Strings -->
