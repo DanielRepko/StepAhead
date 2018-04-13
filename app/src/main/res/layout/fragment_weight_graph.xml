@@ -18,6 +18,8 @@
         android:id="@+id/weightGraph"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:padding="50dp"
+        ap:domainTitle="Entry ID"
         ap:rangeTitle="Weight (lbs)"
-        ap:domainTitle="Entry ID" />
+        ap:paddingBottom="15dp"/>
 </LinearLayout>
