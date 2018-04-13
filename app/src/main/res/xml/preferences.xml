@@ -9,7 +9,7 @@
         android:summary="@string/weight_summary"
         android:title="@string/weight_title" />
     <ListPreference
-        android:defaultValue="1"
+        android:defaultValue="0"
         android:entries="@array/distance_options"
         android:entryValues="@array/distance_options_values"
         android:key="distance_preference"
