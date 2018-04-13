@@ -35,7 +35,8 @@ public class DatabaseHandler extends SQLiteOpenHelper {
     public static final String COLUMN_POUNDS = "lbs";
 
     /* Column Names - Run Table */
-    public static final String COLUMN_DISTANCE = "distance";
+    public static final String COLUMN_DISTANCE_KM = "distance_km";
+    public static final String COLUMN_DISTANCE_MI = "distance_mi";
     public static final String COLUMN_DURATION = "duration";
     public static final String COLUMN_START_TIME = "startTime";
     public static final String COLUMN_CALORIES = "calories";
@@ -46,7 +47,6 @@ public class DatabaseHandler extends SQLiteOpenHelper {
     public static final String COLUMN_AVERAGE_PACE = "averagePace";
     public static final String COLUMN_AVERAGE_SPEED = "averageSpeed";
     public static final String COLUMN_WEATHER = "weather";
-    public static final String COLUMN_MEASUREMENT = "measurement";
 
     /* Column Names - Picture Table */
     public static final String COLUMN_RESOURCE = "resource";
@@ -64,7 +64,8 @@ public class DatabaseHandler extends SQLiteOpenHelper {
     /* Create statement for Run Table */
     public static final String CREATE_RUN_TABLE = "CREATE TABLE "+TABLE_RUN+"("
             +COLUMN_ID+" INTEGER PRIMARY KEY NOT NULL,"
-            +COLUMN_DISTANCE+" REAL,"
+            +COLUMN_DISTANCE_KM+" REAL,"
+            +COLUMN_DISTANCE_MI+" REAL,"
             +COLUMN_DURATION+" TEXT NOT NULL,"
             +COLUMN_START_TIME+" TEXT NOT NULL,"
             +COLUMN_CALORIES+" INTEGER,"
@@ -74,8 +75,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
             +COLUMN_NOTE+" TEXT,"
             +COLUMN_AVERAGE_PACE+" REAL,"
             +COLUMN_AVERAGE_SPEED+" REAL,"
-            +COLUMN_WEATHER+" TEXT,"
-            +COLUMN_MEASUREMENT+" INTEGER NOT NULL)";
+            +COLUMN_WEATHER+" TEXT)";
 
     /* Create statement for Picture table */
     public static final String CREATE_PICTURE_TABLE = "CREATE TABLE "+TABLE_PICTURE+"("
@@ -191,7 +191,8 @@ public class DatabaseHandler extends SQLiteOpenHelper {
     public void addRun(RunJournal run){
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues values = new ContentValues();
-        values.put(COLUMN_DISTANCE, run.getDistance());
+        values.put(COLUMN_DISTANCE_KM, run.getDistanceKM());
+        values.put(COLUMN_DISTANCE_MI, run.getDistanceMI());
         values.put(COLUMN_DURATION, run.getDuration());
         values.put(COLUMN_START_TIME, run.getStartTime());
         values.put(COLUMN_CALORIES, run.getCalories());
@@ -202,7 +203,6 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         values.put(COLUMN_AVERAGE_PACE, run.getAvgPace());
         values.put(COLUMN_AVERAGE_SPEED, run.getAvgSpeed());
         values.put(COLUMN_WEATHER, run.getWeather());
-        values.put(COLUMN_MEASUREMENT, run.getMeasurement());
         db.insert(TABLE_RUN, null, values);
         db.close();
     }
@@ -213,9 +213,9 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         RunJournal run = null;
         //table name, string array of column names, query, String array of values that will be inserted into the query
         Cursor cursor = db.query(TABLE_RUN,
-                new String[]{COLUMN_ID, COLUMN_DISTANCE, COLUMN_DURATION, COLUMN_START_TIME,
+                new String[]{COLUMN_ID, COLUMN_DISTANCE_KM, COLUMN_DISTANCE_MI, COLUMN_DURATION, COLUMN_START_TIME,
                             COLUMN_CALORIES, COLUMN_FEELING, COLUMN_AREA, COLUMN_HEART_RATE,
-                            COLUMN_NOTE, COLUMN_AVERAGE_PACE, COLUMN_AVERAGE_SPEED, COLUMN_WEATHER, COLUMN_MEASUREMENT},
+                            COLUMN_NOTE, COLUMN_AVERAGE_PACE, COLUMN_AVERAGE_SPEED, COLUMN_WEATHER},
                 COLUMN_ID + "=?", new String[]{String.valueOf(id)},
                 null, null, null);
         if(cursor != null){
@@ -223,16 +223,16 @@ public class DatabaseHandler extends SQLiteOpenHelper {
             run = new RunJournal(Integer.parseInt(cursor.getString(0)),
                     Double.parseDouble(cursor.getString(1)),
                     Double.parseDouble(cursor.getString(2)),
-                    cursor.getString(3),
-                    Integer.parseInt(cursor.getString(4)),
-                    cursor.getString(5),
+                    Double.parseDouble(cursor.getString(3)),
+                    cursor.getString(4),
+                    Integer.parseInt(cursor.getString(5)),
                     cursor.getString(6),
-                    Integer.parseInt(cursor.getString(7)),
-                    cursor.getString(8),
-                    Double.parseDouble(cursor.getString(9)),
+                    cursor.getString(7),
+                    Integer.parseInt(cursor.getString(8)),
+                    cursor.getString(9),
                     Double.parseDouble(cursor.getString(10)),
-                    cursor.getString(11),
-                    Integer.parseInt(cursor.getString(12)));
+                    Double.parseDouble(cursor.getString(11)),
+                    cursor.getString(12));
         }
         db.close();
         return run;
@@ -248,16 +248,16 @@ public class DatabaseHandler extends SQLiteOpenHelper {
                 RunJournal run = new RunJournal(Integer.parseInt(cursor.getString(0)),
                         Double.parseDouble(cursor.getString(1)),
                         Double.parseDouble(cursor.getString(2)),
-                        cursor.getString(3),
-                        Integer.parseInt(cursor.getString(4)),
-                        cursor.getString(5),
+                        Double.parseDouble(cursor.getString(3)),
+                        cursor.getString(4),
+                        Integer.parseInt(cursor.getString(5)),
                         cursor.getString(6),
-                        Integer.parseInt(cursor.getString(7)),
-                        cursor.getString(8),
-                        Double.parseDouble(cursor.getString(9)),
+                        cursor.getString(7),
+                        Integer.parseInt(cursor.getString(8)),
+                        cursor.getString(9),
                         Double.parseDouble(cursor.getString(10)),
-                        cursor.getString(11),
-                        Integer.parseInt(cursor.getString(12)));
+                        Double.parseDouble(cursor.getString(11)),
+                        cursor.getString(12));
                 runList.add(run);
             }while(cursor.moveToNext());
         }
@@ -269,7 +269,8 @@ public class DatabaseHandler extends SQLiteOpenHelper {
     public int updateRun(RunJournal run){
         SQLiteDatabase db = getWritableDatabase();
         ContentValues values = new ContentValues();
-        values.put(COLUMN_DISTANCE, run.getDistance());
+        values.put(COLUMN_DISTANCE_KM, run.getDistanceKM());
+        values.put(COLUMN_DISTANCE_MI, run.getDistanceMI());
         values.put(COLUMN_DURATION, run.getDuration());
         values.put(COLUMN_START_TIME, run.getStartTime());
         values.put(COLUMN_CALORIES, run.getCalories());
@@ -280,7 +281,6 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         values.put(COLUMN_AVERAGE_PACE, run.getAvgPace());
         values.put(COLUMN_AVERAGE_SPEED, run.getAvgSpeed());
         values.put(COLUMN_WEATHER, run.getWeather());
-        values.put(COLUMN_MEASUREMENT, run.getMeasurement());
         return db.update(TABLE_RUN, values, COLUMN_ID + "= ?",
                 new String[]{String.valueOf(run.getId())});
     }
