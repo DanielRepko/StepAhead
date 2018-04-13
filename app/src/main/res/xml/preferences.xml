@@ -1,4 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
 
+    <ListPreference
+        android:defaultValue="1"
+        android:entries="@array/weight_options"
+        android:entryValues="@array/weight_options_values"
+        android:key="weight_preference"
+        android:summary="@string/weight_summary"
+        android:title="@string/weight_title" />
+    <ListPreference
+        android:defaultValue="1"
+        android:entries="@array/distance_options"
+        android:entryValues="@array/distance_options_values"
+        android:key="distance_preference"
+        android:summary="@string/distance_summary"
+        android:title="@string/distance_title" />
 </PreferenceScreen>
