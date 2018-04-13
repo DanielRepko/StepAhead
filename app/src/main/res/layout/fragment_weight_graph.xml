@@ -24,6 +24,10 @@
         ap:paddingTop="10dp"
         ap:paddingLeft="10dp"
         ap:lineLabels="left"
-        ap:lineLabelAlignLeft="left"
-        ap:lineLabelTextSizeLeft="10dp" />
+        ap:lineLabelInsetLeft="12dp"
+        ap:lineLabelAlignLeft="right"
+        ap:lineLabelTextSizeLeft="10dp"
+        ap:graphPaddingTop="5dp"
+        ap:graphPaddingLeft="15dp"
+        ap:gridInsetLeft="15dp" />
 </LinearLayout>
