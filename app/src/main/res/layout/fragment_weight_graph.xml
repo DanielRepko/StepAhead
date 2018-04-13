@@ -21,5 +21,6 @@
         android:padding="50dp"
         ap:domainTitle="Entry ID"
         ap:rangeTitle="Weight (lbs)"
-        ap:paddingBottom="15dp"/>
+        ap:paddingBottom="15dp"
+        ap:lineLabels="left|bottom"/>
 </LinearLayout>
