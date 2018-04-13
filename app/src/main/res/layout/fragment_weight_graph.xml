@@ -19,5 +19,15 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         ap:rangeTitle="Weight (lbs)"
-        ap:domainTitle="Entry ID" />
+        ap:paddingBottom="15dp"
+        ap:paddingRight="15dp"
+        ap:paddingTop="10dp"
+        ap:paddingLeft="10dp"
+        ap:lineLabels="left"
+        ap:lineLabelInsetLeft="12dp"
+        ap:lineLabelAlignLeft="right"
+        ap:lineLabelTextSizeLeft="10dp"
+        ap:graphPaddingTop="5dp"
+        ap:graphPaddingLeft="15dp"
+        ap:gridInsetLeft="15dp" />
 </LinearLayout>
