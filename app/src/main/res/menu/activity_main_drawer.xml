@@ -16,5 +16,13 @@
             android:id="@+id/nav_weight"
             android:icon="@drawable/ic_list_black_24dp"
             android:title="@string/menu_weight" />
+        <item android:title="Keep in contact">
+            <menu>
+                <item
+                    android:id="@+id/nav_twitter"
+                    android:icon="@drawable/tw__composer_logo_blue"
+                    android:title="Twitter"/>
+            </menu>
+        </item>
     </group>
 </menu>

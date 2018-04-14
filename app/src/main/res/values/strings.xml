@@ -18,6 +18,7 @@
     <string name="menu_journals">Run Journals</string>
     <string name="menu_weight">Weight Journals</string>
     <string name="menu_reminder">Create Reminder</string>
+    <string name="menu_twitter">Twitter</string>
 
     <!-- Reminder Strings -->
     <string name="reminder_type">Type</string>
