@@ -20,6 +20,8 @@
     <string name="menu_reminder">Create Reminder</string>
     <string name="menu_contact">Contact us</string>
     <string name="menu_twitter">Twitter</string>
+    <string name="menu_email">Email</string>
+    <string name="menu_sms">Text Message</string>
 
     <!-- Reminder Strings -->
     <string name="reminder_type">Type</string>
