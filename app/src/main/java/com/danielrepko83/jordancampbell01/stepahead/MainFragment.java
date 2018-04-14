@@ -2,6 +2,7 @@ package com.danielrepko83.jordancampbell01.stepahead;
 
 import android.Manifest;
 import android.app.Activity;
+import android.content.ContentValues;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -13,6 +14,7 @@ import android.provider.MediaStore;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
 import android.support.v4.content.ContextCompat;
+import android.support.v4.content.FileProvider;
 import android.support.v7.app.AlertDialog;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -274,9 +276,9 @@ public class MainFragment extends Fragment{
                         }catch(IOException e){
                             e.printStackTrace();
                         }
-
                         Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-                        intent.putExtra(MediaStore.EXTRA_OUTPUT, Uri.fromFile(picture));
+                        Uri photoUri = FileProvider.getUriForFile(getContext(), "com.danielrepko83.jordancampbell01.stepahead", picture);
+                        intent.putExtra(MediaStore.EXTRA_OUTPUT, photoUri);
                         if(intent.resolveActivity(getActivity().getPackageManager())!= null) {
                             startActivityForResult(intent, CAMERA_INTENT_LABEL);
                         }
@@ -313,12 +315,9 @@ public class MainFragment extends Fragment{
      */
     File createTempImageFile() throws IOException {
         //Create the name of the image
-        String fileName = "run_journal_pic_2018" + System.currentTimeMillis();
+        String fileName = "run_journal_pic_2018_" + System.currentTimeMillis();
         //Grab the directory we want to save the image in
-        File directory =
-                Environment.
-                        getExternalStoragePublicDirectory(
-                                Environment.DIRECTORY_PICTURES);
+        File directory = getContext().getExternalFilesDir(Environment.DIRECTORY_PICTURES);
         File picture  = File.createTempFile(fileName, ".jpg", directory);
         imageLocation = picture.getAbsolutePath();
         return picture;
