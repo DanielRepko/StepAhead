@@ -4,10 +4,14 @@ import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+
+import com.twitter.sdk.android.tweetui.TweetTimelineRecyclerViewAdapter;
+import com.twitter.sdk.android.tweetui.UserTimeline;
 
 
 /**
@@ -68,7 +72,16 @@ public class TwitterFragment extends Fragment {
         MainActivity.fab.hide();
         RecyclerView twitterFeed = view.findViewById(R.id.twitterFeed);
 
+        //Grab the timeline for the account 'StepAheadApp'
+        UserTimeline userTimeline = new UserTimeline.Builder().screenName("StepAheadApp").build();
 
+        //Build a Twitter Adapter using this timeline
+        TweetTimelineRecyclerViewAdapter adapter = new TweetTimelineRecyclerViewAdapter(getContext(), userTimeline);
+
+        //Create a linearLayoutManager, and set the adapter and layout manager of twitterFeed to our adapter and layout manager
+        LinearLayoutManager layoutManager = new LinearLayoutManager(getContext());
+        twitterFeed.setAdapter(adapter);
+        twitterFeed.setLayoutManager(layoutManager);
 
         return view;
     }
