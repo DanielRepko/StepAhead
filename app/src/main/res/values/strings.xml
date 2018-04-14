@@ -9,6 +9,10 @@
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
 
+    <!-- Twitter Keys. DO NOT MODIFY THE NAME OR THE VALUE -->
+    <string name="com.twitter.sdk.android.CONSUMER_KEY">TeK37Y8fLGx8nyUV4AnLqI6nN</string>
+    <string name="com.twitter.sdk.android.CONSUMER_SECRET">WutaeY2iFn8tGnG1FD9dpeamPbfF4PU9Eo042tgueUFUJUp7Lb</string>
+
     <!-- Menu Strings -->
     <string name="menu_home">Home</string>
     <string name="menu_journals">Run Journals</string>
