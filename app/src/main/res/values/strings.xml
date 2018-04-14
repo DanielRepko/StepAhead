@@ -9,11 +9,17 @@
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
 
+    <!-- Twitter Keys. DO NOT MODIFY THE NAME OR THE VALUE -->
+    <string name="com.twitter.sdk.android.CONSUMER_KEY">TeK37Y8fLGx8nyUV4AnLqI6nN</string>
+    <string name="com.twitter.sdk.android.CONSUMER_SECRET">WutaeY2iFn8tGnG1FD9dpeamPbfF4PU9Eo042tgueUFUJUp7Lb</string>
+
     <!-- Menu Strings -->
     <string name="menu_home">Home</string>
     <string name="menu_journals">Run Journals</string>
     <string name="menu_weight">Weight Journals</string>
     <string name="menu_reminder">Create Reminder</string>
+    <string name="menu_contact">Contact us</string>
+    <string name="menu_twitter">Twitter</string>
 
     <!-- Reminder Strings -->
     <string name="reminder_type">Type</string>
@@ -41,7 +47,6 @@
     <string name="permission_title_write_storage">Create Files on Phone</string>
     <string name="permission_description_write_storage">In order for the camera feature to work, the Step Ahead app needs to
         be able to store the images it takes on your device.</string>
-
 
 
     <!-- Weight Strings -->

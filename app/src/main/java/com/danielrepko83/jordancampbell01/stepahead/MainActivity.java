@@ -17,13 +17,16 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import com.twitter.sdk.android.core.Twitter;
+
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener,
                     ReminderFragment.OnFragmentInteractionListener,
                     MainFragment.OnFragmentInteractionListener,
                     WeightFragment.OnFragmentInteractionListener,
                     WeightListFragment.OnFragmentInteractionListener,
-                    WeightGraphFragment.OnFragmentInteractionListener {
+                    WeightGraphFragment.OnFragmentInteractionListener,
+                    TwitterFragment.OnFragmentInteractionListener {
 
     FragmentManager fm;
     static FloatingActionButton fab;
@@ -31,6 +34,7 @@ public class MainActivity extends AppCompatActivity
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        Twitter.initialize(this);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
@@ -112,6 +116,10 @@ public class MainActivity extends AppCompatActivity
             trans.commit();
         } else if (id == R.id.nav_weight) {
             trans.replace(R.id.content, new WeightFragment());
+            trans.addToBackStack(null);
+            trans.commit();
+        } else if (id == R.id.nav_twitter) {
+            trans.replace(R.id.content, new TwitterFragment());
             trans.addToBackStack(null);
             trans.commit();
         }
