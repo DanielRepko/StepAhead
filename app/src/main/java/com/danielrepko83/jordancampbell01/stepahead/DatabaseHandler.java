@@ -342,8 +342,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
     public Weight getLastWeight(){
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor cursor = db.rawQuery("SELECT * FROM "+TABLE_WEIGHT, null);
-        if(cursor != null){
-            cursor.moveToLast();
+        if(cursor.moveToLast()){
             Weight weight = new Weight(Integer.parseInt(cursor.getString(0)),
                     cursor.getDouble(1),
                     cursor.getString(2));
