@@ -30,6 +30,7 @@ public class MainActivity extends AppCompatActivity
 
     FragmentManager fm;
     static FloatingActionButton fab;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -129,6 +130,13 @@ public class MainActivity extends AppCompatActivity
             intent.putExtra(Intent.EXTRA_EMAIL, email);
             intent.putExtra(Intent.EXTRA_SUBJECT, "Issue with Step Ahead App");
             intent.putExtra(Intent.EXTRA_TEXT, "I would like to report an issue with the Step Ahead app...");
+            if(intent.resolveActivity(getPackageManager()) != null) {
+                startActivity(intent);
+            }
+        } else if (id == R.id.nav_sms) {
+            Intent intent = new Intent(Intent.ACTION_SENDTO);
+            intent.setData(Uri.parse("smsto:5196687325"));
+            intent.putExtra("sms_body", "I have encountered an issue with the Step Ahead app...");
             if(intent.resolveActivity(getPackageManager()) != null) {
                 startActivity(intent);
             }
