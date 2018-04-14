@@ -39,4 +39,10 @@
     <string name="weight_hint">Enter Weight (lbs)</string>
     <string name="weight_swap_graph">View in Graph Mode</string>
     <string name="weight_swap_list">View in List Mode</string>
+
+    <!-- Setting Strings -->
+    <string name="weight_title">Weight Unit</string>
+    <string name="weight_summary">Would you like weights to be displayed in Kilograms or Pounds?</string>
+    <string name="distance_title">Distance Unit</string>
+    <string name="distance_summary">Would you like distance to be displayed in Kilometers or Miles?</string>
 </resources>
