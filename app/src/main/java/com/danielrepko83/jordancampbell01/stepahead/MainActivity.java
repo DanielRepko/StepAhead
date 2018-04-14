@@ -122,6 +122,16 @@ public class MainActivity extends AppCompatActivity
             trans.replace(R.id.content, new TwitterFragment());
             trans.addToBackStack(null);
             trans.commit();
+        } else if (id == R.id.nav_email) {
+            String[] email = {"support@stepaheadapp.ca"};
+            Intent intent = new Intent(Intent.ACTION_SENDTO);
+            intent.setData(Uri.parse("mailto:"));
+            intent.putExtra(Intent.EXTRA_EMAIL, email);
+            intent.putExtra(Intent.EXTRA_SUBJECT, "Issue with Step Ahead App");
+            intent.putExtra(Intent.EXTRA_TEXT, "I would like to report an issue with the Step Ahead app...");
+            if(intent.resolveActivity(getPackageManager()) != null) {
+                startActivity(intent);
+            }
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
