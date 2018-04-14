@@ -15,6 +15,7 @@ import android.view.ViewGroup;
 import com.danielrepko83.jordancampbell01.stepahead.Object_Classes.Weight;
 
 import java.util.ArrayList;
+import java.util.Collections;
 
 
 /**
@@ -92,6 +93,7 @@ public class WeightListFragment extends Fragment {
         //Create a new DatabaseHandler, retrieve all the entries from the weight table, and store it in an ArrayList of Weights
         DatabaseHandler db = new DatabaseHandler(getContext());
         ArrayList<Weight> weightArrayList = db.getAllWeights();
+        Collections.reverse(weightArrayList);
 
         //Create a new CustomAdapterWeight, provide it the weightArrayList, and set the list's adapter to this new adapter
         CustomAdapterWeight adapter = new CustomAdapterWeight(weightArrayList);
