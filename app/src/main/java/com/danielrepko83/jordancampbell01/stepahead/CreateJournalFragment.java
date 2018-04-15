@@ -18,6 +18,7 @@ import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
 
+import com.danielrepko83.jordancampbell01.stepahead.Object_Classes.RunJournal;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
@@ -81,6 +82,8 @@ public class CreateJournalFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_create_journal, container, false);
         MainActivity.fab.hide();
 
+        final RunJournal run = MainFragment.runJournal;
+
         /*
             Feeling
          */
@@ -132,7 +135,7 @@ public class CreateJournalFragment extends Fragment {
         /*
             Area
          */
-        Spinner area = view.findViewById(R.id.areaSpinner);
+        final Spinner area = view.findViewById(R.id.areaSpinner);
         String[] areaList = getResources().getStringArray(R.array.create_journal_area_array);
         ArrayAdapter adapter = new ArrayAdapter(getContext(), R.layout.support_simple_spinner_dropdown_item, areaList);
         area.setAdapter(adapter);
@@ -140,7 +143,7 @@ public class CreateJournalFragment extends Fragment {
         /*
             Heart Rate
          */
-        EditText heartRate = view.findViewById(R.id.heartRate);
+        final EditText heartRate = view.findViewById(R.id.heartRate);
         ImageView heartRateHelp = view.findViewById(R.id.help);
         heartRateHelp.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -156,7 +159,7 @@ public class CreateJournalFragment extends Fragment {
         /*
             Note
          */
-        TextView note = view.findViewById(R.id.note);
+        final TextView note = view.findViewById(R.id.note);
 
         /*
             Submit
@@ -165,6 +168,47 @@ public class CreateJournalFragment extends Fragment {
         submit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                //check which image button is "selected"
+                for(int i = 0; i < feelingList.size(); i++){
+                    if(feelingList.get(i).getColorFilter() == null){
+                        switch(i){
+                            case 0:
+                                run.setFeeling("Awesome");
+                                break;
+                            case 1:
+                                run.setFeeling("Good");
+                                break;
+                            case 2:
+                                run.setFeeling("Soso");
+                                break;
+                            case 3:
+                                run.setFeeling("Bad");
+                                break;
+                            case 4:
+                                run.setFeeling("Awful");
+                                break;
+                            default:
+                                break;
+                        }
+                    }
+                }
+                //set the area of the run
+                run.setArea(area.getSelectedItem().toString());
+
+                //check if the user entered a heart rate
+                if(heartRate.getText() != null){
+                    //if so, add it to the run
+                    run.setHeartRate(Integer.parseInt(heartRate.getText().toString()));
+                }
+
+                //check if the user entered a note
+                if(note.getText() != null){
+                    //if so, add it to the run
+                    run.setNote(note.getText().toString());
+                }
+
+                DatabaseHandler db = new DatabaseHandler(getContext());
+                db.addRun(run);
 
             }
         });
@@ -176,7 +220,7 @@ public class CreateJournalFragment extends Fragment {
         cancel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                
+
             }
         });
 

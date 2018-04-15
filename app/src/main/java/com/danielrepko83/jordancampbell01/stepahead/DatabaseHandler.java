@@ -184,7 +184,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
     /* CRUD Operations - Run Table */
 
     //Add method
-    public void addRun(RunJournal run){
+    public int addRun(RunJournal run){
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues values = new ContentValues();
         values.put(COLUMN_DISTANCE_KM, run.getDistanceKM());
@@ -198,7 +198,17 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         values.put(COLUMN_NOTE, run.getNote());
         values.put(COLUMN_WEATHER, run.getWeather());
         db.insert(TABLE_RUN, null, values);
+        db = this.getReadableDatabase();
+        Cursor cursor = db.rawQuery("SELECT last_insert_rowid()", null);
+        if(cursor.moveToFirst()) {
+            int runId = Integer.parseInt(cursor.getString(0));
+            System.out.println("Record ID " + runId);
+            db.close();
+            return runId;
+        }
         db.close();
+        return -1;
+
     }
 
     //Get methods
