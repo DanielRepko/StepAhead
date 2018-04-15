@@ -360,14 +360,6 @@ public class MainFragment extends Fragment{
         return picture;
     }
 
-    @Override
-    public void onPause(){
-        getActivity().stopService(trackerIntent);
-
-        super.onPause();
-    }
-
-
     // TODO: Rename method, update argument and hook method into UI event
     public void onButtonPressed(Uri uri) {
         if (mListener != null) {
