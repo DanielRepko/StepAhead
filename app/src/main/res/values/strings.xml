@@ -22,6 +22,7 @@
     <string name="menu_twitter">Twitter</string>
     <string name="menu_email">Email</string>
     <string name="menu_sms">Text Message</string>
+    <string name="menu_credits">Credits</string>
 
     <!-- Reminder Strings -->
     <string name="reminder_type">Type</string>
@@ -82,4 +83,17 @@
     <string name="weight_summary">Would you like weights to be displayed in Kilograms or Pounds?</string>
     <string name="distance_title">Distance Unit</string>
     <string name="distance_summary">Would you like distance to be displayed in Kilometers or Miles?</string>
+
+    <!-- Credits Strings -->
+    <string name="credits_image_header">Images</string>
+        <string name="credits_image_link_1">https://www.pexels.com/photo/woman-girl-silhouette-jogger-40751/</string>
+        <string name="credits_image_link_2">https://www.pexels.com/photo/sunset-men-sunrise-jogging-39308/</string>
+    <string name="credits_androidplot">AndroidPlot API</string>
+        <string name="credits_androitplot_link">https://bitbucket.org/androidplot/androidplot</string>
+    <string name="credits_picasso">Picasso API</string>
+        <string name="credits_picasso_link">http://square.github.io/picasso/</string>
+    <string name="credits_openweathermap">OpenWeatherMap API</string>
+        <string name="credits_openweathermap_link">https://openweathermap.org/</string>
+    <string name="credits_volley">Volley API</string>
+        <string name="credits_volley_link">https://github.com/google/volley</string>
 </resources>
