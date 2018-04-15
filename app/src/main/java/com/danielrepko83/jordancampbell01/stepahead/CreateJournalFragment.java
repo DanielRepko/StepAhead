@@ -7,6 +7,14 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.ImageButton;
+import android.widget.ImageView;
+import android.widget.Spinner;
+import android.widget.TextView;
+
+import java.util.ArrayList;
 
 
 /**
@@ -64,7 +72,38 @@ public class CreateJournalFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_create_journal, container, false);
+        View view = inflater.inflate(R.layout.fragment_create_journal, container, false);
+
+        //Feeling
+        ImageButton awesome = (ImageButton) view.findViewById(R.id.awesomeButton);
+        ImageButton good = (ImageButton) view.findViewById(R.id.goodButton);
+        ImageButton soso = (ImageButton) view.findViewById(R.id.sosoButton);
+        ImageButton bad = (ImageButton) view.findViewById(R.id.badButton);
+        ImageButton awful = (ImageButton) view.findViewById(R.id.awfulButton);
+        ArrayList<ImageButton> feelingList = new ArrayList<>();
+        feelingList.add(awesome);
+        feelingList.add(good);
+        feelingList.add(soso);
+        feelingList.add(bad);
+        feelingList.add(awful);
+
+        //Area
+        Spinner area = view.findViewById(R.id.areaSpinner);
+
+        //Heart Rate
+        EditText heartRate = view.findViewById(R.id.heartRate);
+        ImageView heartRateHelp = view.findViewById(R.id.help);
+
+        //Note
+        TextView note = view.findViewById(R.id.note);
+
+        //Submit
+        Button submit = view.findViewById(R.id.submitButton);
+
+        //Cancel
+        Button cancel = view.findViewById(R.id.cancelButton);
+
+        return view;
     }
 
     // TODO: Rename method, update argument and hook method into UI event
