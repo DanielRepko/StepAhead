@@ -51,6 +51,31 @@
     <string name="permission_description_write_storage">In order for the camera feature to work, the Step Ahead app needs to
         be able to store the images it takes on your device.</string>
 
+    <!-- Create Journal Strings -->
+    <string name="create_journal_feeling_label_text">How you felt:</string>
+    <string name="create_journal_area_label_text">Type of area:</string>
+    <string name="create_journal_heart_rate_label">Your heart rate(bpm):</string>
+    <string name="create_journal_note_label_text">Note:</string>
+    <string name="create_journal_submit_button_text">Submit</string>
+    <string name="create_journal_cancel_button_text">Cancel</string>
+
+    <string-array name="create_journal_area_array">
+        <item>City</item>
+        <item>Woods</item>
+        <item>Trail</item>
+        <item>Offroad</item>
+        <item>Beach</item>
+        <item>Mixed</item>
+    </string-array>
+
+    <string name="create_journal_heart_rate_alert_title">How to calulate average heart rate</string>
+    <string name="create_journal_heart_rate_message">To calculate your average heart rate, feel for your pulse and
+        count the beats for 15 seconds. Then simply multiply that number by 4. That is you heart rate in bpm (beats per minute)</string>
+
+    <string name="create_journal_cancel_alert_title">Discard run journal?</string>
+    <string name="create_journal_cancel_alert_message">Are you sure you want to cancel this run journal? Any
+        recorded/input information will be lost and a run journal will not be created.</string>
+
 
     <!-- Weight Strings -->
     <string name="weight_hint">Enter Weight (lbs)</string>

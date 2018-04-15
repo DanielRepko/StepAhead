@@ -1,5 +1,6 @@
 package com.danielrepko83.jordancampbell01.stepahead;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
@@ -28,7 +29,8 @@ public class MainActivity extends AppCompatActivity
                     WeightListFragment.OnFragmentInteractionListener,
                     WeightGraphFragment.OnFragmentInteractionListener,
                     TwitterFragment.OnFragmentInteractionListener,
-                    CreditsFragment.OnFragmentInteractionListener {
+                    CreateJournalFragment.OnFragmentInteractionListener,
+                    CreditsFragment.OnFragmentInteractionListener{
 
     FragmentManager fm;
     static FloatingActionButton fab;
@@ -110,6 +112,7 @@ public class MainActivity extends AppCompatActivity
         int id = item.getItemId();
 
         FragmentTransaction trans = fm.beginTransaction();
+
 
         if (id == R.id.nav_home) {
             trans.replace(R.id.content, new MainFragment());

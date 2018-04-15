@@ -1,6 +1,7 @@
 package com.danielrepko83.jordancampbell01.stepahead;
 
 import android.content.Context;
+import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -79,6 +80,9 @@ public class WeightFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_weight, container, false);
+
+        //stop LocationTracker if it is running
+        getActivity().stopService(new Intent(getActivity(), LocationTracker.class));
 
         weightEditText = view.findViewById(R.id.weightEditText);
         swapButton = view.findViewById(R.id.swapButton);
