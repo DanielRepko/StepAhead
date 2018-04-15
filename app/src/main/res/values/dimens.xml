@@ -24,6 +24,10 @@
     <dimen name="home_page_pause_finish_dividing_margin">20dp</dimen>
     <dimen name="home_page_pause_finish_button_width">150dp</dimen>
 
+    <!-- Create Journal Page -->
+    <dimen name="create_journal_page_help_width_height">60dp</dimen>
+    <dimen name="create_journal_page_all_labels_text_size">18sp</dimen>
+
     <!-- Weight Pages -->
     <dimen name="weight_text_size">20sp</dimen>
 
