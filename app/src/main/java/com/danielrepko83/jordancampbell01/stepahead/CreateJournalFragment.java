@@ -14,6 +14,8 @@ import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
 
+import com.squareup.picasso.Picasso;
+
 import java.util.ArrayList;
 
 
@@ -74,7 +76,9 @@ public class CreateJournalFragment extends Fragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_create_journal, container, false);
 
-        //Feeling
+        /*
+            Feeling
+         */
         ImageButton awesome = (ImageButton) view.findViewById(R.id.awesomeButton);
         ImageButton good = (ImageButton) view.findViewById(R.id.goodButton);
         ImageButton soso = (ImageButton) view.findViewById(R.id.sosoButton);
@@ -87,22 +91,46 @@ public class CreateJournalFragment extends Fragment {
         feelingList.add(bad);
         feelingList.add(awful);
 
+        //setting image for awesome button
+        Picasso.with(getContext()).load(R.drawable.awesome_face).resize(150,
+                150).centerCrop().into(awesome);
+        //setting image for good button
+        Picasso.with(getContext()).load(R.drawable.awesome_face).resize(150,
+                150).centerCrop().into(awesome);
+        //setting image for soso button
+        Picasso.with(getContext()).load(R.drawable.awesome_face).resize(150,
+                150).centerCrop().into(awesome);
+        //setting image for bad button
+        Picasso.with(getContext()).load(R.drawable.awesome_face).resize(150,
+                150).centerCrop().into(awesome);
+        //setting image for awful button
+        Picasso.with(getContext()).load(R.drawable.awesome_face).resize(150,
+                150).centerCrop().into(awesome);
 
-
-        //Area
+        /*
+            Area
+         */
         Spinner area = view.findViewById(R.id.areaSpinner);
 
-        //Heart Rate
+        /*
+            Heart Rate
+         */
         EditText heartRate = view.findViewById(R.id.heartRate);
         ImageView heartRateHelp = view.findViewById(R.id.help);
 
-        //Note
+        /*
+            Note
+         */
         TextView note = view.findViewById(R.id.note);
 
-        //Submit
+        /*
+            Submit
+         */
         Button submit = view.findViewById(R.id.submitButton);
 
-        //Cancel
+        /*
+            Cancel
+         */
         Button cancel = view.findViewById(R.id.cancelButton);
 
         return view;
