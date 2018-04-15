@@ -75,6 +75,7 @@ public class CreateJournalFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_create_journal, container, false);
+        MainActivity.fab.hide();
 
         /*
             Feeling
@@ -92,20 +93,20 @@ public class CreateJournalFragment extends Fragment {
         feelingList.add(awful);
 
         //setting image for awesome button
-        Picasso.with(getContext()).load(R.drawable.awesome_face).resize(150,
-                150).centerCrop().into(awesome);
+        Picasso.with(getContext()).load(R.drawable.awesome_face).resize(175,
+                175).centerCrop().into(awesome);
         //setting image for good button
-        Picasso.with(getContext()).load(R.drawable.awesome_face).resize(150,
-                150).centerCrop().into(awesome);
+        Picasso.with(getContext()).load(R.drawable.happy_face).resize(175,
+                175).centerCrop().into(good);
         //setting image for soso button
-        Picasso.with(getContext()).load(R.drawable.awesome_face).resize(150,
-                150).centerCrop().into(awesome);
+        Picasso.with(getContext()).load(R.drawable.soso_face).resize(175,
+                175).centerCrop().into(soso);
         //setting image for bad button
-        Picasso.with(getContext()).load(R.drawable.awesome_face).resize(150,
-                150).centerCrop().into(awesome);
+        Picasso.with(getContext()).load(R.drawable.sad_face).resize(175,
+                175).centerCrop().into(bad);
         //setting image for awful button
-        Picasso.with(getContext()).load(R.drawable.awesome_face).resize(150,
-                150).centerCrop().into(awesome);
+        Picasso.with(getContext()).load(R.drawable.hurt_face).resize(175,
+                175).centerCrop().into(awful);
 
         /*
             Area
