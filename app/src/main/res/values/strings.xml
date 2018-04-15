@@ -58,6 +58,15 @@
     <string name="create_journal_submit_button_text">Submit</string>
     <string name="create_journal_cancel_button_text">Cancel</string>
 
+    <string-array name="create_journal_area_array">
+        <item>City</item>
+        <item>Woods</item>
+        <item>Trail</item>
+        <item>Offroad</item>
+        <item>Beach</item>
+        <item>Mixed</item>
+    </string-array>
+
 
     <!-- Weight Strings -->
     <string name="weight_hint">Enter Weight (lbs)</string>
