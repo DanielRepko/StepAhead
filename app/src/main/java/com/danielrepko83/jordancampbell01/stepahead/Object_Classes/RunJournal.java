@@ -22,8 +22,6 @@ public class RunJournal {
     private String area;
     private int heartRate;
     private String note;
-    private double avgPace;
-    private double avgSpeed;
     private String weather;
 
 
@@ -35,7 +33,7 @@ public class RunJournal {
 
     }
 
-    public RunJournal(int id, double distanceKM, double distanceMI, String duration, String startTime, int calories, String feeling, String area, int heartRate, String note, double avgPace, double avgSpeed, String weather) {
+    public RunJournal(int id, double distanceKM, double distanceMI, String duration, String startTime, int calories, String feeling, String area, int heartRate, String note, String weather) {
         this.id = id;
         this.distanceKM = distanceKM;
         this.distanceMI = distanceMI;
@@ -46,8 +44,6 @@ public class RunJournal {
         this.area = area;
         this.heartRate = heartRate;
         this.note = note;
-        this.avgPace = avgPace;
-        this.avgSpeed = avgSpeed;
         this.weather = weather;
     }
 
@@ -65,7 +61,7 @@ public class RunJournal {
      * @param avgSpeed the average speed that the user ran
      * @param weather the weather during the run
      */
-    public RunJournal(double distanceKM, double distanceMI, String duration, String startTime, int calories, String feeling, String area, int heartRate, String note, double avgPace, double avgSpeed, String weather) {
+    public RunJournal(double distanceKM, double distanceMI, String duration, String startTime, int calories, String feeling, String area, int heartRate, String note, String weather) {
         this.distanceKM = distanceKM;
         this.distanceMI = distanceMI;
         this.duration = duration;
@@ -75,8 +71,6 @@ public class RunJournal {
         this.area = area;
         this.heartRate = heartRate;
         this.note = note;
-        this.avgPace = avgPace;
-        this.avgSpeed = avgSpeed;
         this.weather = weather;
     }
 
@@ -164,22 +158,6 @@ public class RunJournal {
 
     public void setNote(String note) {
         this.note = note;
-    }
-
-    public double getAvgPace() {
-        return avgPace;
-    }
-
-    public void setAvgPace(double avgPace) {
-        this.avgPace = avgPace;
-    }
-
-    public double getAvgSpeed() {
-        return avgSpeed;
-    }
-
-    public void setAvgSpeed(double avgSpeed) {
-        this.avgSpeed = avgSpeed;
     }
 
     public String getWeather() {

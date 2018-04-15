@@ -240,7 +240,10 @@ public class MainFragment extends Fragment{
                 runJournal.setDuration(duration.getText().toString());
                 runJournal.setCalories(Integer.parseInt(calories.getText().toString()));
 
+                getActivity().stopService(trackerIntent);
+
                 trans.commit();
+
             }
         });
 
