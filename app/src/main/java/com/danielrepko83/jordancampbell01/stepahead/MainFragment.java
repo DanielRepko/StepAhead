@@ -13,6 +13,8 @@ import android.os.Environment;
 import android.provider.MediaStore;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.content.FileProvider;
 import android.support.v7.app.AlertDialog;
@@ -98,6 +100,8 @@ public class MainFragment extends Fragment{
     private String imageLocation;
     //this ArrayList will hold all of image resources to be used inside of CreateRunFragment
     public static ArrayList<String> runPictures;
+
+    FragmentManager fm;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -213,7 +217,11 @@ public class MainFragment extends Fragment{
         finish.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                
+                fm = getActivity().getSupportFragmentManager();
+                FragmentTransaction trans = fm.beginTransaction();
+                trans.addToBackStack(null);
+                trans.replace(R.id.content, new CreateJournalFragment());
+                trans.commit();
             }
         });
 
