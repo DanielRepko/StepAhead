@@ -118,6 +118,9 @@ public class MainFragment extends Fragment{
         MainActivity.fab.hide();
         fm = getActivity().getSupportFragmentManager();
 
+        //stop LocationTracker if it is running
+        getActivity().stopService(new Intent(getActivity(), LocationTracker.class));
+
         distance = view.findViewById(R.id.distance);
         TextView distanceLabel = view.findViewById(R.id.distanceLabel);
         duration = view.findViewById(R.id.duration);
