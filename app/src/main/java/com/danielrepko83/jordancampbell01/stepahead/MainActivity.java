@@ -123,6 +123,10 @@ public class MainActivity extends AppCompatActivity
             trans.replace(R.id.content, new WeightFragment());
             trans.addToBackStack(null);
             trans.commit();
+        } else if (id == R.id.nav_credits) {
+            trans.replace(R.id.content, new CreditsFragment());
+            trans.addToBackStack(null);
+            trans.commit();
         } else if (id == R.id.nav_twitter) {
             trans.replace(R.id.content, new TwitterFragment());
             trans.addToBackStack(null);
