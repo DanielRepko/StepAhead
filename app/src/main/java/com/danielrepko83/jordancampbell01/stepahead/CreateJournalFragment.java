@@ -87,6 +87,8 @@ public class CreateJournalFragment extends Fragment {
         feelingList.add(bad);
         feelingList.add(awful);
 
+
+
         //Area
         Spinner area = view.findViewById(R.id.areaSpinner);
 
