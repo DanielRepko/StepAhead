@@ -19,6 +19,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 
 import com.twitter.sdk.android.core.Twitter;
+import com.twitter.sdk.android.tweetui.UserTimeline;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener,
@@ -57,6 +58,8 @@ public class MainActivity extends AppCompatActivity
             }
         });
         fab.hide();
+
+        new UserTimeline.Builder().screenName("StepAheadApp").build();
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
