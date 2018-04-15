@@ -1,9 +1,12 @@
 package com.danielrepko83.jordancampbell01.stepahead;
 
+import android.Manifest;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v7.app.AlertDialog;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -139,6 +142,16 @@ public class CreateJournalFragment extends Fragment {
          */
         EditText heartRate = view.findViewById(R.id.heartRate);
         ImageView heartRateHelp = view.findViewById(R.id.help);
+        heartRateHelp.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                new AlertDialog.Builder(getContext())
+                        .setTitle(R.string.create_journal_heart_rate_alert_title)
+                        .setMessage(R.string.create_journal_heart_rate_message)
+                        .setPositiveButton("Ok", null)
+                        .show();
+            }
+        });
 
         /*
             Note

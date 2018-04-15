@@ -53,7 +53,7 @@
     <!-- Create Journal Strings -->
     <string name="create_journal_feeling_label_text">How you felt on your run:</string>
     <string name="create_journal_area_label_text">Type of area you ran in:</string>
-    <string name="create_journal_heart_rate_label">Your heart rate:</string>
+    <string name="create_journal_heart_rate_label">Your heart rate(bpm):</string>
     <string name="create_journal_note_label_text">Note:</string>
     <string name="create_journal_submit_button_text">Submit</string>
     <string name="create_journal_cancel_button_text">Cancel</string>
@@ -66,6 +66,10 @@
         <item>Beach</item>
         <item>Mixed</item>
     </string-array>
+
+    <string name="create_journal_heart_rate_alert_title">How to calulate average heart rate</string>
+    <string name="create_journal_heart_rate_message">To calculate your average heart rate, feel for your pulse and
+        count the beats for 15 seconds. Then simply multiply that number by 4. That is you heart rate in bpm (beats per minute)</string>
 
 
     <!-- Weight Strings -->
