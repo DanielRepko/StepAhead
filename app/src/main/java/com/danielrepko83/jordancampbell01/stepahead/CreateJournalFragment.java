@@ -162,11 +162,23 @@ public class CreateJournalFragment extends Fragment {
             Submit
          */
         Button submit = view.findViewById(R.id.submitButton);
+        submit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
 
         /*
             Cancel
          */
         Button cancel = view.findViewById(R.id.cancelButton);
+        cancel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                
+            }
+        });
 
         return view;
     }
