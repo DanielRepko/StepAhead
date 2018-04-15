@@ -27,7 +27,8 @@ public class MainActivity extends AppCompatActivity
                     WeightFragment.OnFragmentInteractionListener,
                     WeightListFragment.OnFragmentInteractionListener,
                     WeightGraphFragment.OnFragmentInteractionListener,
-                    TwitterFragment.OnFragmentInteractionListener {
+                    TwitterFragment.OnFragmentInteractionListener,
+                    CreditsFragment.OnFragmentInteractionListener {
 
     FragmentManager fm;
     static FloatingActionButton fab;
@@ -120,6 +121,10 @@ public class MainActivity extends AppCompatActivity
             trans.commit();
         } else if (id == R.id.nav_weight) {
             trans.replace(R.id.content, new WeightFragment());
+            trans.addToBackStack(null);
+            trans.commit();
+        } else if (id == R.id.nav_credits) {
+            trans.replace(R.id.content, new CreditsFragment());
             trans.addToBackStack(null);
             trans.commit();
         } else if (id == R.id.nav_twitter) {
