@@ -114,7 +114,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         Cursor cursor = db.rawQuery("SELECT last_insert_rowid()", null);
         if(cursor.moveToFirst()) {
             int picId = Integer.parseInt(cursor.getString(0));
-            System.out.println("Record ID " + picId);
+            System.out.println("Pic Record ID " + picId);
             db.close();
             return picId;
         }
@@ -202,7 +202,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         Cursor cursor = db.rawQuery("SELECT last_insert_rowid()", null);
         if(cursor.moveToFirst()) {
             int runId = Integer.parseInt(cursor.getString(0));
-            System.out.println("Record ID " + runId);
+            System.out.println("Run Record ID " + runId);
             db.close();
             return runId;
         }

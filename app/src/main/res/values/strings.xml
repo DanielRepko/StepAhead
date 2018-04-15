@@ -72,6 +72,10 @@
     <string name="create_journal_heart_rate_message">To calculate your average heart rate, feel for your pulse and
         count the beats for 15 seconds. Then simply multiply that number by 4. That is you heart rate in bpm (beats per minute)</string>
 
+    <string name="create_journal_cancel_alert_title">Discard run journal?</string>
+    <string name="create_journal_cancel_alert_message">Are you sure you want to cancel this run journal? Any
+        recorded/input information will be lost and a run journal will not be created.</string>
+
 
     <!-- Weight Strings -->
     <string name="weight_hint">Enter Weight (lbs)</string>

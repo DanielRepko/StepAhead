@@ -6,6 +6,8 @@ import android.content.DialogInterface;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AlertDialog;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -222,6 +224,11 @@ public class CreateJournalFragment extends Fragment {
                         }
                     }
 
+                    /**
+                     * Add code to lead to the
+                     * View Journal Page (to be created)
+                     */
+
                     Toast.makeText(getContext(),
                             "Run Journal Created",
                             Toast.LENGTH_SHORT).show();
@@ -237,7 +244,20 @@ public class CreateJournalFragment extends Fragment {
         cancel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                new AlertDialog.Builder(getContext())
+                        .setTitle(R.string.create_journal_cancel_alert_title)
+                        .setMessage(R.string.create_journal_cancel_alert_message)
+                        .setPositiveButton("Discard", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                FragmentManager fm = getActivity().getSupportFragmentManager();
+                                FragmentTransaction trans = fm.beginTransaction();
+                                trans.replace(R.id.content, new MainFragment());
+                                trans.commit();
+                            }
+                        })
+                        .setNegativeButton("Stay",null)
+                        .show();
             }
         });
 
