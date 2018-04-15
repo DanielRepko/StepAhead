@@ -9,11 +9,19 @@
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
 
+    <!-- Twitter Keys. DO NOT MODIFY THE NAME OR THE VALUE -->
+    <string name="com.twitter.sdk.android.CONSUMER_KEY">TeK37Y8fLGx8nyUV4AnLqI6nN</string>
+    <string name="com.twitter.sdk.android.CONSUMER_SECRET">WutaeY2iFn8tGnG1FD9dpeamPbfF4PU9Eo042tgueUFUJUp7Lb</string>
+
     <!-- Menu Strings -->
     <string name="menu_home">Home</string>
     <string name="menu_journals">Run Journals</string>
     <string name="menu_weight">Weight Journals</string>
     <string name="menu_reminder">Create Reminder</string>
+    <string name="menu_contact">Contact us</string>
+    <string name="menu_twitter">Twitter</string>
+    <string name="menu_email">Email</string>
+    <string name="menu_sms">Text Message</string>
 
     <!-- Reminder Strings -->
     <string name="reminder_type">Type</string>
@@ -32,5 +40,25 @@
     <string name="home_page_finish_button_text">Finish</string>
     <string name="home_page_cancel_button_text">Cancel</string>
     <string name="home_page_alert_title">Cancel Run</string>
-    <string name="home_page_alert_message">Are you sure you want to cancel this run? Any recorded info will be discarded and a run journal will not be created.</string>
+    <string name="home_page_alert_message">Are you sure you want to cancel this run? Any recoded info will be discarded and a run journal will not be created.</string>
+
+    <string name="permission_title_camera">Use Phone Camera</string>
+    <string name="permission_description_camera">The Step Ahead app includes a feature that allows you take pictures during your run
+        that can then be attached to the journal for that run. Access to the phone camera is needed to accomplish this</string>
+
+    <string name="permission_title_write_storage">Create Files on Phone</string>
+    <string name="permission_description_write_storage">In order for the camera feature to work, the Step Ahead app needs to
+        be able to store the images it takes on your device.</string>
+
+
+    <!-- Weight Strings -->
+    <string name="weight_hint">Enter Weight (lbs)</string>
+    <string name="weight_swap_graph">View in Graph Mode</string>
+    <string name="weight_swap_list">View in List Mode</string>
+
+    <!-- Setting Strings -->
+    <string name="weight_title">Weight Unit</string>
+    <string name="weight_summary">Would you like weights to be displayed in Kilograms or Pounds?</string>
+    <string name="distance_title">Distance Unit</string>
+    <string name="distance_summary">Would you like distance to be displayed in Kilometers or Miles?</string>
 </resources>

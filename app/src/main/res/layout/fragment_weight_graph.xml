@@ -1,0 +1,33 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:ap="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    tools:context="com.danielrepko83.jordancampbell01.stepahead.WeightGraphFragment">
+
+    <!--
+    <TextView
+        android:id="@+id/textView6"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Graph" />
+    -->
+
+    <com.androidplot.xy.XYPlot
+        android:id="@+id/weightGraph"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        ap:rangeTitle="Weight (lbs)"
+        ap:paddingBottom="15dp"
+        ap:paddingRight="15dp"
+        ap:paddingTop="10dp"
+        ap:paddingLeft="10dp"
+        ap:lineLabels="left"
+        ap:lineLabelInsetLeft="12dp"
+        ap:lineLabelAlignLeft="right"
+        ap:lineLabelTextSizeLeft="10dp"
+        ap:graphPaddingTop="5dp"
+        ap:graphPaddingLeft="15dp"
+        ap:gridInsetLeft="15dp" />
+</LinearLayout>

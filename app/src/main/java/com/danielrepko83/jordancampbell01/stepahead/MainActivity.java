@@ -1,5 +1,6 @@
 package com.danielrepko83.jordancampbell01.stepahead;
 
+import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
@@ -16,17 +17,25 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import com.twitter.sdk.android.core.Twitter;
+
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener,
                     ReminderFragment.OnFragmentInteractionListener,
-                    MainFragment.OnFragmentInteractionListener{
+                    MainFragment.OnFragmentInteractionListener,
+                    WeightFragment.OnFragmentInteractionListener,
+                    WeightListFragment.OnFragmentInteractionListener,
+                    WeightGraphFragment.OnFragmentInteractionListener,
+                    TwitterFragment.OnFragmentInteractionListener {
 
     FragmentManager fm;
+    static FloatingActionButton fab;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        Twitter.initialize(this);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
@@ -37,7 +46,7 @@ public class MainActivity extends AppCompatActivity
             trans.commit();
         }
 
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
+        fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -45,6 +54,7 @@ public class MainActivity extends AppCompatActivity
                         .setAction("Action", null).show();
             }
         });
+        fab.hide();
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
@@ -82,7 +92,8 @@ public class MainActivity extends AppCompatActivity
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
-            return true;
+            Intent settingsIntent = new Intent(MainActivity.this, SettingsActivity.class);
+            startActivity(settingsIntent);
         }
 
         return super.onOptionsItemSelected(item);
@@ -104,12 +115,38 @@ public class MainActivity extends AppCompatActivity
             trans.replace(R.id.content, new ReminderFragment());
             trans.addToBackStack(null);
             trans.commit();
+        } else if (id == R.id.nav_weight) {
+            trans.replace(R.id.content, new WeightFragment());
+            trans.addToBackStack(null);
+            trans.commit();
+        } else if (id == R.id.nav_twitter) {
+            trans.replace(R.id.content, new TwitterFragment());
+            trans.addToBackStack(null);
+            trans.commit();
+        } else if (id == R.id.nav_email) {
+            String[] email = {"support@stepaheadapp.ca"};
+            Intent intent = new Intent(Intent.ACTION_SENDTO);
+            intent.setData(Uri.parse("mailto:"));
+            intent.putExtra(Intent.EXTRA_EMAIL, email);
+            intent.putExtra(Intent.EXTRA_SUBJECT, "Issue with Step Ahead App");
+            intent.putExtra(Intent.EXTRA_TEXT, "I would like to report an issue with the Step Ahead app...");
+            if(intent.resolveActivity(getPackageManager()) != null) {
+                startActivity(intent);
+            }
+        } else if (id == R.id.nav_sms) {
+            Intent intent = new Intent(Intent.ACTION_SENDTO);
+            intent.setData(Uri.parse("smsto:5196687325"));
+            intent.putExtra("sms_body", "I have encountered an issue with the Step Ahead app...");
+            if(intent.resolveActivity(getPackageManager()) != null) {
+                startActivity(intent);
+            }
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
     }
+
 
     @Override
     public void onFragmentInteraction(Uri uri) {

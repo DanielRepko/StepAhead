@@ -7,10 +7,30 @@
         <item
             android:id="@+id/nav_home"
             android:icon="@drawable/ic_directions_run_black_24dp"
-            android:title="Home" />
+            android:title="@string/menu_home" />
         <item
             android:id="@+id/nav_reminder"
             android:icon="@drawable/ic_event_note_black_24dp"
             android:title="@string/menu_reminder" />
+        <item
+            android:id="@+id/nav_weight"
+            android:icon="@drawable/ic_list_black_24dp"
+            android:title="@string/menu_weight" />
+        <item android:title="@string/menu_contact">
+            <menu>
+                <item
+                    android:id="@+id/nav_twitter"
+                    android:icon="@drawable/tw__composer_logo_blue"
+                    android:title="@string/menu_twitter"/>
+                <item
+                    android:id="@+id/nav_email"
+                    android:icon="@drawable/ic_email_black_24dp"
+                    android:title="@string/menu_email"/>
+                <item
+                    android:id="@+id/nav_sms"
+                    android:icon="@drawable/ic_smartphone_black_24dp"
+                    android:title="@string/menu_sms"/>
+            </menu>
+        </item>
     </group>
 </menu>
