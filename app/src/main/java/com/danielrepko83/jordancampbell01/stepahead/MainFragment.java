@@ -101,6 +101,8 @@ public class MainFragment extends Fragment{
     //this ArrayList will hold all of image resources to be used inside of CreateRunFragment
     public static ArrayList<String> runPictures;
 
+    Intent trackerIntent;
+
     FragmentManager fm;
 
     @Override
@@ -109,6 +111,7 @@ public class MainFragment extends Fragment{
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_main, container, false);
         MainActivity.fab.hide();
+        fm = getActivity().getSupportFragmentManager();
 
         distance = view.findViewById(R.id.distance);
         TextView distanceLabel = view.findViewById(R.id.distanceLabel);
@@ -122,7 +125,7 @@ public class MainFragment extends Fragment{
         final Button finish = view.findViewById(R.id.finish);
         runPictures = new ArrayList<>();
 
-        final Intent trackerIntent = new Intent(getActivity(), LocationTracker.class);
+        trackerIntent = new Intent(getActivity(), LocationTracker.class);
 
         //Start Run click listener
         startRun.setOnClickListener(new View.OnClickListener() {
@@ -133,6 +136,7 @@ public class MainFragment extends Fragment{
                 cancel.setVisibility(View.VISIBLE);
                 pause.setVisibility(View.VISIBLE);
                 finish.setVisibility(View.VISIBLE);
+
 
                 //show the fab button
                 MainActivity.fab.show();
@@ -217,7 +221,6 @@ public class MainFragment extends Fragment{
         finish.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                fm = getActivity().getSupportFragmentManager();
                 FragmentTransaction trans = fm.beginTransaction();
                 trans.addToBackStack(null);
                 trans.replace(R.id.content, new CreateJournalFragment());
@@ -336,6 +339,13 @@ public class MainFragment extends Fragment{
         File picture  = File.createTempFile(fileName, ".jpg", directory);
         imageLocation = picture.getAbsolutePath();
         return picture;
+    }
+
+    @Override
+    public void onPause(){
+        getActivity().stopService(trackerIntent);
+
+        super.onPause();
     }
 
 
