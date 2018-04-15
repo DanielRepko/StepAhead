@@ -4,6 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:layout_marginLeft="@dimen/all_pages_side_margin"
+    android:layout_marginRight="@dimen/all_pages_side_margin"
     android:columnCount="2"
     android:useDefaultMargins="true"
     tools:context="com.danielrepko83.jordancampbell01.stepahead.CreateJournalFragment">
