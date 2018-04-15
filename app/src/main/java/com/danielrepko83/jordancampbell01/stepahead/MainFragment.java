@@ -10,6 +10,7 @@ import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
+import android.os.SystemClock;
 import android.provider.MediaStore;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
@@ -26,12 +27,14 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.danielrepko83.jordancampbell01.stepahead.Object_Classes.RunJournal;
 import com.danielrepko83.jordancampbell01.stepahead.Object_Classes.Weight;
 import com.google.android.gms.location.LocationRequest;
 
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Calendar;
 
 import static android.app.Activity.RESULT_OK;
 
@@ -105,6 +108,8 @@ public class MainFragment extends Fragment{
 
     FragmentManager fm;
 
+    public static RunJournal runJournal;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -136,6 +141,9 @@ public class MainFragment extends Fragment{
                 cancel.setVisibility(View.VISIBLE);
                 pause.setVisibility(View.VISIBLE);
                 finish.setVisibility(View.VISIBLE);
+
+                runJournal = new RunJournal();
+                runJournal.setStartTime(Calendar.getInstance().getTime()+"");
 
 
                 //show the fab button
@@ -189,6 +197,8 @@ public class MainFragment extends Fragment{
                                 //stop tracking location
                                 getActivity().stopService(trackerIntent);
 
+                                runJournal = null;
+
                             }
                         })
                         //if no, do nothing
@@ -224,6 +234,12 @@ public class MainFragment extends Fragment{
                 FragmentTransaction trans = fm.beginTransaction();
                 trans.addToBackStack(null);
                 trans.replace(R.id.content, new CreateJournalFragment());
+
+                //add data to run journal
+                runJournal.setDistanceKM(Double.parseDouble(distance.getText().toString()));
+                runJournal.setDuration(duration.getText().toString());
+                runJournal.setCalories(Integer.parseInt(calories.getText().toString()));
+
                 trans.commit();
             }
         });

@@ -15,7 +15,7 @@ public class RunJournal {
     private int id;
     private double distanceKM;
     private double distanceMI;
-    private double duration;
+    private String duration;
     private String startTime;
     private int calories;
     private String feeling;
@@ -35,7 +35,7 @@ public class RunJournal {
 
     }
 
-    public RunJournal(int id, double distanceKM, double distanceMI, double duration, String startTime, int calories, String feeling, String area, int heartRate, String note, double avgPace, double avgSpeed, String weather) {
+    public RunJournal(int id, double distanceKM, double distanceMI, String duration, String startTime, int calories, String feeling, String area, int heartRate, String note, double avgPace, double avgSpeed, String weather) {
         this.id = id;
         this.distanceKM = distanceKM;
         this.distanceMI = distanceMI;
@@ -65,7 +65,7 @@ public class RunJournal {
      * @param avgSpeed the average speed that the user ran
      * @param weather the weather during the run
      */
-    public RunJournal(double distanceKM, double distanceMI, double duration, String startTime, int calories, String feeling, String area, int heartRate, String note, double avgPace, double avgSpeed, String weather) {
+    public RunJournal(double distanceKM, double distanceMI, String duration, String startTime, int calories, String feeling, String area, int heartRate, String note, double avgPace, double avgSpeed, String weather) {
         this.distanceKM = distanceKM;
         this.distanceMI = distanceMI;
         this.duration = duration;
@@ -110,11 +110,11 @@ public class RunJournal {
         this.distanceKM = this.distanceMI / 0.62137;
     }
 
-    public double getDuration() {
+    public String getDuration() {
         return duration;
     }
 
-    public void setDuration(double duration) {
+    public void setDuration(String duration) {
         this.duration = duration;
     }
 
