@@ -195,6 +195,8 @@ public class LocationTracker extends Service {
         timeInterval = 0;
         distanceInterval = 0;
 
+        paused = false;
+
         super.onDestroy();
     }
 

@@ -168,6 +168,7 @@ public class MainFragment extends Fragment{
                                 //if yes, get rid of the pause, finish cancel buttons and show the startRun button
                                 startRun.setVisibility(View.VISIBLE);
                                 cancel.setVisibility(View.GONE);
+                                pause.setText(R.string.home_page_pause_button_text);
                                 pause.setVisibility(View.GONE);
                                 finish.setVisibility(View.GONE);
 
@@ -176,10 +177,6 @@ public class MainFragment extends Fragment{
                                 //a picture when a run is not active
                                 MainActivity.fab.hide();
 
-                                if(pause.getText().equals("Resume")){
-                                    pause.setText("Pause");
-                                    LocationTracker.pause();
-                                }
 
                                 //stop tracking location
                                 getActivity().stopService(trackerIntent);
@@ -209,6 +206,14 @@ public class MainFragment extends Fragment{
                     LocationTracker.pause();
 
                 }
+            }
+        });
+
+        //Finish click listener
+        finish.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                
             }
         });
 
