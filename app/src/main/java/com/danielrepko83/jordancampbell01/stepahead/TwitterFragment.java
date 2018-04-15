@@ -1,6 +1,7 @@
 package com.danielrepko83.jordancampbell01.stepahead;
 
 import android.content.Context;
+import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -69,6 +70,10 @@ public class TwitterFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_twitter, container, false);
+
+        //stop LocationTracker if it is running
+        getActivity().stopService(new Intent(getActivity(), LocationTracker.class));
+
         MainActivity.fab.hide();
         RecyclerView twitterFeed = view.findViewById(R.id.twitterFeed);
 

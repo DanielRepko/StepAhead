@@ -10,9 +10,12 @@ import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
+import android.os.SystemClock;
 import android.provider.MediaStore;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.content.FileProvider;
 import android.support.v7.app.AlertDialog;
@@ -24,12 +27,14 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.danielrepko83.jordancampbell01.stepahead.Object_Classes.RunJournal;
 import com.danielrepko83.jordancampbell01.stepahead.Object_Classes.Weight;
 import com.google.android.gms.location.LocationRequest;
 
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Calendar;
 
 import static android.app.Activity.RESULT_OK;
 
@@ -99,11 +104,22 @@ public class MainFragment extends Fragment{
     //this ArrayList will hold all of image resources to be used inside of CreateRunFragment
     public static ArrayList<String> runPictures;
 
+    Intent trackerIntent;
+
+    FragmentManager fm;
+
+    public static RunJournal runJournal;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_main, container, false);
+        MainActivity.fab.hide();
+        fm = getActivity().getSupportFragmentManager();
+
+        //stop LocationTracker if it is running
+        getActivity().stopService(new Intent(getActivity(), LocationTracker.class));
 
         distance = view.findViewById(R.id.distance);
         TextView distanceLabel = view.findViewById(R.id.distanceLabel);
@@ -117,7 +133,7 @@ public class MainFragment extends Fragment{
         final Button finish = view.findViewById(R.id.finish);
         runPictures = new ArrayList<>();
 
-        final Intent trackerIntent = new Intent(getActivity(), LocationTracker.class);
+        trackerIntent = new Intent(getActivity(), LocationTracker.class);
 
         //Start Run click listener
         startRun.setOnClickListener(new View.OnClickListener() {
@@ -128,6 +144,10 @@ public class MainFragment extends Fragment{
                 cancel.setVisibility(View.VISIBLE);
                 pause.setVisibility(View.VISIBLE);
                 finish.setVisibility(View.VISIBLE);
+
+                runJournal = new RunJournal();
+                runJournal.setStartTime(Calendar.getInstance().getTime()+"");
+
 
                 //show the fab button
                 MainActivity.fab.show();
@@ -167,6 +187,7 @@ public class MainFragment extends Fragment{
                                 //if yes, get rid of the pause, finish cancel buttons and show the startRun button
                                 startRun.setVisibility(View.VISIBLE);
                                 cancel.setVisibility(View.GONE);
+                                pause.setText(R.string.home_page_pause_button_text);
                                 pause.setVisibility(View.GONE);
                                 finish.setVisibility(View.GONE);
 
@@ -175,13 +196,11 @@ public class MainFragment extends Fragment{
                                 //a picture when a run is not active
                                 MainActivity.fab.hide();
 
-                                if(pause.getText().equals("Resume")){
-                                    pause.setText("Pause");
-                                    LocationTracker.pause();
-                                }
 
                                 //stop tracking location
                                 getActivity().stopService(trackerIntent);
+
+                                runJournal = null;
 
                             }
                         })
@@ -208,6 +227,26 @@ public class MainFragment extends Fragment{
                     LocationTracker.pause();
 
                 }
+            }
+        });
+
+        //Finish click listener
+        finish.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                FragmentTransaction trans = fm.beginTransaction();
+                trans.addToBackStack(null);
+                trans.replace(R.id.content, new CreateJournalFragment());
+
+                //add data to run journal
+                runJournal.setDistanceKM(Double.parseDouble(distance.getText().toString()));
+                runJournal.setDuration(duration.getText().toString());
+                runJournal.setCalories(Integer.parseInt(calories.getText().toString()));
+
+                getActivity().stopService(trackerIntent);
+
+                trans.commit();
+
             }
         });
 
@@ -323,7 +362,6 @@ public class MainFragment extends Fragment{
         imageLocation = picture.getAbsolutePath();
         return picture;
     }
-
 
     // TODO: Rename method, update argument and hook method into UI event
     public void onButtonPressed(Uri uri) {
