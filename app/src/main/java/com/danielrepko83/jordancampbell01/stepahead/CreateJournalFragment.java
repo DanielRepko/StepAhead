@@ -85,7 +85,7 @@ public class CreateJournalFragment extends Fragment {
         ImageButton soso = (ImageButton) view.findViewById(R.id.sosoButton);
         ImageButton bad = (ImageButton) view.findViewById(R.id.badButton);
         ImageButton awful = (ImageButton) view.findViewById(R.id.awfulButton);
-        ArrayList<ImageButton> feelingList = new ArrayList<>();
+        final ArrayList<ImageButton> feelingList = new ArrayList<>();
         feelingList.add(awesome);
         feelingList.add(good);
         feelingList.add(soso);
@@ -107,6 +107,23 @@ public class CreateJournalFragment extends Fragment {
         //setting image for awful button
         Picasso.with(getContext()).load(R.drawable.hurt_face).resize(175,
                 175).centerCrop().into(awful);
+
+        for(int i = 0; i < feelingList.size(); i++){
+            final ImageButton button = feelingList.get(i);
+            button.setColorFilter(R.color.unselected);
+            button.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    for(int j = 0; j < feelingList.size(); j++){
+                        if(feelingList.get(j).equals(button)){
+                            feelingList.get(j).setColorFilter(null);
+                        } else {
+                            feelingList.get(j).setColorFilter(R.color.unselected);
+                        }
+                    }
+                }
+            });
+        }
 
         /*
             Area

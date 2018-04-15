@@ -28,40 +28,35 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:background="@color/ap_transparent"
-            android:tint="@color/unselected" />
+            android:background="@color/ap_transparent" />
 
         <ImageButton
             android:id="@+id/goodButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:background="@color/ap_transparent"
-            android:tint="@color/unselected" />
+            android:background="@color/ap_transparent" />
 
         <ImageButton
             android:id="@+id/sosoButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:background="@color/ap_transparent"
-            android:tint="@color/unselected" />
+            android:background="@color/ap_transparent" />
 
         <ImageButton
             android:id="@+id/badButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:background="@color/ap_transparent"
-            android:tint="@color/unselected" />
+            android:background="@color/ap_transparent" />
 
         <ImageButton
             android:id="@+id/awfulButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:background="@color/ap_transparent"
-            android:tint="@color/unselected" />
+            android:background="@color/ap_transparent" />
     </LinearLayout>
 
     <TextView
