@@ -27,7 +27,8 @@ public class MainActivity extends AppCompatActivity
                     WeightFragment.OnFragmentInteractionListener,
                     WeightListFragment.OnFragmentInteractionListener,
                     WeightGraphFragment.OnFragmentInteractionListener,
-                    TwitterFragment.OnFragmentInteractionListener {
+                    TwitterFragment.OnFragmentInteractionListener,
+                    CreditsFragment.OnFragmentInteractionListener {
 
     FragmentManager fm;
     static FloatingActionButton fab;
