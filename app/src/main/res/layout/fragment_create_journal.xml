@@ -13,7 +13,7 @@
         android:id="@+id/feelingLabel"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="TextView" />
+        android:text="@string/create_journal_feeling_label_text" />
 
     <LinearLayout
         android:id="@+id/feelingLayout"
@@ -28,42 +28,47 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:background="@color/ap_transparent" />
+            android:background="@color/ap_transparent"
+            android:tint="@color/unselected" />
 
         <ImageButton
             android:id="@+id/goodButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:background="@color/ap_transparent" />
+            android:background="@color/ap_transparent"
+            android:tint="@color/unselected" />
 
         <ImageButton
             android:id="@+id/sosoButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:background="@color/ap_transparent" />
+            android:background="@color/ap_transparent"
+            android:tint="@color/unselected" />
 
         <ImageButton
             android:id="@+id/badButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:background="@color/ap_transparent" />
+            android:background="@color/ap_transparent"
+            android:tint="@color/unselected" />
 
         <ImageButton
             android:id="@+id/awfulButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:background="@color/ap_transparent" />
+            android:background="@color/ap_transparent"
+            android:tint="@color/unselected" />
     </LinearLayout>
-    
+
     <TextView
-    android:id="@+id/textView7"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:text="TextView" />
+        android:id="@+id/areaLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/create_journal_area_label_text" />
 
     <Spinner
         android:id="@+id/areaSpinner"
@@ -83,7 +88,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="TextView" />
+            android:text="@string/create_journal_heart_rate_label" />
 
         <EditText
             android:id="@+id/heartRate"
@@ -107,7 +112,7 @@
         android:id="@+id/noteLabel"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="TextView" />
+        android:text="@string/create_journal_note_label_text" />
 
     <EditText
         android:id="@+id/note"
@@ -123,7 +128,7 @@
         android:layout_height="wrap_content"
         android:layout_column="0"
         android:layout_columnSpan="2"
-        android:text="Button" />
+        android:text="@string/create_journal_submit_button_text" />
 
     <Button
         android:id="@+id/cancelButton"
@@ -131,6 +136,6 @@
         android:layout_height="wrap_content"
         android:layout_column="0"
         android:layout_columnSpan="2"
-        android:text="Button" />
+        android:text="@string/create_journal_cancel_button_text" />
 
 </GridLayout>

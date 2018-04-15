@@ -50,6 +50,14 @@
     <string name="permission_description_write_storage">In order for the camera feature to work, the Step Ahead app needs to
         be able to store the images it takes on your device.</string>
 
+    <!-- Create Journal Strings -->
+    <string name="create_journal_feeling_label_text">How you felt on your run:</string>
+    <string name="create_journal_area_label_text">Type of area you ran in:</string>
+    <string name="create_journal_heart_rate_label">Your heart rate:</string>
+    <string name="create_journal_note_label_text">Note:</string>
+    <string name="create_journal_submit_button_text">Submit</string>
+    <string name="create_journal_cancel_button_text">Cancel</string>
+
 
     <!-- Weight Strings -->
     <string name="weight_hint">Enter Weight (lbs)</string>
