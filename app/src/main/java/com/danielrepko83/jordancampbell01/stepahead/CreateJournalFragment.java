@@ -17,7 +17,9 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.danielrepko83.jordancampbell01.stepahead.Object_Classes.Picture;
 import com.danielrepko83.jordancampbell01.stepahead.Object_Classes.RunJournal;
 import com.squareup.picasso.Picasso;
 
@@ -208,7 +210,22 @@ public class CreateJournalFragment extends Fragment {
                 }
 
                 DatabaseHandler db = new DatabaseHandler(getContext());
-                db.addRun(run);
+                int runId = db.addRun(run);
+
+                if(runId != -1){
+                    ArrayList<String> runPictures = MainFragment.runPictures;
+                    if(!runPictures.isEmpty()) {
+                        for (int i = 0; i < runPictures.size(); i++) {
+                            Picture pic = new Picture(runPictures.get(i));
+                            int picId = db.addPicture(pic);
+                            db.addRunPicture(runId, picId);
+                        }
+                    }
+
+                    Toast.makeText(getContext(),
+                            "Run Journal Created",
+                            Toast.LENGTH_SHORT).show();
+                }
 
             }
         });
