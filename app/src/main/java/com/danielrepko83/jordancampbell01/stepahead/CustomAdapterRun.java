@@ -21,6 +21,10 @@ public class CustomAdapterRun extends RecyclerView.Adapter {
     private ArrayList<RunJournal> runs;
     Context context;
 
+    public CustomAdapterRun(ArrayList<RunJournal> runs) {
+        this.runs = runs;
+    }
+
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.run_recycler_item, parent, false);
@@ -56,7 +60,7 @@ public class CustomAdapterRun extends RecyclerView.Adapter {
         RunJournal runJournal = runs.get(position);
         ((CustomViewHolder) holder).distance.setText(runJournal.getDistanceKM()+"");
         ((CustomViewHolder) holder).duration.setText(runJournal.getDuration());
-        ((CustomViewHolder) holder).calories.setText(runJournal.getCalories());
+        ((CustomViewHolder) holder).calories.setText(runJournal.getCalories()+"");
     }
 
     @Override

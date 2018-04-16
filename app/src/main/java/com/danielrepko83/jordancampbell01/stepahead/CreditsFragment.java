@@ -1,6 +1,7 @@
 package com.danielrepko83.jordancampbell01.stepahead;
 
 import android.content.Context;
+import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -65,7 +66,9 @@ public class CreditsFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_credits, container, false);
-
+        MainActivity.fab.hide();
+        //stop LocationTracker if it is running
+        getActivity().stopService(new Intent(getActivity(), LocationTracker.class));
 
 
         return view;
