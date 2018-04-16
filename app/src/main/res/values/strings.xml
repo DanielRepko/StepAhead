@@ -32,7 +32,8 @@
     <string name="reminder_create">Create Reminder</string>
 
     <!-- Home Page -->
-    <string name="home_page_distance_label_text">Distance(km)</string>
+    <string name="home_page_distance_label_km_text">Distance(km)</string>
+    <string name="home_page_distance_label_mi_text">Distance(mi)</string>
     <string name="home_page_duration_label_text">Duration</string>
     <string name="home_page_calories_label_text">Calories</string>
     <string name="home_page_start_run_button_text">Start Run</string>
@@ -75,6 +76,12 @@
     <string name="create_journal_cancel_alert_title">Discard run journal?</string>
     <string name="create_journal_cancel_alert_message">Are you sure you want to cancel this run journal? Any
         recorded/input information will be lost and a run journal will not be created.</string>
+
+    <!-- Run history page -->
+    <string name="run_history_page_distance_label_km_text">Distance(km):</string>
+    <string name="run_history_page_distance_label_mi_text">Distance(mi):</string>
+    <string name="run_history_page_duration_label_text">Duration:</string>
+    <string name="run_history_page_calories_label_text">Calories:</string>
 
 
     <!-- Weight Strings -->

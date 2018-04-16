@@ -17,36 +17,51 @@
             android:id="@+id/distanceLabel"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="TextView" />
+            android:layout_columnWeight="1"
+            android:text="@string/run_history_page_distance_label_km_text"
+            android:textSize="@dimen/run_history_page_label_text_size" />
 
         <TextView
             android:id="@+id/distance"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="TextView" />
+            android:layout_columnWeight="1"
+            android:text="TextView"
+            android:textAlignment="center"
+            android:textSize="@dimen/run_history_page_label_text_size" />
 
         <TextView
             android:id="@+id/durationLabel"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="TextView" />
+            android:layout_columnWeight="1"
+            android:text="@string/run_history_page_duration_label_text"
+            android:textSize="@dimen/run_history_page_label_text_size" />
 
         <TextView
             android:id="@+id/duration"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="TextView" />
+            android:layout_columnWeight="1"
+            android:text="TextView"
+            android:textAlignment="center"
+            android:textSize="@dimen/run_history_page_label_text_size" />
 
         <TextView
             android:id="@+id/caloriesLabel"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="TextView" />
+            android:layout_columnWeight="1"
+            android:text="@string/run_history_page_calories_label_text"
+            android:textSize="@dimen/run_history_page_label_text_size" />
 
         <TextView
             android:id="@+id/calories"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="TextView" />
+            android:layout_columnWeight="1"
+            android:text="TextView"
+            android:textAlignment="center"
+            android:textSize="@dimen/run_history_page_label_text_size" />
     </GridLayout>
 </android.support.v7.widget.CardView>
