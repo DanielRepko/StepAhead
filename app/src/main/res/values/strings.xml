@@ -83,6 +83,9 @@
     <string name="run_history_page_duration_label_text">Duration:</string>
     <string name="run_history_page_calories_label_text">Calories:</string>
 
+    <string name="run_history_page_alert_title">Delete this run journal?</string>
+    <string name="run_history_page_alert_message">Are you sure that you want to delete this run journal? This action cannot be undone.</string>
+
 
     <!-- Weight Strings -->
     <string name="weight_hint">Enter Weight (lbs)</string>

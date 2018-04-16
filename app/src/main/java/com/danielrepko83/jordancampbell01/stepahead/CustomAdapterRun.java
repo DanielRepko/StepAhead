@@ -1,6 +1,8 @@
 package com.danielrepko83.jordancampbell01.stepahead;
 
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -24,6 +26,27 @@ public class CustomAdapterRun extends RecyclerView.Adapter {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.run_recycler_item, parent, false);
         final CustomViewHolder viewHolder = new CustomViewHolder(view);
         context = parent.getContext();
+
+        view.setOnLongClickListener(new View.OnLongClickListener() {
+            public boolean onLongClick(View v) {
+                new AlertDialog.Builder(context)
+                        .setTitle(R.string.run_history_page_alert_title)
+                        .setMessage(R.string.run_history_page_alert_message)
+                        .setIcon(android.R.drawable.ic_dialog_alert)
+                        .setPositiveButton("Delete", new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int which) {
+                                int run = viewHolder.getAdapterPosition();
+                                DatabaseHandler db = new DatabaseHandler(context);
+                                db.deleteRun(runs.get(run).getId());
+                                runs.remove(run);
+                                notifyItemRemoved(run);
+                            }
+                        })
+                        .setNegativeButton("Cancel", null)
+                        .show();
+                return false;
+            }
+        });
 
         return viewHolder;
     }
