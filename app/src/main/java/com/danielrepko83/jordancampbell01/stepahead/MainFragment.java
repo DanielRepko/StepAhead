@@ -27,9 +27,17 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.Volley;
 import com.danielrepko83.jordancampbell01.stepahead.Object_Classes.RunJournal;
 import com.danielrepko83.jordancampbell01.stepahead.Object_Classes.Weight;
 import com.google.android.gms.location.LocationRequest;
+
+import org.json.JSONObject;
 
 import java.io.File;
 import java.io.IOException;
@@ -109,6 +117,8 @@ public class MainFragment extends Fragment{
     FragmentManager fm;
 
     public static RunJournal runJournal;
+
+    String weatherString;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -242,6 +252,58 @@ public class MainFragment extends Fragment{
                 runJournal.setDistanceKM(Double.parseDouble(distance.getText().toString()));
                 runJournal.setDuration(duration.getText().toString());
                 runJournal.setCalories(Integer.parseInt(calories.getText().toString()));
+
+                //pull weather information
+                RequestQueue requestQueue = Volley.newRequestQueue(getContext());
+                String url = "http://api.openweathermap.org/data/2.5/weather?lat="
+                        +LocationTracker.lastLocation.getLatitude()+"&lon="
+                        +LocationTracker.lastLocation.getLongitude()+
+                        "&units=metric&appid=e4fe52a6d27f0a63571bfc00fe71d629";
+                weatherString = "";
+                //request the weather
+                JsonObjectRequest weatherRequest = new JsonObjectRequest(Request.Method.GET, url,null, new Response.Listener<JSONObject>() {
+                    @Override
+                    public void onResponse(JSONObject response) {
+                        //Grab the main object out of the response object
+                        try {
+                            JSONObject object = response.getJSONArray("weather").getJSONObject(0);
+                            //unicode at end makes it display as Celsius
+                            String text = object.getString("main")+" ";
+                            //Display it to the screen
+                            weatherString = text;
+                        } catch(Exception e){
+                            e.printStackTrace();
+                        }
+                    }
+                }, new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        System.out.println(error.getLocalizedMessage());
+                    }
+                });
+                //request the tempature
+                JsonObjectRequest tempRequest = new JsonObjectRequest(Request.Method.GET, url,null, new Response.Listener<JSONObject>() {
+                    @Override
+                    public void onResponse(JSONObject response) {
+                        //Grab the main object out of the response object
+                        try {
+                            JSONObject object = response.getJSONObject("main");
+                            //unicode at end makes it display as Celsius
+                            String text = +object.getDouble("temp")+"\u2103";
+                            //Display it to the screen
+                            weatherString+=text;
+                        } catch(Exception e){
+                            e.printStackTrace();
+                        }
+                    }
+                }, new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        System.out.println(error.getLocalizedMessage());
+                    }
+                });
+                requestQueue.add(weatherRequest);
+                requestQueue.add(tempRequest);
 
                 getActivity().stopService(trackerIntent);
 
