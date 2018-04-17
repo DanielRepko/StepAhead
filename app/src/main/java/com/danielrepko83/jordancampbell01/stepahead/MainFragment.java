@@ -118,7 +118,7 @@ public class MainFragment extends Fragment{
 
     public static RunJournal runJournal;
 
-    String weatherString;
+    private String weatherString;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -257,18 +257,16 @@ public class MainFragment extends Fragment{
                             + LocationTracker.lastLocation.getLatitude() + "&lon="
                             + LocationTracker.lastLocation.getLongitude() +
                             "&units=metric&appid=e4fe52a6d27f0a63571bfc00fe71d629";
-                        weatherString = "";
+                weatherString = "";
                     //request the weather
                     JsonObjectRequest weatherRequest = new JsonObjectRequest(Request.Method.GET, url, null, new Response.Listener<JSONObject>() {
                         @Override
                         public void onResponse(JSONObject response) {
-                            //Grab the weather array out of the response object
+                            //Grab the first object out of the weather array
                             try {
                                 JSONObject object = response.getJSONArray("weather").getJSONObject(0);
                                 String text = object.getString("main") + " ";
-                                //Display it to the screen
                                 weatherString = text;
-                                System.out.println(text+"!!!!!!!!!");
                             } catch (Exception e) {
                                 e.printStackTrace();
                             }
@@ -287,9 +285,9 @@ public class MainFragment extends Fragment{
                             try {
                                 JSONObject object = response.getJSONObject("main");
                                 //unicode at end makes it display as Celsius
-                                String text = +object.getDouble("temp") + "\u2103";
-                                //Display it to the screen
+                                String text = object.getDouble("temp") + "\u2103";
                                 weatherString += text;
+                                runJournal.setWeather(weatherString);
                             } catch (Exception e) {
                                 e.printStackTrace();
                             }
@@ -301,11 +299,9 @@ public class MainFragment extends Fragment{
                         }
                     });
 
-                //requestQueue.add(weatherRequest);
+                requestQueue.add(weatherRequest);
                 requestQueue.add(tempRequest);
 
-                System.out.println("!!!!!!!!!!!!!!!!"+weatherString);
-                runJournal.setWeather(weatherString);
 
                 getActivity().stopService(trackerIntent);
 
