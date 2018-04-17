@@ -8,6 +8,7 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import com.danielrepko83.jordancampbell01.stepahead.Object_Classes.RunJournal;
 
@@ -62,7 +63,30 @@ public class ViewRunFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_view_run, container, false);
+        View view = inflater.inflate(R.layout.fragment_view_run, container, false);
+
+        TextView duration = view.findViewById(R.id.duration);
+        TextView distance = view.findViewById(R.id.distance);
+        TextView calories = view.findViewById(R.id.calories);
+        TextView heartRate = view.findViewById(R.id.heartRate);
+        TextView feeling = view.findViewById(R.id.feeling);
+        TextView area = view.findViewById(R.id.area);
+        TextView weather = view.findViewById(R.id.weather);
+        TextView startTime = view.findViewById(R.id.startTime);
+        TextView note = view.findViewById(R.id.note);
+
+        //set the text in the fields to the values of the run journal selected
+        duration.setText(mParam1.getDuration());
+        distance.setText(mParam1.getDistanceKM()+"");
+        calories.setText(mParam1.getCalories()+"");
+        heartRate.setText(mParam1.getHeartRate()+"");
+        feeling.setText(mParam1.getFeeling());
+        area.setText(mParam1.getArea());
+        weather.setText(mParam1.getWeather());
+        startTime.setText(mParam1.getStartTime());
+        note.setText(mParam1.getNote());
+
+        return view;
     }
 
     // TODO: Rename method, update argument and hook method into UI event
