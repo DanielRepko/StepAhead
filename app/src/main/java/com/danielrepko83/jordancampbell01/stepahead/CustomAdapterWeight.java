@@ -61,8 +61,8 @@ public class CustomAdapterWeight extends RecyclerView.Adapter {
         if(Integer.parseInt(sharedPref.getString("weight_preference", "1")) == 1) {
             weightText = weight.getPounds().toString() + " lbs";
         } else {
-            Double weightPounds = weight.getPounds() * (1 / 2.2046);
-            String formattedWeight = String.format("%.2f", weightPounds);
+            Double weightKilograms = weight.getPounds() * (1 / 2.2046);
+            String formattedWeight = String.format("%.2f", weightKilograms);
             weightText = formattedWeight + " kg";
         }
 

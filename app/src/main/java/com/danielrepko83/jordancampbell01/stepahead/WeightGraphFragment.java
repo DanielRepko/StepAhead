@@ -1,9 +1,11 @@
 package com.danielrepko83.jordancampbell01.stepahead;
 
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
@@ -105,8 +107,16 @@ public class WeightGraphFragment extends Fragment {
         //Convert the Weight ArrayList into two ArrayLists, one for the actual weight and one for the id
         ArrayList<Double> weightValues = new ArrayList<>();
         ArrayList<Integer> weightIds = new ArrayList<>();
+        SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(getContext());
         for(int i = 0; i < weights.size(); i++) {
-            weightValues.add(weights.get(i).getPounds());
+            if(Integer.parseInt(sharedPref.getString("weight_preference", "1")) == 0) {
+                //If the weight setting is kilograms, add the kilograms version of the weight to the list
+                Double weightKilograms = Double.parseDouble(String.format("%.2f", weights.get(i).getPounds() * (1 / 2.2046)));
+                weightValues.add(weightKilograms);
+            } else {
+                //Otherwise, directly add the pounds version
+                weightValues.add(weights.get(i).getPounds());
+            }
             weightIds.add(weights.get(i).getId());
         }
 
