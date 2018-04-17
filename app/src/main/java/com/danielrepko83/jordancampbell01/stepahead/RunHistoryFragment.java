@@ -5,20 +5,27 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+
+import com.danielrepko83.jordancampbell01.stepahead.Object_Classes.RunJournal;
+
+import java.util.ArrayList;
+import java.util.Collections;
 
 
 /**
  * A simple {@link Fragment} subclass.
  * Activities that contain this fragment must implement the
- * {@link CreditsFragment.OnFragmentInteractionListener} interface
+ * {@link RunHistoryFragment.OnFragmentInteractionListener} interface
  * to handle interaction events.
- * Use the {@link CreditsFragment#newInstance} factory method to
+ * Use the {@link RunHistoryFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class CreditsFragment extends Fragment {
+public class RunHistoryFragment extends Fragment {
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -30,7 +37,7 @@ public class CreditsFragment extends Fragment {
 
     private OnFragmentInteractionListener mListener;
 
-    public CreditsFragment() {
+    public RunHistoryFragment() {
         // Required empty public constructor
     }
 
@@ -40,11 +47,11 @@ public class CreditsFragment extends Fragment {
      *
      * @param param1 Parameter 1.
      * @param param2 Parameter 2.
-     * @return A new instance of fragment CreditsFragment.
+     * @return A new instance of fragment RunHistoryFragment.
      */
     // TODO: Rename and change types and number of parameters
-    public static CreditsFragment newInstance(String param1, String param2) {
-        CreditsFragment fragment = new CreditsFragment();
+    public static RunHistoryFragment newInstance(String param1, String param2) {
+        RunHistoryFragment fragment = new RunHistoryFragment();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);
@@ -65,10 +72,25 @@ public class CreditsFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View view = inflater.inflate(R.layout.fragment_credits, container, false);
+        View view = inflater.inflate(R.layout.fragment_run_history, container, false);
         MainActivity.fab.hide();
         //stop LocationTracker if it is running
         getActivity().stopService(new Intent(getActivity(), LocationTracker.class));
+
+        RecyclerView list = view.findViewById(R.id.runRecycler);
+
+        //grab all records in the run table from the database
+        DatabaseHandler db = new DatabaseHandler(getContext());
+        ArrayList<RunJournal> runList = db.getAllRuns();
+        Collections.reverse(runList);
+
+        //create and set the recyclerview adapter
+        CustomAdapterRun adapter = new CustomAdapterRun(runList);
+        list.setAdapter(adapter);
+
+        //create and set the layout manager
+        LinearLayoutManager layoutManager = new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false);
+        list.setLayoutManager(layoutManager);
 
 
         return view;

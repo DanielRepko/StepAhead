@@ -32,7 +32,7 @@ public class LocationTracker extends Service {
     //properties for location tracking
     private double currentDistance;
     private TextView distanceLabel;
-    private Location lastLocation;
+    public static Location lastLocation;
     private LocationCallback callBack;
     private static boolean paused = false;
 

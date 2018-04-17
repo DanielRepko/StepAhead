@@ -57,8 +57,6 @@ public class RunJournal {
      * @param area the type of area that the user ran in
      * @param heartRate the user's heart rate during the run
      * @param note a random note that the user can write describing their run
-     * @param avgPace the average pace that the user ran at
-     * @param avgSpeed the average speed that the user ran
      * @param weather the weather during the run
      */
     public RunJournal(double distanceKM, double distanceMI, String duration, String startTime, int calories, String feeling, String area, int heartRate, String note, String weather) {

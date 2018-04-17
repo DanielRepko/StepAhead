@@ -23,7 +23,7 @@
         android:id="@+id/distanceLabel"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/home_page_distance_label_text"
+        android:text="@string/home_page_distance_label_km_text"
         android:textAlignment="center"
         android:textSize="@dimen/home_page_distance_label_text_size" />
 

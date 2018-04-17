@@ -200,13 +200,13 @@ public class CreateJournalFragment extends Fragment {
                 run.setArea(area.getSelectedItem().toString());
 
                 //check if the user entered a heart rate
-                if(heartRate.getText() != null){
+                if(!heartRate.getText().toString().equals("")){
                     //if so, add it to the run
                     run.setHeartRate(Integer.parseInt(heartRate.getText().toString()));
                 }
 
                 //check if the user entered a note
-                if(note.getText() != null){
+                if(!note.getText().toString().equals("")){
                     //if so, add it to the run
                     run.setNote(note.getText().toString());
                 }

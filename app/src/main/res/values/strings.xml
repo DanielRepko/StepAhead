@@ -32,7 +32,8 @@
     <string name="reminder_create">Create Reminder</string>
 
     <!-- Home Page -->
-    <string name="home_page_distance_label_text">Distance(km)</string>
+    <string name="home_page_distance_label_km_text">Distance(km)</string>
+    <string name="home_page_distance_label_mi_text">Distance(mi)</string>
     <string name="home_page_duration_label_text">Duration</string>
     <string name="home_page_calories_label_text">Calories</string>
     <string name="home_page_start_run_button_text">Start Run</string>
@@ -76,6 +77,15 @@
     <string name="create_journal_cancel_alert_message">Are you sure you want to cancel this run journal? Any
         recorded/input information will be lost and a run journal will not be created.</string>
 
+    <!-- Run history page -->
+    <string name="run_history_page_distance_label_km_text">Distance(km):</string>
+    <string name="run_history_page_distance_label_mi_text">Distance(mi):</string>
+    <string name="run_history_page_duration_label_text">Duration:</string>
+    <string name="run_history_page_calories_label_text">Calories:</string>
+
+    <string name="run_history_page_alert_title">Delete this run journal?</string>
+    <string name="run_history_page_alert_message">Are you sure that you want to delete this run journal? This action cannot be undone.</string>
+
 
     <!-- Weight Strings -->
     <string name="weight_hint">Enter Weight (lbs)</string>
@@ -90,14 +100,14 @@
 
     <!-- Credits Strings -->
     <string name="credits_image_header">Images</string>
-        <string name="credits_image_link_1">https://www.pexels.com/photo/woman-girl-silhouette-jogger-40751/</string>
-        <string name="credits_image_link_2">https://www.pexels.com/photo/sunset-men-sunrise-jogging-39308/</string>
+    <string name="credits_image_link_1">https://www.pexels.com/photo/woman-girl-silhouette-jogger-40751/</string>
+    <string name="credits_image_link_2">https://www.pexels.com/photo/sunset-men-sunrise-jogging-39308/</string>
     <string name="credits_androidplot">AndroidPlot API</string>
-        <string name="credits_androitplot_link">https://bitbucket.org/androidplot/androidplot</string>
+    <string name="credits_androitplot_link">https://bitbucket.org/androidplot/androidplot</string>
     <string name="credits_picasso">Picasso API</string>
-        <string name="credits_picasso_link">http://square.github.io/picasso/</string>
+    <string name="credits_picasso_link">http://square.github.io/picasso/</string>
     <string name="credits_openweathermap">OpenWeatherMap API</string>
-        <string name="credits_openweathermap_link">https://openweathermap.org/</string>
+    <string name="credits_openweathermap_link">https://openweathermap.org/</string>
     <string name="credits_volley">Volley API</string>
-        <string name="credits_volley_link">https://github.com/google/volley</string>
+    <string name="credits_volley_link">https://github.com/google/volley</string>
 </resources>
