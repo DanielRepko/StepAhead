@@ -38,6 +38,7 @@ public class WeightListFragment extends Fragment {
 
     private OnFragmentInteractionListener mListener;
     FragmentManager fm;
+    RecyclerView list;
 
     public WeightListFragment() {
         // Required empty public constructor
@@ -88,7 +89,7 @@ public class WeightListFragment extends Fragment {
         });
 
         //Grab the RecyclerView so we can modify it's content
-        RecyclerView list = view.findViewById(R.id.weightRecyclerView);
+        list = view.findViewById(R.id.weightRecyclerView);
 
         //Create a new DatabaseHandler, retrieve all the entries from the weight table, and store it in an ArrayList of Weights
         DatabaseHandler db = new DatabaseHandler(getContext());
@@ -143,5 +144,11 @@ public class WeightListFragment extends Fragment {
     public interface OnFragmentInteractionListener {
         // TODO: Update argument type and name
         void onFragmentInteraction(Uri uri);
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        list.getAdapter().notifyDataSetChanged();
     }
 }
