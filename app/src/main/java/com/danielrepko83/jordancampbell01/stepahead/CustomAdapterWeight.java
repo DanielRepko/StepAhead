@@ -3,6 +3,8 @@ package com.danielrepko83.jordancampbell01.stepahead;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.SharedPreferences;
+import android.preference.PreferenceManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -16,6 +18,7 @@ import java.util.ArrayList;
 public class CustomAdapterWeight extends RecyclerView.Adapter {
     private ArrayList<Weight> weights;
     Context context;
+    SharedPreferences sharedPref;
 
     public CustomAdapterWeight(ArrayList<Weight> weights) {
         this.weights = weights;
@@ -25,6 +28,8 @@ public class CustomAdapterWeight extends RecyclerView.Adapter {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.weight_recycler_view, parent, false);
         final CustomViewHolder viewHolder = new CustomViewHolder(view);
         context = parent.getContext();
+
+        sharedPref = PreferenceManager.getDefaultSharedPreferences(context);
 
         view.setOnLongClickListener(new View.OnLongClickListener() {
             public boolean onLongClick(View v) {
@@ -52,7 +57,15 @@ public class CustomAdapterWeight extends RecyclerView.Adapter {
 
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
         Weight weight = weights.get(position);
-        String weightText = weight.getPounds().toString() + " lbs";
+        String weightText;
+        if(Integer.parseInt(sharedPref.getString("weight_preference", "1")) == 1) {
+            weightText = weight.getPounds().toString() + " lbs";
+        } else {
+            Double weightKilograms = weight.getPounds() * (1 / 2.2046);
+            String formattedWeight = String.format("%.2f", weightKilograms);
+            weightText = formattedWeight + " kg";
+        }
+
         ((CustomViewHolder) holder).weight.setText(weightText);
         ((CustomViewHolder) holder).date.setText(weight.getDate());
     }

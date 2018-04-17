@@ -88,7 +88,9 @@
 
 
     <!-- Weight Strings -->
-    <string name="weight_hint">Enter Weight (lbs)</string>
+    <string name="weight_hint_generic">Enter Weight</string>
+    <string name="weight_hint_lbs">Enter Weight (lbs)</string>
+    <string name="weight_hint_kg">Enter Weight (kg)</string>
     <string name="weight_swap_graph">View in Graph Mode</string>
     <string name="weight_swap_list">View in List Mode</string>
 
