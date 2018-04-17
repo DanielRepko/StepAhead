@@ -100,6 +100,12 @@ public class WeightFragment extends Fragment {
                     return;
                 }
 
+                SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(getContext());
+                if(Integer.parseInt(sharedPref.getString("weight_preference", "1")) == 0) {
+                    //If the entered value is kilograms, convert to pounds for the database
+                    enteredNumber = Double.parseDouble(String.format("%.2f", enteredNumber * 2.2046));
+                }
+
                 Date date = Calendar.getInstance().getTime();
                 Weight weight = new Weight(enteredNumber, date.toString());
 
