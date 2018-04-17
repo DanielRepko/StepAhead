@@ -130,6 +130,7 @@ public class WeightGraphFragment extends Fragment {
         weightGraph.addSeries(weightSeries, formatter);
         weightGraph.setDomainStep(StepMode.SUBDIVIDE, 10);
         weightGraph.setRangeStep(StepMode.SUBDIVIDE, 10);
+        weightGraph.setVisibility(View.INVISIBLE);
 
         return view;
     }
@@ -171,5 +172,17 @@ public class WeightGraphFragment extends Fragment {
     public interface OnFragmentInteractionListener {
         // TODO: Update argument type and name
         void onFragmentInteraction(Uri uri);
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        if(weightGraph.getVisibility() == View.VISIBLE) {
+            FragmentTransaction trans = fm.beginTransaction();
+            trans.replace(R.id.fragmentStorage, new WeightGraphFragment());
+            trans.commit();
+        } else {
+            weightGraph.setVisibility(View.VISIBLE);
+        }
     }
 }
