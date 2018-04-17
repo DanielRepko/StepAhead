@@ -78,7 +78,7 @@ public class CreateJournalFragment extends Fragment {
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
     }
-
+    RunJournal run;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -86,7 +86,7 @@ public class CreateJournalFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_create_journal, container, false);
         MainActivity.fab.hide();
 
-        final RunJournal run = MainFragment.runJournal;
+        run = MainFragment.runJournal;
 
         /*
             Feeling
@@ -183,7 +183,7 @@ public class CreateJournalFragment extends Fragment {
                                 run.setFeeling("Good");
                                 break;
                             case 2:
-                                run.setFeeling("Soso");
+                                run.setFeeling("So so");
                                 break;
                             case 3:
                                 run.setFeeling("Bad");
@@ -224,13 +224,19 @@ public class CreateJournalFragment extends Fragment {
                         }
                     }
 
-                    /**
-                     * Add code to lead to the
-                     * View Journal Page (to be created)
-                     */
-
                     Toast.makeText(getContext(),
                             "Run Journal Created",
+                            Toast.LENGTH_SHORT).show();
+
+                    //Bring user to the View Run Page
+                    FragmentManager fm = getActivity().getSupportFragmentManager();
+                    FragmentTransaction trans = fm.beginTransaction();
+                    trans.replace(R.id.content, ViewRunFragment.newInstance(run));
+                    trans.commit();
+
+                } else {
+                    Toast.makeText(getContext(),
+                            "Error Occurred: No Journal Created",
                             Toast.LENGTH_SHORT).show();
                 }
 

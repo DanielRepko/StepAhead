@@ -1,8 +1,10 @@
 package com.danielrepko83.jordancampbell01.stepahead;
 
 import android.app.AlertDialog;
+import android.app.FragmentManager;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -49,6 +51,20 @@ public class CustomAdapterRun extends RecyclerView.Adapter {
                         .setNegativeButton("Cancel", null)
                         .show();
                 return false;
+            }
+        });
+
+        view.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                MainActivity activity = (MainActivity) context;
+                int location = viewHolder.getAdapterPosition();
+                android.support.v4.app.FragmentManager fm = activity.getSupportFragmentManager();
+                FragmentTransaction transaction = fm.beginTransaction();
+                transaction.replace(R.id.content,
+                        ViewRunFragment.newInstance(runs.get(location)));
+                transaction.addToBackStack(null);
+                transaction.commit();
             }
         });
 
