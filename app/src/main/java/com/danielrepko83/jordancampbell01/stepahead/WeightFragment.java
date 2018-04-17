@@ -2,8 +2,10 @@ package com.danielrepko83.jordancampbell01.stepahead;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
@@ -162,5 +164,18 @@ public class WeightFragment extends Fragment {
     public interface OnFragmentInteractionListener {
         // TODO: Update argument type and name
         void onFragmentInteraction(Uri uri);
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(getContext());
+        if(Integer.parseInt(sharedPref.getString("weight_preference", "1")) == 1) {
+            //Pounds
+            weightEditText.setHint(R.string.weight_hint_lbs);
+        } else {
+            //Kilograms
+            weightEditText.setHint(R.string.weight_hint_kg);
+        }
     }
 }

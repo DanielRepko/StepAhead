@@ -38,7 +38,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:ems="10"
-            android:hint="@string/weight_hint"
+            android:hint="@string/weight_hint_generic"
             android:inputType="number" />
     </LinearLayout>
 
