@@ -60,6 +60,7 @@ public class LocationTracker extends Service {
     public LocationTracker() {
         this.distanceLabel = MainFragment.distance;
         currentDistance = Double.parseDouble(distanceLabel.getText().toString());
+        //lastLocation = null;
 
         startTime = SystemClock.uptimeMillis();
         durationLabel = MainFragment.duration;

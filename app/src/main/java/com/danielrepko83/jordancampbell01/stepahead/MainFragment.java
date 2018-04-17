@@ -149,14 +149,7 @@ public class MainFragment extends Fragment{
         startRun.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //hide the startRun button and show the pause, finish, and cancel buttons
-                startRun.setVisibility(View.GONE);
-                cancel.setVisibility(View.VISIBLE);
-                pause.setVisibility(View.VISIBLE);
-                finish.setVisibility(View.VISIBLE);
 
-                runJournal = new RunJournal();
-                runJournal.setStartTime(Calendar.getInstance().getTime()+"");
 
 
                 //show the fab button
@@ -167,15 +160,20 @@ public class MainFragment extends Fragment{
                 int permission = ContextCompat.checkSelfPermission(getActivity(),
                         Manifest.permission.ACCESS_FINE_LOCATION);
                 if(permission == PackageManager.PERMISSION_GRANTED){
+                    //hide the startRun button and show the pause, finish, and cancel buttons
+                    startRun.setVisibility(View.GONE);
+                    cancel.setVisibility(View.VISIBLE);
+                    pause.setVisibility(View.VISIBLE);
+                    finish.setVisibility(View.VISIBLE);
+
+                    runJournal = new RunJournal();
+                    runJournal.setStartTime(Calendar.getInstance().getTime()+"");
+                    getActivity().startService(trackerIntent);
                 } else {
                     ActivityCompat.requestPermissions(getActivity(),
                             new String[]{Manifest.permission.ACCESS_FINE_LOCATION},
                             PERMISSIONS_REQUEST);
                 }
-
-
-
-                getActivity().startService(trackerIntent);
 
             }
         });
@@ -253,57 +251,59 @@ public class MainFragment extends Fragment{
                 runJournal.setDuration(duration.getText().toString());
                 runJournal.setCalories(Integer.parseInt(calories.getText().toString()));
 
-                //pull weather information
-                RequestQueue requestQueue = Volley.newRequestQueue(getContext());
-                String url = "http://api.openweathermap.org/data/2.5/weather?lat="
-                        +LocationTracker.lastLocation.getLatitude()+"&lon="
-                        +LocationTracker.lastLocation.getLongitude()+
-                        "&units=metric&appid=e4fe52a6d27f0a63571bfc00fe71d629";
-                weatherString = "";
-                //request the weather
-                JsonObjectRequest weatherRequest = new JsonObjectRequest(Request.Method.GET, url,null, new Response.Listener<JSONObject>() {
-                    @Override
-                    public void onResponse(JSONObject response) {
-                        //Grab the main object out of the response object
-                        try {
-                            JSONObject object = response.getJSONArray("weather").getJSONObject(0);
-                            //unicode at end makes it display as Celsius
-                            String text = object.getString("main")+" ";
-                            //Display it to the screen
-                            weatherString = text;
-                        } catch(Exception e){
-                            e.printStackTrace();
+                //if(LocationTracker.lastLocation != null) {
+                    //pull weather information
+                    RequestQueue requestQueue = Volley.newRequestQueue(getContext());
+                    String url = "http://api.openweathermap.org/data/2.5/weather?lat="
+                            + LocationTracker.lastLocation.getLatitude() + "&lon="
+                            + LocationTracker.lastLocation.getLongitude() +
+                            "&units=metric&appid=e4fe52a6d27f0a63571bfc00fe71d629";
+                    weatherString = "";
+                    //request the weather
+                    JsonObjectRequest weatherRequest = new JsonObjectRequest(Request.Method.GET, url, null, new Response.Listener<JSONObject>() {
+                        @Override
+                        public void onResponse(JSONObject response) {
+                            //Grab the main object out of the response object
+                            try {
+                                JSONObject object = response.getJSONArray("weather").getJSONObject(0);
+                                //unicode at end makes it display as Celsius
+                                String text = object.getString("main") + " ";
+                                //Display it to the screen
+                                weatherString = text;
+                            } catch (Exception e) {
+                                e.printStackTrace();
+                            }
                         }
-                    }
-                }, new Response.ErrorListener() {
-                    @Override
-                    public void onErrorResponse(VolleyError error) {
-                        System.out.println(error.getLocalizedMessage());
-                    }
-                });
-                //request the tempature
-                JsonObjectRequest tempRequest = new JsonObjectRequest(Request.Method.GET, url,null, new Response.Listener<JSONObject>() {
-                    @Override
-                    public void onResponse(JSONObject response) {
-                        //Grab the main object out of the response object
-                        try {
-                            JSONObject object = response.getJSONObject("main");
-                            //unicode at end makes it display as Celsius
-                            String text = +object.getDouble("temp")+"\u2103";
-                            //Display it to the screen
-                            weatherString+=text;
-                        } catch(Exception e){
-                            e.printStackTrace();
+                    }, new Response.ErrorListener() {
+                        @Override
+                        public void onErrorResponse(VolleyError error) {
+                            System.out.println(error.getLocalizedMessage());
                         }
-                    }
-                }, new Response.ErrorListener() {
-                    @Override
-                    public void onErrorResponse(VolleyError error) {
-                        System.out.println(error.getLocalizedMessage());
-                    }
-                });
-                requestQueue.add(weatherRequest);
-                requestQueue.add(tempRequest);
+                    });
+                    //request the tempature
+                    JsonObjectRequest tempRequest = new JsonObjectRequest(Request.Method.GET, url, null, new Response.Listener<JSONObject>() {
+                        @Override
+                        public void onResponse(JSONObject response) {
+                            //Grab the main object out of the response object
+                            try {
+                                JSONObject object = response.getJSONObject("main");
+                                //unicode at end makes it display as Celsius
+                                String text = +object.getDouble("temp") + "\u2103";
+                                //Display it to the screen
+                                weatherString += text;
+                            } catch (Exception e) {
+                                e.printStackTrace();
+                            }
+                        }
+                    }, new Response.ErrorListener() {
+                        @Override
+                        public void onErrorResponse(VolleyError error) {
+                            System.out.println(error.getLocalizedMessage());
+                        }
+                    });
+                    requestQueue.add(weatherRequest);
+                    requestQueue.add(tempRequest);
+                //}
 
                 getActivity().stopService(trackerIntent);
 

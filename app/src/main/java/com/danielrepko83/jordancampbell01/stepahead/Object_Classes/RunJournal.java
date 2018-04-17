@@ -1,12 +1,15 @@
 package com.danielrepko83.jordancampbell01.stepahead.Object_Classes;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 import java.util.ArrayList;
 
 /**
  * Created by Daniel Repko on 2018-03-29.
  */
 
-public class RunJournal {
+public class RunJournal implements Parcelable{
 
     /**
      * PROPERTIES
@@ -165,5 +168,52 @@ public class RunJournal {
     public void setWeather(String weather) {
         this.weather = weather;
     }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeInt(this.id);
+        dest.writeDouble(this.distanceKM);
+        dest.writeDouble(this.distanceMI);
+        dest.writeString(this.duration);
+        dest.writeString(this.startTime);
+        dest.writeInt(this.calories);
+        dest.writeString(this.feeling);
+        dest.writeString(this.area);
+        dest.writeInt(this.heartRate);
+        dest.writeString(this.note);
+        dest.writeString(this.weather);
+    }
+
+    protected RunJournal(Parcel in){
+        this.id = in.readInt();
+        this.distanceKM = in.readDouble();
+        this.distanceMI = in.readDouble();
+        this.duration = in.readString();
+        this.startTime = in.readString();
+        this.calories = in.readInt();
+        this.feeling = in.readString();
+        this.area = in.readString();
+        this.heartRate = in.readInt();
+        this.note = in.readString();
+        this.weather = in.readString();
+    }
+
+    public static final Creator<RunJournal> CREATOR = new Creator<RunJournal>() {
+        @Override
+        public RunJournal createFromParcel(Parcel source) {
+            return new RunJournal(source);
+        }
+
+        @Override
+        public RunJournal[] newArray(int size) {
+            return new RunJournal[size];
+        }
+    };
+
 
 }

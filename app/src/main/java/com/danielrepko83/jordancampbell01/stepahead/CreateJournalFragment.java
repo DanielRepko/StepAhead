@@ -224,13 +224,19 @@ public class CreateJournalFragment extends Fragment {
                         }
                     }
 
-                    /**
-                     * Add code to lead to the
-                     * View Journal Page (to be created)
-                     */
-
                     Toast.makeText(getContext(),
                             "Run Journal Created",
+                            Toast.LENGTH_SHORT).show();
+
+                    //Bring user to the View Run Page
+                    FragmentManager fm = getActivity().getSupportFragmentManager();
+                    FragmentTransaction trans = fm.beginTransaction();
+                    trans.replace(R.id.content, ViewRunFragment.newInstance(run));
+                    trans.commit();
+
+                } else {
+                    Toast.makeText(getContext(),
+                            "Error Occurred : No Journal Created",
                             Toast.LENGTH_SHORT).show();
                 }
 
