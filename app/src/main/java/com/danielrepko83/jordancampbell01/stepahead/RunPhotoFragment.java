@@ -7,6 +7,13 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
+
+import com.danielrepko83.jordancampbell01.stepahead.Object_Classes.Picture;
+import com.squareup.picasso.Picasso;
+
+import java.io.File;
+import java.util.ArrayList;
 
 
 /**
@@ -24,8 +31,8 @@ public class RunPhotoFragment extends Fragment {
     private static final String ARG_PARAM2 = "param2";
 
     // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
+    private int mParam1;
+    private int mParam2;
 
     private OnFragmentInteractionListener mListener;
 
@@ -38,15 +45,14 @@ public class RunPhotoFragment extends Fragment {
      * this fragment using the provided parameters.
      *
      * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
      * @return A new instance of fragment RunPhotoFragment.
      */
     // TODO: Rename and change types and number of parameters
-    public static RunPhotoFragment newInstance(String param1, String param2) {
+    public static RunPhotoFragment newInstance(int param1, int param2) {
         RunPhotoFragment fragment = new RunPhotoFragment();
         Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
+        args.putInt(ARG_PARAM1, param1);
+        args.putInt(ARG_PARAM2, param2);
         fragment.setArguments(args);
         return fragment;
     }
@@ -55,8 +61,8 @@ public class RunPhotoFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
+            mParam1 = getArguments().getInt(ARG_PARAM1);
+            mParam2 = getArguments().getInt(ARG_PARAM2);
         }
     }
 
@@ -64,7 +70,18 @@ public class RunPhotoFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_run_photo, container, false);
+        View view = inflater.inflate(R.layout.fragment_run_photo, container, false);
+
+        ImageView runPhoto = view.findViewById(R.id.runPhoto);
+
+        if(mParam1 != -1){
+            DatabaseHandler db = new DatabaseHandler(getContext());
+            ArrayList<Picture> picList = db.getRunPictures(mParam1);
+            File photo = new File(picList.get(mParam2).getResource());
+            Picasso.with(getContext()).load(photo).centerCrop().into(runPhoto);
+        }
+
+        return view;
     }
 
     // TODO: Rename method, update argument and hook method into UI event
