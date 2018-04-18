@@ -101,12 +101,46 @@ public class ViewRunFragment extends Fragment {
         duration.setText(mParam1.getDuration());
         distance.setText(mParam1.getDistanceKM()+"");
         calories.setText(mParam1.getCalories()+"");
-        heartRate.setText(mParam1.getHeartRate()+"");
-        feeling.setText(mParam1.getFeeling());
-        area.setText(mParam1.getArea());
-        weather.setText(mParam1.getWeather());
-        startTime.setText(mParam1.getStartTime());
-        note.setText(mParam1.getNote());
+
+        if(mParam1.getHeartRate() != 0) {
+            heartRate.setText(mParam1.getHeartRate() + "");
+        } else {
+            heartRate.setText("N/A");
+        }
+        if(mParam1.getFeeling() != null){
+            feeling.setText(mParam1.getFeeling());
+        } else {
+            feeling.setText("N/A");
+        }
+
+        if(mParam1.getArea() != null){
+            area.setText(mParam1.getArea());
+        } else {
+            area.setText("N/A");
+        }
+
+        if(mParam1.getWeather() != null){
+            weather.setText(mParam1.getWeather());
+        } else {
+            weather.setText("N/A");
+        }
+
+        if(mParam1.getStartTime() != null){
+            startTime.setText(mParam1.getStartTime());
+        } else {
+            startTime.setText("N/A");
+        }
+
+        if(mParam1.getNote() != null){
+            note.setText(mParam1.getNote());
+        } else {
+            note.setText("N/A");
+        }
+
+
+
+
+
 
         return view;
     }
