@@ -216,7 +216,7 @@ public class CreateJournalFragment extends Fragment {
 
                 if(runId != -1){
                     ArrayList<String> runPictures = MainFragment.runPictures;
-                    if(!runPictures.isEmpty()) {
+                    if(runPictures.size() != 0) {
                         for (int i = 0; i < runPictures.size(); i++) {
                             Picture pic = new Picture(runPictures.get(i));
                             int picId = db.addPicture(pic);

@@ -91,6 +91,9 @@ public class ViewRunFragment extends Fragment {
         if(picList.size() != 0) {
             final CustomPagerAdapter adapter = new CustomPagerAdapter(getChildFragmentManager());
             photoPager.setAdapter(adapter);
+            System.out.println("!!!!!!!!!!PICLIST IS NOT EMPTY");
+        } else {
+            System.out.println("!!!!!!!!!!picllist IS EMPTY");
         }
 
         //set the text in the fields to the values of the run journal selected

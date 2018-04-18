@@ -72,7 +72,7 @@ public class RunPhotoFragment extends Fragment {
 
         if(!mParam1.equals("")){
             File photo = new File(mParam1);
-            Picasso.with(getContext()).load(photo).resize(100, 100).centerCrop().into(runPhoto);
+            Picasso.with(getContext()).load(photo).resize(200, 200).centerCrop().into(runPhoto);
         }
 
         return view;
