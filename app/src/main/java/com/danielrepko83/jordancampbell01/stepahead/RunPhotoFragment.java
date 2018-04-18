@@ -28,11 +28,9 @@ public class RunPhotoFragment extends Fragment {
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
 
     // TODO: Rename and change types of parameters
-    private int mParam1;
-    private int mParam2;
+    private String mParam1;
 
     private OnFragmentInteractionListener mListener;
 
@@ -48,11 +46,10 @@ public class RunPhotoFragment extends Fragment {
      * @return A new instance of fragment RunPhotoFragment.
      */
     // TODO: Rename and change types and number of parameters
-    public static RunPhotoFragment newInstance(int param1, int param2) {
+    public static RunPhotoFragment newInstance(String param1) {
         RunPhotoFragment fragment = new RunPhotoFragment();
         Bundle args = new Bundle();
-        args.putInt(ARG_PARAM1, param1);
-        args.putInt(ARG_PARAM2, param2);
+        args.putString(ARG_PARAM1, param1);
         fragment.setArguments(args);
         return fragment;
     }
@@ -61,8 +58,7 @@ public class RunPhotoFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
-            mParam1 = getArguments().getInt(ARG_PARAM1);
-            mParam2 = getArguments().getInt(ARG_PARAM2);
+            mParam1 = getArguments().getString(ARG_PARAM1);
         }
     }
 
@@ -74,11 +70,9 @@ public class RunPhotoFragment extends Fragment {
 
         ImageView runPhoto = view.findViewById(R.id.runPhoto);
 
-        if(mParam1 != -1){
-            DatabaseHandler db = new DatabaseHandler(getContext());
-            ArrayList<Picture> picList = db.getRunPictures(mParam1);
-            File photo = new File(picList.get(mParam2).getResource());
-            Picasso.with(getContext()).load(photo).centerCrop().into(runPhoto);
+        if(!mParam1.equals("")){
+            File photo = new File(mParam1);
+            Picasso.with(getContext()).load(photo).resize(100, 100).centerCrop().into(runPhoto);
         }
 
         return view;

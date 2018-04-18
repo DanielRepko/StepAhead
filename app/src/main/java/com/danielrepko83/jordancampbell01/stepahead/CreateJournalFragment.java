@@ -223,6 +223,7 @@ public class CreateJournalFragment extends Fragment {
                             db.addRunPicture(runId, picId);
                         }
                     }
+                    db.close();
 
                     Toast.makeText(getContext(),
                             "Run Journal Created",

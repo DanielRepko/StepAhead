@@ -5,12 +5,18 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.os.Parcelable;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentPagerAdapter;
+import android.support.v4.view.ViewPager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.danielrepko83.jordancampbell01.stepahead.Object_Classes.Picture;
 import com.danielrepko83.jordancampbell01.stepahead.Object_Classes.RunJournal;
+
+import java.util.ArrayList;
 
 
 /**
@@ -59,6 +65,8 @@ public class ViewRunFragment extends Fragment {
         }
     }
 
+    ArrayList<Picture> picList;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -74,6 +82,16 @@ public class ViewRunFragment extends Fragment {
         TextView weather = view.findViewById(R.id.weather);
         TextView startTime = view.findViewById(R.id.startTime);
         TextView note = view.findViewById(R.id.note);
+        ViewPager photoPager = view.findViewById(R.id.photoPager);
+
+
+        DatabaseHandler db = new DatabaseHandler(getContext());
+        picList = db.getRunPictures(mParam1.getId());
+        db.close();
+        if(picList.size() != 0) {
+            final CustomPagerAdapter adapter = new CustomPagerAdapter(getChildFragmentManager());
+            photoPager.setAdapter(adapter);
+        }
 
         //set the text in the fields to the values of the run journal selected
         duration.setText(mParam1.getDuration());
@@ -87,6 +105,37 @@ public class ViewRunFragment extends Fragment {
         note.setText(mParam1.getNote());
 
         return view;
+    }
+
+    public class CustomPagerAdapter extends FragmentPagerAdapter {
+
+        ArrayList<Picture> photoList = picList;
+
+        public CustomPagerAdapter(FragmentManager fm){
+            super(fm);
+        }
+
+        @Override
+        public Fragment getItem(int position) {
+            /**
+             * Strings are not only stored in arrays, but are also stored in
+             * the order that they are to appear.
+             * This makes it possible to do away with the usual switch statement
+             * and simply pull the values from the array by using the position in the
+             * ViewPager as the desired index location in the array
+             */
+            try {
+                return RunPhotoFragment.newInstance(picList.get(position).getResource());
+            } catch(NullPointerException e){
+                e.printStackTrace();
+                return RunPhotoFragment.newInstance("");
+            }
+        }
+
+        @Override
+        public int getCount() {
+            return picList.size();
+        }
     }
 
     // TODO: Rename method, update argument and hook method into UI event
