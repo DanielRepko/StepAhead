@@ -1,7 +1,9 @@
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:layout_marginLeft="@dimen/all_pages_side_margin"
+    android:layout_marginRight="@dimen/all_pages_side_margin">
 
     <GridLayout
         android:layout_width="match_parent"
@@ -29,7 +31,8 @@
                 android:layout_height="wrap_content"
                 android:layout_columnWeight="1"
                 android:text="TextView"
-                android:textAlignment="center" />
+                android:textAlignment="center"
+                android:textSize="@dimen/view_run_top_three_values_text_size" />
 
             <TextView
                 android:id="@+id/duration"
@@ -37,7 +40,8 @@
                 android:layout_height="wrap_content"
                 android:layout_columnWeight="1"
                 android:text="TextView"
-                android:textAlignment="center" />
+                android:textAlignment="center"
+                android:textSize="@dimen/view_run_top_three_values_text_size" />
 
             <TextView
                 android:id="@+id/calories"
@@ -45,7 +49,8 @@
                 android:layout_height="wrap_content"
                 android:layout_columnWeight="1"
                 android:text="TextView"
-                android:textAlignment="center" />
+                android:textAlignment="center"
+                android:textSize="@dimen/view_run_top_three_values_text_size" />
 
             <TextView
                 android:id="@+id/distanceLabel"
@@ -53,7 +58,8 @@
                 android:layout_height="wrap_content"
                 android:layout_columnWeight="1"
                 android:text="TextView"
-                android:textAlignment="center" />
+                android:textAlignment="center"
+                android:textSize="@dimen/view_run_labels_text_size" />
 
             <TextView
                 android:id="@+id/durationLabel"
@@ -61,7 +67,8 @@
                 android:layout_height="wrap_content"
                 android:layout_columnWeight="1"
                 android:text="TextView"
-                android:textAlignment="center" />
+                android:textAlignment="center"
+                android:textSize="@dimen/view_run_labels_text_size" />
 
             <TextView
                 android:id="@+id/calorieLabel"
@@ -69,7 +76,8 @@
                 android:layout_height="wrap_content"
                 android:layout_columnWeight="1"
                 android:text="TextView"
-                android:textAlignment="center" />
+                android:textAlignment="center"
+                android:textSize="@dimen/view_run_labels_text_size" />
         </GridLayout>
 
         <TextView
@@ -77,84 +85,102 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_columnWeight="1"
-            android:text="TextView" />
+            android:text="TextView"
+            android:textSize="@dimen/view_run_labels_text_size" />
 
         <TextView
             android:id="@+id/heartRate"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_columnWeight="1"
-            android:text="TextView" />
+            android:text="TextView"
+            android:textAlignment="center"
+            android:textSize="@dimen/view_run_other_values_text_size" />
 
         <TextView
             android:id="@+id/feelingLabel"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_columnWeight="1"
-            android:text="TextView" />
+            android:text="TextView"
+            android:textSize="@dimen/view_run_labels_text_size" />
 
         <TextView
             android:id="@+id/feeling"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_columnWeight="1"
-            android:text="TextView" />
+            android:text="TextView"
+            android:textAlignment="center"
+            android:textSize="@dimen/view_run_other_values_text_size" />
 
         <TextView
             android:id="@+id/areaLabel"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_columnWeight="1"
-            android:text="TextView" />
+            android:text="TextView"
+            android:textSize="@dimen/view_run_labels_text_size" />
 
         <TextView
             android:id="@+id/area"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_columnWeight="1"
-            android:text="TextView" />
+            android:text="TextView"
+            android:textAlignment="center"
+            android:textSize="@dimen/view_run_other_values_text_size" />
 
         <TextView
             android:id="@+id/weatherLabel"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_columnWeight="1"
-            android:text="TextView" />
+            android:text="TextView"
+            android:textSize="@dimen/view_run_labels_text_size" />
 
         <TextView
             android:id="@+id/weather"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_columnWeight="1"
-            android:text="TextView" />
+            android:text="TextView"
+            android:textAlignment="center"
+            android:textSize="@dimen/view_run_other_values_text_size" />
 
         <TextView
             android:id="@+id/startTimeLabel"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_columnWeight="1"
-            android:text="TextView" />
+            android:text="TextView"
+            android:textSize="@dimen/view_run_labels_text_size" />
 
         <TextView
             android:id="@+id/startTime"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_columnWeight="1"
-            android:text="TextView" />
+            android:text="TextView"
+            android:textAlignment="center"
+            android:textSize="@dimen/view_run_other_values_text_size" />
 
         <TextView
             android:id="@+id/noteLabel"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_columnWeight="1"
-            android:text="TextView" />
+            android:text="TextView"
+            android:textSize="@dimen/view_run_labels_text_size" />
 
         <TextView
             android:id="@+id/note"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_columnWeight="1"
-            android:text="TextView" />
+            android:text="TextView"
+            android:textAlignment="textStart"
+            android:textSize="@dimen/view_run_other_values_text_size" />
 
 
     </GridLayout>
