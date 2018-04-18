@@ -72,6 +72,7 @@ public class ViewRunFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_view_run, container, false);
+        MainActivity.fab.hide();
 
         TextView duration = view.findViewById(R.id.duration);
         TextView distance = view.findViewById(R.id.distance);
@@ -91,9 +92,6 @@ public class ViewRunFragment extends Fragment {
         if(picList.size() != 0) {
             final CustomPagerAdapter adapter = new CustomPagerAdapter(getChildFragmentManager());
             photoPager.setAdapter(adapter);
-            System.out.println("!!!!!!!!!!PICLIST IS NOT EMPTY");
-        } else {
-            System.out.println("!!!!!!!!!!picllist IS EMPTY");
         }
 
         //set the text in the fields to the values of the run journal selected

@@ -232,7 +232,7 @@ public class CreateJournalFragment extends Fragment {
                     //Bring user to the View Run Page
                     FragmentManager fm = getActivity().getSupportFragmentManager();
                     FragmentTransaction trans = fm.beginTransaction();
-                    trans.replace(R.id.content, ViewRunFragment.newInstance(run));
+                    trans.replace(R.id.content, new MainFragment());
                     trans.commit();
 
                 } else {
