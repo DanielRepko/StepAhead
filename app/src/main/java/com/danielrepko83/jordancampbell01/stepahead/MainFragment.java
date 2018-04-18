@@ -112,8 +112,6 @@ public class MainFragment extends Fragment{
     //this ArrayList will hold all of image resources to be used inside of CreateRunFragment
     public static ArrayList<String> runPictures;
 
-    Intent trackerIntent;
-
     FragmentManager fm;
 
     public static RunJournal runJournal;
@@ -143,7 +141,6 @@ public class MainFragment extends Fragment{
         final Button finish = view.findViewById(R.id.finish);
         runPictures = new ArrayList<>();
 
-        trackerIntent = new Intent(getActivity(), LocationTracker.class);
 
         //Start Run click listener
         startRun.setOnClickListener(new View.OnClickListener() {
@@ -168,7 +165,7 @@ public class MainFragment extends Fragment{
 
                     runJournal = new RunJournal();
                     runJournal.setStartTime(Calendar.getInstance().getTime()+"");
-                    getActivity().startService(trackerIntent);
+                    getActivity().startService(new Intent(getActivity(), LocationTracker.class));
                 } else {
                     ActivityCompat.requestPermissions(getActivity(),
                             new String[]{Manifest.permission.ACCESS_FINE_LOCATION},
@@ -206,7 +203,7 @@ public class MainFragment extends Fragment{
 
 
                                 //stop tracking location
-                                getActivity().stopService(trackerIntent);
+                                getActivity().stopService(new Intent(getActivity(), LocationTracker.class));
 
                                 runJournal = null;
 
@@ -303,7 +300,7 @@ public class MainFragment extends Fragment{
                 requestQueue.add(tempRequest);
 
 
-                getActivity().stopService(trackerIntent);
+                getActivity().stopService(new Intent(getActivity(), LocationTracker.class));
 
                 trans.commit();
 
