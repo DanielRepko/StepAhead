@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Parcelable;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
@@ -40,11 +41,9 @@ public class CreateJournalFragment extends Fragment {
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
 
     // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
+    private RunJournal mParam1;
 
     private OnFragmentInteractionListener mListener;
 
@@ -57,15 +56,13 @@ public class CreateJournalFragment extends Fragment {
      * this fragment using the provided parameters.
      *
      * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
      * @return A new instance of fragment CreateJournalFragment.
      */
     // TODO: Rename and change types and number of parameters
-    public static CreateJournalFragment newInstance(String param1, String param2) {
+    public static CreateJournalFragment newInstance(Parcelable param1) {
         CreateJournalFragment fragment = new CreateJournalFragment();
         Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
+        args.putParcelable(ARG_PARAM1, param1);
         fragment.setArguments(args);
         return fragment;
     }
@@ -74,8 +71,7 @@ public class CreateJournalFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
+            mParam1 = getArguments().getParcelable(ARG_PARAM1);
         }
     }
     RunJournal run;
@@ -86,7 +82,11 @@ public class CreateJournalFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_create_journal, container, false);
         MainActivity.fab.hide();
 
-        run = MainFragment.runJournal;
+        if(mParam1 != null){
+            run = mParam1;
+        } else {
+            run = MainFragment.runJournal;
+        }
 
         /*
             Feeling
@@ -165,6 +165,67 @@ public class CreateJournalFragment extends Fragment {
          */
         final TextView note = view.findViewById(R.id.note);
 
+        //check to see if mParam1 contains a run journal
+        //if it does this means that CreateJournalFragment is being used to modify a journal
+        if(mParam1 != null){
+            if(run.getFeeling() != null) {
+                //make the appropriate feeling button "selected"
+                switch (run.getFeeling()) {
+                    case "Awesome":
+                        feelingList.get(0).setColorFilter(null);
+                        break;
+                    case "Good":
+                        feelingList.get(1).setColorFilter(null);
+                        break;
+                    case "So so":
+                        feelingList.get(2).setColorFilter(null);
+                        break;
+                    case "Bad":
+                        feelingList.get(3).setColorFilter(null);
+                        break;
+                    case "Awful":
+                        feelingList.get(4).setColorFilter(null);
+                        break;
+                    default:
+                        break;
+                }
+            }
+
+            if(run.getArea() != null) {
+                //set the selected value of the area spinner
+                switch (run.getArea()) {
+                    case "City":
+                        area.setSelection(0);
+                        break;
+                    case "Woods":
+                        area.setSelection(1);
+                        break;
+                    case "Trail":
+                        area.setSelection(2);
+                        break;
+                    case "Offroad":
+                        area.setSelection(3);
+                        break;
+                    case "Beach":
+                        area.setSelection(4);
+                        break;
+                    case "Mixed":
+                        area.setSelection(5);
+                        break;
+                    default:
+                        break;
+                }
+            }
+
+            //set the text for the heart rate and note edittexts
+            if(run.getHeartRate() != 0) {
+                heartRate.setText(run.getHeartRate() + "");
+            }
+            if(run.getNote() != null) {
+                note.setText(run.getHeartRate() + "");
+            }
+        }
+
         /*
             Submit
          */
@@ -172,75 +233,92 @@ public class CreateJournalFragment extends Fragment {
         submit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //check which image button is "selected"
-                for(int i = 0; i < feelingList.size(); i++){
-                    if(feelingList.get(i).getColorFilter() == null){
-                        switch(i){
-                            case 0:
-                                run.setFeeling("Awesome");
-                                break;
-                            case 1:
-                                run.setFeeling("Good");
-                                break;
-                            case 2:
-                                run.setFeeling("So so");
-                                break;
-                            case 3:
-                                run.setFeeling("Bad");
-                                break;
-                            case 4:
-                                run.setFeeling("Awful");
-                                break;
-                            default:
-                                break;
+
+                    //check which image button is "selected"
+                    for (int i = 0; i < feelingList.size(); i++) {
+                        if (feelingList.get(i).getColorFilter() == null) {
+                            switch (i) {
+                                case 0:
+                                    run.setFeeling("Awesome");
+                                    break;
+                                case 1:
+                                    run.setFeeling("Good");
+                                    break;
+                                case 2:
+                                    run.setFeeling("So so");
+                                    break;
+                                case 3:
+                                    run.setFeeling("Bad");
+                                    break;
+                                case 4:
+                                    run.setFeeling("Awful");
+                                    break;
+                                default:
+                                    break;
+                            }
                         }
                     }
-                }
-                //set the area of the run
-                run.setArea(area.getSelectedItem().toString());
+                    //set the area of the run
+                    run.setArea(area.getSelectedItem().toString());
 
-                //check if the user entered a heart rate
-                if(!heartRate.getText().toString().equals("")){
-                    //if so, add it to the run
-                    run.setHeartRate(Integer.parseInt(heartRate.getText().toString()));
-                }
+                    //check if the user entered a heart rate
+                    if (!heartRate.getText().toString().equals("")) {
+                        //if so, add it to the run
+                        run.setHeartRate(Integer.parseInt(heartRate.getText().toString()));
+                    }
 
-                //check if the user entered a note
-                if(!note.getText().toString().equals("")){
-                    //if so, add it to the run
-                    run.setNote(note.getText().toString());
-                }
+                    //check if the user entered a note
+                    if (!note.getText().toString().equals("")) {
+                        //if so, add it to the run
+                        run.setNote(note.getText().toString());
+                    }
 
-                DatabaseHandler db = new DatabaseHandler(getContext());
-                int runId = db.addRun(run);
+                    //if mParam1 is not null, update the existing journal
+                    if(mParam1 != null) {
+                        DatabaseHandler db = new DatabaseHandler(getContext());
+                        db.updateRun(run);
+                        db.close();
 
-                if(runId != -1){
-                    ArrayList<String> runPictures = MainFragment.runPictures;
-                    if(runPictures.size() != 0) {
-                        for (int i = 0; i < runPictures.size(); i++) {
-                            Picture pic = new Picture(runPictures.get(i));
-                            int picId = db.addPicture(pic);
-                            db.addRunPicture(runId, picId);
+                        Toast.makeText(getContext(),
+                                "Run Journal Updated",
+                                Toast.LENGTH_SHORT).show();
+
+                        //bring the user to the view run page
+                        FragmentManager fm = getActivity().getSupportFragmentManager();
+                        FragmentTransaction trans = fm.beginTransaction();
+                        trans.replace(R.id.content, ViewRunFragment.newInstance(run));
+                        trans.commit();
+                    } else {
+                        DatabaseHandler db = new DatabaseHandler(getContext());
+                        int runId = db.addRun(run);
+
+                        if (runId != -1) {
+                            ArrayList<String> runPictures = MainFragment.runPictures;
+                            if (runPictures.size() != 0) {
+                                for (int i = 0; i < runPictures.size(); i++) {
+                                    Picture pic = new Picture(runPictures.get(i));
+                                    int picId = db.addPicture(pic);
+                                    db.addRunPicture(runId, picId);
+                                }
+                            }
+                            db.close();
+
+                            Toast.makeText(getContext(),
+                                    "Run Journal Created",
+                                    Toast.LENGTH_SHORT).show();
+
+
+                            //Bring user to the View Run Page
+                            FragmentManager fm = getActivity().getSupportFragmentManager();
+                            FragmentTransaction trans = fm.beginTransaction();
+                            trans.replace(R.id.content, new MainFragment());
+                            trans.commit();
+                        } else {
+                            Toast.makeText(getContext(),
+                                    "Error Occurred: No Journal Created",
+                                    Toast.LENGTH_SHORT).show();
                         }
                     }
-                    db.close();
-
-                    Toast.makeText(getContext(),
-                            "Run Journal Created",
-                            Toast.LENGTH_SHORT).show();
-
-                    //Bring user to the View Run Page
-                    FragmentManager fm = getActivity().getSupportFragmentManager();
-                    FragmentTransaction trans = fm.beginTransaction();
-                    trans.replace(R.id.content, new MainFragment());
-                    trans.commit();
-
-                } else {
-                    Toast.makeText(getContext(),
-                            "Error Occurred: No Journal Created",
-                            Toast.LENGTH_SHORT).show();
-                }
-
             }
         });
 
