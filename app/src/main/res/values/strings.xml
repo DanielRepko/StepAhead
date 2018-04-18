@@ -86,6 +86,18 @@
     <string name="run_history_page_alert_title">Delete this run journal?</string>
     <string name="run_history_page_alert_message">Are you sure that you want to delete this run journal? This action cannot be undone.</string>
 
+    <!-- View Run Page -->
+    <string name="view_run_distance_label_km_text">Distance(km)</string>
+    <string name="view_run_distance_label_mi_text">Distance(mi)</string>
+    <string name="view_run_duration_label_text">Duration</string>
+    <string name="view_run_calories_label_text">Calories</string>
+    <string name="view_run_heart_rate_label_text">Heart rate:</string>
+    <string name="view_run_feeling_label_text">Feeling:</string>
+    <string name="view_run_area_label_text">Area:</string>
+    <string name="view_run_weather_label_text">Weather:</string>
+    <string name="view_run_start_time_label_text">Start time:</string>
+    <string name="view_run_note_label_text">Note:</string>
+
 
     <!-- Weight Strings -->
     <string name="weight_hint_generic">Enter Weight</string>
