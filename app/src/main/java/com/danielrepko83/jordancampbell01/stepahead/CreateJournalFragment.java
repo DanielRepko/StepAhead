@@ -216,13 +216,14 @@ public class CreateJournalFragment extends Fragment {
 
                 if(runId != -1){
                     ArrayList<String> runPictures = MainFragment.runPictures;
-                    if(!runPictures.isEmpty()) {
+                    if(runPictures.size() != 0) {
                         for (int i = 0; i < runPictures.size(); i++) {
                             Picture pic = new Picture(runPictures.get(i));
                             int picId = db.addPicture(pic);
                             db.addRunPicture(runId, picId);
                         }
                     }
+                    db.close();
 
                     Toast.makeText(getContext(),
                             "Run Journal Created",
@@ -231,7 +232,7 @@ public class CreateJournalFragment extends Fragment {
                     //Bring user to the View Run Page
                     FragmentManager fm = getActivity().getSupportFragmentManager();
                     FragmentTransaction trans = fm.beginTransaction();
-                    trans.replace(R.id.content, ViewRunFragment.newInstance(run));
+                    trans.replace(R.id.content, new MainFragment());
                     trans.commit();
 
                 } else {

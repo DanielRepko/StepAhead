@@ -32,7 +32,8 @@ public class MainActivity extends AppCompatActivity
                     CreditsFragment.OnFragmentInteractionListener,
                     RunHistoryFragment.OnFragmentInteractionListener,
                     CreateJournalFragment.OnFragmentInteractionListener,
-                    ViewRunFragment.OnFragmentInteractionListener{
+                    ViewRunFragment.OnFragmentInteractionListener,
+                    RunPhotoFragment.OnFragmentInteractionListener{
 
     FragmentManager fm;
     static FloatingActionButton fab;

@@ -5,12 +5,18 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.os.Parcelable;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentPagerAdapter;
+import android.support.v4.view.ViewPager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.danielrepko83.jordancampbell01.stepahead.Object_Classes.Picture;
 import com.danielrepko83.jordancampbell01.stepahead.Object_Classes.RunJournal;
+
+import java.util.ArrayList;
 
 
 /**
@@ -59,11 +65,14 @@ public class ViewRunFragment extends Fragment {
         }
     }
 
+    ArrayList<Picture> picList;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_view_run, container, false);
+        MainActivity.fab.hide();
 
         TextView duration = view.findViewById(R.id.duration);
         TextView distance = view.findViewById(R.id.distance);
@@ -74,6 +83,19 @@ public class ViewRunFragment extends Fragment {
         TextView weather = view.findViewById(R.id.weather);
         TextView startTime = view.findViewById(R.id.startTime);
         TextView note = view.findViewById(R.id.note);
+        ViewPager photoPager = view.findViewById(R.id.photoPager);
+
+
+        DatabaseHandler db = new DatabaseHandler(getContext());
+        picList = db.getRunPictures(mParam1.getId());
+        db.close();
+        if(picList.size() != 0) {
+            final CustomPagerAdapter adapter = new CustomPagerAdapter(getChildFragmentManager());
+            photoPager.setAdapter(adapter);
+            photoPager.setPageTransformer(true, new DepthPageTransformer());
+        } else {
+            photoPager.setVisibility(View.GONE);
+        }
 
         //set the text in the fields to the values of the run journal selected
         duration.setText(mParam1.getDuration());
@@ -87,6 +109,74 @@ public class ViewRunFragment extends Fragment {
         note.setText(mParam1.getNote());
 
         return view;
+    }
+
+    public class CustomPagerAdapter extends FragmentPagerAdapter {
+
+        ArrayList<Picture> photoList = picList;
+
+        public CustomPagerAdapter(FragmentManager fm){
+            super(fm);
+        }
+
+        @Override
+        public Fragment getItem(int position) {
+            /**
+             * Strings are not only stored in arrays, but are also stored in
+             * the order that they are to appear.
+             * This makes it possible to do away with the usual switch statement
+             * and simply pull the values from the array by using the position in the
+             * ViewPager as the desired index location in the array
+             */
+            try {
+                return RunPhotoFragment.newInstance(picList.get(position).getResource());
+            } catch(NullPointerException e){
+                e.printStackTrace();
+                return RunPhotoFragment.newInstance("");
+            }
+        }
+
+        @Override
+        public int getCount() {
+            return picList.size();
+        }
+    }
+
+    public class DepthPageTransformer implements ViewPager.PageTransformer {
+        private static final float MIN_SCALE = 0.75f;
+
+        public void transformPage(View view, float position) {
+            int pageWidth = view.getWidth();
+
+            if (position < -1) { // [-Infinity,-1)
+                // This page is way off-screen to the left.
+                view.setAlpha(0);
+
+            } else if (position <= 0) { // [-1,0]
+                // Use the default slide transition when moving to the left page
+                view.setAlpha(1);
+                view.setTranslationX(0);
+                view.setScaleX(1);
+                view.setScaleY(1);
+
+            } else if (position <= 1) { // (0,1]
+                // Fade the page out.
+                view.setAlpha(1 - position);
+
+                // Counteract the default slide transition
+                view.setTranslationX(pageWidth * -position);
+
+                // Scale the page down (between MIN_SCALE and 1)
+                float scaleFactor = MIN_SCALE
+                        + (1 - MIN_SCALE) * (1 - Math.abs(position));
+                view.setScaleX(scaleFactor);
+                view.setScaleY(scaleFactor);
+
+            } else { // (1,+Infinity]
+                // This page is way off-screen to the right.
+                view.setAlpha(0);
+            }
+        }
     }
 
     // TODO: Rename method, update argument and hook method into UI event
