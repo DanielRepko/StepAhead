@@ -1,14 +1,15 @@
 package com.danielrepko83.jordancampbell01.stepahead;
 
 import android.app.AlertDialog;
-import android.app.FragmentManager;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.danielrepko83.jordancampbell01.stepahead.Object_Classes.RunJournal;
@@ -59,10 +60,24 @@ public class CustomAdapterRun extends RecyclerView.Adapter {
             public void onClick(View v) {
                 MainActivity activity = (MainActivity) context;
                 int location = viewHolder.getAdapterPosition();
-                android.support.v4.app.FragmentManager fm = activity.getSupportFragmentManager();
+                FragmentManager fm = activity.getSupportFragmentManager();
                 FragmentTransaction transaction = fm.beginTransaction();
                 transaction.replace(R.id.content,
                         ViewRunFragment.newInstance(runs.get(location)));
+                transaction.addToBackStack(null);
+                transaction.commit();
+            }
+        });
+
+        viewHolder.edit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                MainActivity activity = (MainActivity) context;
+                int location = viewHolder.getAdapterPosition();
+                FragmentManager fm = activity.getSupportFragmentManager();
+                FragmentTransaction transaction = fm.beginTransaction();
+                transaction.replace(R.id.content,
+                        CreateJournalFragment.newInstance(runs.get(location)));
                 transaction.addToBackStack(null);
                 transaction.commit();
             }
@@ -93,6 +108,7 @@ public class CustomAdapterRun extends RecyclerView.Adapter {
         protected TextView distance;
         protected TextView duration;
         protected TextView calories;
+        protected ImageView edit;
 
         public CustomViewHolder(View view){
             super(view);
@@ -100,6 +116,7 @@ public class CustomAdapterRun extends RecyclerView.Adapter {
             this.distance = (TextView) view.findViewById(R.id.distance);
             this.duration = (TextView) view.findViewById(R.id.duration);
             this.calories = (TextView) view.findViewById(R.id.calories);
+            this.edit = (ImageView) view.findViewById(R.id.edit);
         }
     }
 }
