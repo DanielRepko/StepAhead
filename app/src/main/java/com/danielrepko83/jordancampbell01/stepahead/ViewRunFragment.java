@@ -93,6 +93,8 @@ public class ViewRunFragment extends Fragment {
             final CustomPagerAdapter adapter = new CustomPagerAdapter(getChildFragmentManager());
             photoPager.setAdapter(adapter);
             photoPager.setPageTransformer(true, new DepthPageTransformer());
+        } else {
+            photoPager.setVisibility(View.GONE);
         }
 
         //set the text in the fields to the values of the run journal selected
