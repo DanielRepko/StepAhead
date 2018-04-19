@@ -1,0 +1,154 @@
+<!-- This page is where run journals will be created and updated -->
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_marginLeft="@dimen/all_pages_side_margin"
+    android:layout_marginRight="@dimen/all_pages_side_margin"
+    android:fillViewport="true"
+    android:scrollbarStyle="insideOverlay">
+
+    <GridLayout xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:columnCount="2"
+        android:useDefaultMargins="true"
+        tools:context="com.danielrepko83.jordancampbell01.stepahead.CreateJournalFragment">
+
+
+        <TextView
+            android:id="@+id/feelingLabel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/create_journal_feeling_label_text"
+            android:textSize="@dimen/create_journal_page_all_labels_text_size" />
+
+        <LinearLayout
+            android:id="@+id/feelingLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_columnSpan="2"
+            android:orientation="horizontal">
+
+            <ImageButton
+                android:id="@+id/awesomeButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:adjustViewBounds="false"
+                android:background="@color/ap_transparent"
+                android:scaleType="fitCenter" />
+
+            <ImageButton
+                android:id="@+id/goodButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:adjustViewBounds="false"
+                android:background="@color/ap_transparent"
+                android:scaleType="fitCenter" />
+
+            <ImageButton
+                android:id="@+id/sosoButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:adjustViewBounds="false"
+                android:background="@color/ap_transparent"
+                android:scaleType="fitCenter" />
+
+            <ImageButton
+                android:id="@+id/badButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:adjustViewBounds="false"
+                android:background="@color/ap_transparent"
+                android:scaleType="fitCenter" />
+
+            <ImageButton
+                android:id="@+id/awfulButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:adjustViewBounds="false"
+                android:background="@color/ap_transparent"
+                android:scaleType="fitCenter" />
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/areaLabel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/create_journal_area_label_text"
+            android:textSize="@dimen/create_journal_page_all_labels_text_size" />
+
+        <Spinner
+            android:id="@+id/areaSpinner"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <LinearLayout
+            android:id="@+id/heartRateLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_columnSpan="2"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/heartRateLabel"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:text="@string/create_journal_heart_rate_label"
+                android:textSize="@dimen/create_journal_page_all_labels_text_size" />
+
+            <EditText
+                android:id="@+id/heartRate"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:ems="10"
+                android:inputType="number" />
+
+            <ImageView
+                android:id="@+id/help"
+                android:layout_width="@dimen/create_journal_page_help_width_height"
+                android:layout_height="@dimen/create_journal_page_help_width_height"
+                android:layout_weight="1"
+                android:src="@drawable/ic_error_outline_black_24dp" />
+
+        </LinearLayout>
+
+
+        <TextView
+            android:id="@+id/noteLabel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/create_journal_note_label_text"
+            android:textSize="@dimen/create_journal_page_all_labels_text_size" />
+
+        <EditText
+            android:id="@+id/note"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:inputType="textMultiLine"
+            android:singleLine="false" />
+
+        <Button
+            android:id="@+id/submitButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_columnSpan="2"
+            android:text="@string/create_journal_submit_button_text" />
+
+        <Button
+            android:id="@+id/cancelButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_columnSpan="2"
+            android:text="@string/create_journal_cancel_button_text" />
+
+    </GridLayout>
+</ScrollView>

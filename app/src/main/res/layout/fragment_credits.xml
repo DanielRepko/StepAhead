@@ -21,13 +21,15 @@
         android:id="@+id/imageSource1"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/credits_image_link_1" />
+        android:text="@string/credits_image_link_1"
+        android:textAlignment="center" />
 
     <TextView
         android:id="@+id/imageSource2"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/credits_image_link_2" />
+        android:text="@string/credits_image_link_2"
+        android:textAlignment="center" />
 
     <TextView
         android:id="@+id/androidPlotHeader"
@@ -42,7 +44,8 @@
         android:id="@+id/androitPlotSource"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/credits_androitplot_link" />
+        android:text="@string/credits_androitplot_link"
+        android:textAlignment="center" />
 
     <TextView
         android:id="@+id/picassoHeader"
@@ -57,7 +60,8 @@
         android:id="@+id/picassoSource"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/credits_picasso_link" />
+        android:text="@string/credits_picasso_link"
+        android:textAlignment="center" />
 
     <TextView
         android:id="@+id/openWeatherMapHeader"
@@ -72,13 +76,14 @@
         android:id="@+id/openWeatherMapSource"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/credits_openweathermap_link" />
+        android:text="@string/credits_openweathermap_link"
+        android:textAlignment="center" />
 
     <TextView
         android:id="@+id/volleyHeader"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="TextView"
+        android:text="@string/credits_volley"
         android:textAlignment="center"
         android:textSize="@dimen/credits_header_size"
         android:textStyle="bold" />
@@ -87,5 +92,6 @@
         android:id="@+id/volleySource"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/credits_volley_link" />
+        android:text="@string/credits_volley_link"
+        android:textAlignment="center" />
 </LinearLayout>
