@@ -248,13 +248,15 @@ public class MainFragment extends Fragment{
                 runJournal.setDuration(duration.getText().toString());
                 runJournal.setCalories(Integer.parseInt(calories.getText().toString()));
 
-                //pull weather information
+                //check to see if LocationTracker has had time to pull an initial location
+                if(LocationTracker.lastLocation != null) {
+                    //pull weather information
                     RequestQueue requestQueue = Volley.newRequestQueue(getContext());
                     String url = "http://api.openweathermap.org/data/2.5/weather?lat="
                             + LocationTracker.lastLocation.getLatitude() + "&lon="
                             + LocationTracker.lastLocation.getLongitude() +
                             "&units=metric&appid=e4fe52a6d27f0a63571bfc00fe71d629";
-                weatherString = "";
+                    weatherString = "";
                     //request the weather
                     JsonObjectRequest weatherRequest = new JsonObjectRequest(Request.Method.GET, url, null, new Response.Listener<JSONObject>() {
                         @Override
@@ -296,8 +298,9 @@ public class MainFragment extends Fragment{
                         }
                     });
 
-                requestQueue.add(weatherRequest);
-                requestQueue.add(tempRequest);
+                    requestQueue.add(weatherRequest);
+                    requestQueue.add(tempRequest);
+                }
 
 
                 getActivity().stopService(new Intent(getActivity(), LocationTracker.class));
