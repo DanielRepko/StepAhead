@@ -35,36 +35,45 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
+                android:adjustViewBounds="false"
                 android:background="@color/ap_transparent"
-                app:srcCompat="@drawable/awesome_face" />
+                android:scaleType="fitCenter" />
 
             <ImageButton
                 android:id="@+id/goodButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:background="@color/ap_transparent" />
+                android:adjustViewBounds="false"
+                android:background="@color/ap_transparent"
+                android:scaleType="fitCenter" />
 
             <ImageButton
                 android:id="@+id/sosoButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:background="@color/ap_transparent" />
+                android:adjustViewBounds="false"
+                android:background="@color/ap_transparent"
+                android:scaleType="fitCenter" />
 
             <ImageButton
                 android:id="@+id/badButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:background="@color/ap_transparent" />
+                android:adjustViewBounds="false"
+                android:background="@color/ap_transparent"
+                android:scaleType="fitCenter" />
 
             <ImageButton
                 android:id="@+id/awfulButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:background="@color/ap_transparent" />
+                android:adjustViewBounds="false"
+                android:background="@color/ap_transparent"
+                android:scaleType="fitCenter" />
         </LinearLayout>
 
         <TextView
