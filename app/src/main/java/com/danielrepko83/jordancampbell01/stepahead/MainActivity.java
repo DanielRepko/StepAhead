@@ -114,7 +114,7 @@ public class MainActivity extends AppCompatActivity
         int id = item.getItemId();
 
         FragmentTransaction trans = fm.beginTransaction();
-        trans.setCustomAnimations(R.anim.enter_from_left_short, R.anim.exit_to_right_medium, R.anim.enter_from_right_medium, R.anim.exit_to_left_medium);
+        trans.setCustomAnimations(R.anim.enter_from_right_medium, R.anim.exit_to_left_medium, R.anim.enter_from_left_medium, R.anim.exit_to_right_medium);
 
         if (id == R.id.nav_home) {
             trans.replace(R.id.content, new MainFragment());
