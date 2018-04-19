@@ -22,7 +22,8 @@
     <dimen name="create_journal_page_submit_cancel_buttons_layout_height">115dp</dimen>
 
     <!-- Run History Page -->
-    <dimen name="run_history_page_label_text_size">17sp</dimen>
+    <dimen name="run_history_page_label_text_size">25sp</dimen>
+    <dimen name="run_history_edit_image_width_height">30dp</dimen>
 
     <!-- View Run Page -->
     <dimen name="view_run_top_three_values_text_size">24sp</dimen>
