@@ -131,7 +131,7 @@
         android:layout_gravity="center_horizontal"
         android:layout_marginTop="@dimen/home_page_cancel_button_top_margin"
         android:text="@string/home_page_cancel_button_text"
-        android:textSize="18sp"
+        android:textSize="@dimen/home_page_cancel_button_text_size"
         android:visibility="gone" />
 
 </LinearLayout>

@@ -6,13 +6,14 @@
     <dimen name="home_page_duration_calories_label_text_size">20sp</dimen>
 
     <dimen name="home_page_start_run_button_left_right_padding">20dp</dimen>
-    <dimen name="home_page_start_run_button_top_bottom_padding">25dp</dimen>
-    <dimen name="home_page_distance_top_margin">40dp</dimen>
-    <dimen name="home_page_calorie_duration_layout_top_margin">20dp</dimen>
-    <dimen name="home_page_controlbuttons_layout_top_margin">80dp</dimen>
-    <dimen name="home_page_cancel_button_top_margin">45dp</dimen>
-    <dimen name="home_page_pause_finish_dividing_margin">20dp</dimen>
-    <dimen name="home_page_pause_finish_button_width">150dp</dimen>
+    <dimen name="home_page_start_run_button_top_bottom_padding">37dp</dimen>
+    <dimen name="home_page_distance_top_margin">120dp</dimen>
+    <dimen name="home_page_calorie_duration_layout_top_margin">30dp</dimen>
+    <dimen name="home_page_controlbuttons_layout_top_margin">120dp</dimen>
+    <dimen name="home_page_cancel_button_top_margin">67dp</dimen>
+    <dimen name="home_page_pause_finish_dividing_margin">30dp</dimen>
+    <dimen name="home_page_pause_finish_button_width">225dp</dimen>
+    <dimen name="home_page_cancel_button_text_size">22sp</dimen>
 
     <!-- Create Journal Page -->
     <dimen name="create_journal_page_help_width_height">60dp</dimen>
