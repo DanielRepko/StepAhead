@@ -85,7 +85,7 @@
 
         <Spinner
             android:id="@+id/areaSpinner"
-            android:layout_width="wrap_content"
+            android:layout_width="@dimen/create_journal_page_area_spinner_layout_width"
             android:layout_height="wrap_content" />
 
         <LinearLayout
@@ -132,7 +132,7 @@
             android:id="@+id/note"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:ems="10"
+            android:ems="20"
             android:inputType="textMultiLine"
             android:singleLine="false" />
 

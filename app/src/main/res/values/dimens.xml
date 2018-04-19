@@ -27,6 +27,7 @@
     <!-- Create Journal Page -->
     <dimen name="create_journal_page_help_width_height">60dp</dimen>
     <dimen name="create_journal_page_all_labels_text_size">18sp</dimen>
+    <dimen name="create_journal_page_area_spinner_layout_width">140dp</dimen>
 
     <!-- Run History Page -->
     <dimen name="run_history_page_label_text_size">17sp</dimen>
