@@ -283,11 +283,13 @@ public class CreateJournalFragment extends Fragment {
                                 "Run Journal Updated",
                                 Toast.LENGTH_SHORT).show();
 
-                        //bring the user to the view run page
+                       //bring the user to the view run page
                         FragmentManager fm = getActivity().getSupportFragmentManager();
-                        FragmentTransaction trans = fm.beginTransaction();
-                        trans.replace(R.id.content, ViewRunFragment.newInstance(run));
-                        trans.commit();
+//                        FragmentTransaction trans = fm.beginTransaction();
+//                        trans.replace(R.id.content, ViewRunFragment.newInstance(run));
+//                        trans.commit();
+                        //Bring the user back a page
+                        fm.popBackStack();
                     } else {
                         DatabaseHandler db = new DatabaseHandler(getContext());
                         int runId = db.addRun(run);
@@ -310,9 +312,11 @@ public class CreateJournalFragment extends Fragment {
 
                             //Bring user to the View Run Page
                             FragmentManager fm = getActivity().getSupportFragmentManager();
-                            FragmentTransaction trans = fm.beginTransaction();
-                            trans.replace(R.id.content, new MainFragment());
-                            trans.commit();
+//                            FragmentTransaction trans = fm.beginTransaction();
+//                            trans.replace(R.id.content, new MainFragment());
+//                            trans.commit();
+                            //Bring the user back a page
+                            fm.popBackStack();
                         } else {
                             Toast.makeText(getContext(),
                                     "Error Occurred: No Journal Created",
@@ -336,9 +340,10 @@ public class CreateJournalFragment extends Fragment {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
                                 FragmentManager fm = getActivity().getSupportFragmentManager();
-                                FragmentTransaction trans = fm.beginTransaction();
-                                trans.replace(R.id.content, new MainFragment());
-                                trans.commit();
+//                                FragmentTransaction trans = fm.beginTransaction();
+//                                trans.replace(R.id.content, new MainFragment());
+//                                trans.commit();
+                                fm.popBackStack();
                             }
                         })
                         .setNegativeButton("Stay",null)
