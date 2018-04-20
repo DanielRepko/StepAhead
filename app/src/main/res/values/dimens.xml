@@ -43,6 +43,11 @@
     <dimen name="weight_button_text_size">14sp</dimen>
     <dimen name="weight_button_height">50dp</dimen>
 
+    <!-- Reminder Page -->
+    <dimen name="reminder_text_size">14sp</dimen>
+    <dimen name="reminder_editable_height">40dp</dimen>
+    <dimen name="reminder_button_height">50dp</dimen>
+
     <!-- Credits font sizes -->
     <dimen name="credits_header_size">24sp</dimen>
 </resources>
