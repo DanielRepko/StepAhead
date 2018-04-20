@@ -79,6 +79,12 @@ public class CustomDialog extends Dialog {
         });
 
         noThanks = (Button) findViewById(R.id.noThanks);
+        noThanks.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dismiss();
+            }
+        });
 
     }
 
