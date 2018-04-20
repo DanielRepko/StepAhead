@@ -132,23 +132,25 @@
             android:id="@+id/note"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:ems="10"
+            android:ems="20"
             android:inputType="textMultiLine"
             android:singleLine="false" />
 
         <Button
             android:id="@+id/submitButton"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="@dimen/create_journal_page_submit_cancel_buttons_layout_height"
             android:layout_columnSpan="2"
-            android:text="@string/create_journal_submit_button_text" />
+            android:text="@string/create_journal_submit_button_text"
+            android:textSize="30sp" />
 
         <Button
             android:id="@+id/cancelButton"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="@dimen/create_journal_page_submit_cancel_buttons_layout_height"
             android:layout_columnSpan="2"
-            android:text="@string/create_journal_cancel_button_text" />
+            android:text="@string/create_journal_cancel_button_text"
+            android:textSize="30sp" />
 
     </GridLayout>
 </ScrollView>

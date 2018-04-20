@@ -222,7 +222,7 @@ public class CreateJournalFragment extends Fragment {
                 heartRate.setText(run.getHeartRate() + "");
             }
             if(run.getNote() != null) {
-                note.setText(run.getHeartRate() + "");
+                note.setText(run.getNote() + "");
             }
         }
 

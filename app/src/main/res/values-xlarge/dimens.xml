@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="home_page_distance_text_size">82sp</dimen>
+    <dimen name="home_page_distance_label_text_size">24sp</dimen>
+    <dimen name="home_page_duration_calories_text_size">60sp</dimen>
+    <dimen name="home_page_duration_calories_label_text_size">20sp</dimen>
+
+    <dimen name="home_page_start_run_button_left_right_padding">20dp</dimen>
+    <dimen name="home_page_start_run_button_top_bottom_padding">37dp</dimen>
+    <dimen name="home_page_distance_top_margin">120dp</dimen>
+    <dimen name="home_page_calorie_duration_layout_top_margin">30dp</dimen>
+    <dimen name="home_page_controlbuttons_layout_top_margin">120dp</dimen>
+    <dimen name="home_page_cancel_button_top_margin">67dp</dimen>
+    <dimen name="home_page_pause_finish_dividing_margin">30dp</dimen>
+    <dimen name="home_page_pause_finish_button_width">225dp</dimen>
+    <dimen name="home_page_cancel_button_text_size">22sp</dimen>
+
+    <!-- Create Journal Page -->
+    <dimen name="create_journal_page_help_width_height">30dp</dimen>
+    <dimen name="create_journal_page_all_labels_text_size">27sp</dimen>
+    <dimen name="create_journal_page_area_spinner_layout_width">210dp</dimen>
+    <dimen name="create_journal_page_submit_cancel_buttons_layout_height">115dp</dimen>
+
+    <!-- Run History Page -->
+    <dimen name="run_history_page_label_text_size">25sp</dimen>
+    <dimen name="run_history_edit_image_width_height">30dp</dimen>
+
+    <!-- View Run Page -->
+    <dimen name="view_run_top_three_values_text_size">36sp</dimen>
+    <dimen name="view_run_other_values_text_size">24sp</dimen>
+    <dimen name="view_run_labels_text_size">26sp</dimen>
+    <dimen name="view_run_viewpager_height">255dp</dimen>
+
+    <!-- Weight Pages -->
+    <dimen name="weight_text_size">20sp</dimen>
+
+    <!-- Credits font sizes -->
+    <dimen name="credits_header_size">24sp</dimen>
+</resources>
