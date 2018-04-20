@@ -52,6 +52,9 @@ public class MainActivity extends AppCompatActivity
             trans.replace(R.id.content, new MainFragment());
             trans.commit();
 
+            CustomDialog dialog = new CustomDialog(this);
+            dialog.show();
+
         }
 
         fab = (FloatingActionButton) findViewById(R.id.fab);

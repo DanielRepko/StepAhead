@@ -54,7 +54,7 @@ public class CustomDialog extends Dialog {
                     //if kg is checked
                     if(kg.isChecked()){
                         DatabaseHandler db = new DatabaseHandler(getContext());
-                        Weight newWeight = new Weight(Double.parseDouble(weight.getText().toString()) * 2.2046, Calendar.getInstance().getTime()+"");
+                        Weight newWeight = new Weight(Double.parseDouble(String.format("%.2f",Double.parseDouble(weight.getText().toString()) * 2.2046)), Calendar.getInstance().getTime()+"");
                         db.addWeight(newWeight);
                         db.close();
 
