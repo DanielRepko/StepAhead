@@ -1,12 +1,15 @@
 package com.danielrepko83.jordancampbell01.stepahead.Object_Classes;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 import java.util.ArrayList;
 
 /**
  * Created by Daniel Repko on 2018-03-29.
  */
 
-public class RunJournal {
+public class RunJournal implements Parcelable{
 
     /**
      * PROPERTIES
@@ -15,15 +18,13 @@ public class RunJournal {
     private int id;
     private double distanceKM;
     private double distanceMI;
-    private double duration;
+    private String duration;
     private String startTime;
     private int calories;
     private String feeling;
     private String area;
     private int heartRate;
     private String note;
-    private double avgPace;
-    private double avgSpeed;
     private String weather;
 
 
@@ -35,7 +36,7 @@ public class RunJournal {
 
     }
 
-    public RunJournal(int id, double distanceKM, double distanceMI, double duration, String startTime, int calories, String feeling, String area, int heartRate, String note, double avgPace, double avgSpeed, String weather) {
+    public RunJournal(int id, double distanceKM, double distanceMI, String duration, String startTime, int calories, String feeling, String area, int heartRate, String note, String weather) {
         this.id = id;
         this.distanceKM = distanceKM;
         this.distanceMI = distanceMI;
@@ -46,8 +47,6 @@ public class RunJournal {
         this.area = area;
         this.heartRate = heartRate;
         this.note = note;
-        this.avgPace = avgPace;
-        this.avgSpeed = avgSpeed;
         this.weather = weather;
     }
 
@@ -61,11 +60,9 @@ public class RunJournal {
      * @param area the type of area that the user ran in
      * @param heartRate the user's heart rate during the run
      * @param note a random note that the user can write describing their run
-     * @param avgPace the average pace that the user ran at
-     * @param avgSpeed the average speed that the user ran
      * @param weather the weather during the run
      */
-    public RunJournal(double distanceKM, double distanceMI, double duration, String startTime, int calories, String feeling, String area, int heartRate, String note, double avgPace, double avgSpeed, String weather) {
+    public RunJournal(double distanceKM, double distanceMI, String duration, String startTime, int calories, String feeling, String area, int heartRate, String note, String weather) {
         this.distanceKM = distanceKM;
         this.distanceMI = distanceMI;
         this.duration = duration;
@@ -75,8 +72,6 @@ public class RunJournal {
         this.area = area;
         this.heartRate = heartRate;
         this.note = note;
-        this.avgPace = avgPace;
-        this.avgSpeed = avgSpeed;
         this.weather = weather;
     }
 
@@ -110,11 +105,11 @@ public class RunJournal {
         this.distanceKM = this.distanceMI / 0.62137;
     }
 
-    public double getDuration() {
+    public String getDuration() {
         return duration;
     }
 
-    public void setDuration(double duration) {
+    public void setDuration(String duration) {
         this.duration = duration;
     }
 
@@ -166,22 +161,6 @@ public class RunJournal {
         this.note = note;
     }
 
-    public double getAvgPace() {
-        return avgPace;
-    }
-
-    public void setAvgPace(double avgPace) {
-        this.avgPace = avgPace;
-    }
-
-    public double getAvgSpeed() {
-        return avgSpeed;
-    }
-
-    public void setAvgSpeed(double avgSpeed) {
-        this.avgSpeed = avgSpeed;
-    }
-
     public String getWeather() {
         return weather;
     }
@@ -189,5 +168,52 @@ public class RunJournal {
     public void setWeather(String weather) {
         this.weather = weather;
     }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeInt(this.id);
+        dest.writeDouble(this.distanceKM);
+        dest.writeDouble(this.distanceMI);
+        dest.writeString(this.duration);
+        dest.writeString(this.startTime);
+        dest.writeInt(this.calories);
+        dest.writeString(this.feeling);
+        dest.writeString(this.area);
+        dest.writeInt(this.heartRate);
+        dest.writeString(this.note);
+        dest.writeString(this.weather);
+    }
+
+    protected RunJournal(Parcel in){
+        this.id = in.readInt();
+        this.distanceKM = in.readDouble();
+        this.distanceMI = in.readDouble();
+        this.duration = in.readString();
+        this.startTime = in.readString();
+        this.calories = in.readInt();
+        this.feeling = in.readString();
+        this.area = in.readString();
+        this.heartRate = in.readInt();
+        this.note = in.readString();
+        this.weather = in.readString();
+    }
+
+    public static final Creator<RunJournal> CREATOR = new Creator<RunJournal>() {
+        @Override
+        public RunJournal createFromParcel(Parcel source) {
+            return new RunJournal(source);
+        }
+
+        @Override
+        public RunJournal[] newArray(int size) {
+            return new RunJournal[size];
+        }
+    };
+
 
 }

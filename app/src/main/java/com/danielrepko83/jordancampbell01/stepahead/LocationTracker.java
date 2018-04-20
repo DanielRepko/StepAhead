@@ -32,7 +32,7 @@ public class LocationTracker extends Service {
     //properties for location tracking
     private double currentDistance;
     private TextView distanceLabel;
-    private Location lastLocation;
+    public static Location lastLocation;
     private LocationCallback callBack;
     private static boolean paused = false;
 
@@ -60,6 +60,7 @@ public class LocationTracker extends Service {
     public LocationTracker() {
         this.distanceLabel = MainFragment.distance;
         currentDistance = Double.parseDouble(distanceLabel.getText().toString());
+        //lastLocation = null;
 
         startTime = SystemClock.uptimeMillis();
         durationLabel = MainFragment.duration;
@@ -194,6 +195,8 @@ public class LocationTracker extends Service {
         calorieLabel.setText("0");
         timeInterval = 0;
         distanceInterval = 0;
+
+        paused = false;
 
         super.onDestroy();
     }

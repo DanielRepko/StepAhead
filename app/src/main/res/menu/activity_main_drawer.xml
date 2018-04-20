@@ -9,6 +9,10 @@
             android:icon="@drawable/ic_directions_run_black_24dp"
             android:title="@string/menu_home" />
         <item
+            android:id="@+id/nav_journals"
+            android:icon="@drawable/ic_library_books_black_24dp"
+            android:title="@string/menu_journals" />
+        <item
             android:id="@+id/nav_reminder"
             android:icon="@drawable/ic_event_note_black_24dp"
             android:title="@string/menu_reminder" />
@@ -16,6 +20,10 @@
             android:id="@+id/nav_weight"
             android:icon="@drawable/ic_list_black_24dp"
             android:title="@string/menu_weight" />
+        <item
+            android:id="@+id/nav_credits"
+            android:icon="@drawable/ic_star_black_24dp"
+            android:title="@string/menu_credits" />
         <item android:title="@string/menu_contact">
             <menu>
                 <item

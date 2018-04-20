@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_marginLeft="@dimen/all_pages_side_margin"
+    android:layout_marginRight="@dimen/all_pages_side_margin"
+    android:orientation="vertical"
+    tools:context=".CreditsFragment">
+
+    <TextView
+        android:id="@+id/imageSourceHeader"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/credits_image_header"
+        android:textAlignment="center"
+        android:textSize="24sp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/imageSource1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/credits_image_link_1"
+        android:textAlignment="center" />
+
+    <TextView
+        android:id="@+id/imageSource2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/credits_image_link_2"
+        android:textAlignment="center" />
+
+    <TextView
+        android:id="@+id/androidPlotHeader"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/credits_androidplot"
+        android:textAlignment="center"
+        android:textSize="@dimen/credits_header_size"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/androitPlotSource"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/credits_androitplot_link"
+        android:textAlignment="center" />
+
+    <TextView
+        android:id="@+id/picassoHeader"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/credits_picasso"
+        android:textAlignment="center"
+        android:textSize="@dimen/credits_header_size"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/picassoSource"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/credits_picasso_link"
+        android:textAlignment="center" />
+
+    <TextView
+        android:id="@+id/openWeatherMapHeader"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/credits_openweathermap"
+        android:textAlignment="center"
+        android:textSize="@dimen/credits_header_size"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/openWeatherMapSource"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/credits_openweathermap_link"
+        android:textAlignment="center" />
+
+    <TextView
+        android:id="@+id/volleyHeader"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/credits_volley"
+        android:textAlignment="center"
+        android:textSize="@dimen/credits_header_size"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/volleySource"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/credits_volley_link"
+        android:textAlignment="center" />
+</LinearLayout>

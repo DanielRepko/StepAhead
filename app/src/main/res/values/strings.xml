@@ -22,6 +22,7 @@
     <string name="menu_twitter">Twitter</string>
     <string name="menu_email">Email</string>
     <string name="menu_sms">Text Message</string>
+    <string name="menu_credits">Credits</string>
 
     <!-- Reminder Strings -->
     <string name="reminder_type">Type</string>
@@ -31,7 +32,8 @@
     <string name="reminder_create">Create Reminder</string>
 
     <!-- Home Page -->
-    <string name="home_page_distance_label_text">Distance(km)</string>
+    <string name="home_page_distance_label_km_text">Distance(km)</string>
+    <string name="home_page_distance_label_mi_text">Distance(mi)</string>
     <string name="home_page_duration_label_text">Duration</string>
     <string name="home_page_calories_label_text">Calories</string>
     <string name="home_page_start_run_button_text">Start Run</string>
@@ -50,9 +52,66 @@
     <string name="permission_description_write_storage">In order for the camera feature to work, the Step Ahead app needs to
         be able to store the images it takes on your device.</string>
 
+    <string name="home_page_first_weight_check_title">Enter your weight</string>
+    <string name="home_page_first_weight_check_message">Please enter your weight. This will allow us to calculate the calories you burn during
+        during your runs. You can always change this by entering a new weight on the Weight Journals page.</string>
+    <string name="home_page_first_weight_check_weight_label">Weight:</string>
+    <string name="home_page_first_weight_check_measurement_kg">kg</string>
+    <string name="home_page_first_weight_check_measurement_lbs">lbs</string>
+    <string name="home_page_first_weight_check_submit_button_text">Submit</string>
+    <string name="home_page_first_weight_check_nothanks_button_text">No thanks</string>
+
+    <!-- Create Journal Strings -->
+    <string name="create_journal_feeling_label_text">How you felt:</string>
+    <string name="create_journal_area_label_text">Type of area:</string>
+    <string name="create_journal_heart_rate_label">Your heart rate(bpm):</string>
+    <string name="create_journal_note_label_text">Note:</string>
+    <string name="create_journal_submit_button_text">Submit</string>
+    <string name="create_journal_cancel_button_text">Cancel</string>
+
+    <string-array name="create_journal_area_array">
+        <item>City</item>
+        <item>Woods</item>
+        <item>Trail</item>
+        <item>Offroad</item>
+        <item>Beach</item>
+        <item>Mixed</item>
+    </string-array>
+
+    <string name="create_journal_heart_rate_alert_title">How to calulate average heart rate</string>
+    <string name="create_journal_heart_rate_message">To calculate your average heart rate, feel for your pulse and
+        count the beats for 15 seconds. Then simply multiply that number by 4. That is you heart rate in bpm (beats per minute)</string>
+
+    <string name="create_journal_cancel_alert_title">Discard run journal?</string>
+    <string name="create_journal_cancel_alert_message">Are you sure you want to cancel this run journal? Any
+        recorded/input information will be lost and a run journal will not be created.</string>
+
+    <!-- Run history page -->
+    <string name="run_history_page_distance_label_km_text">Distance(km):</string>
+    <string name="run_history_page_distance_label_mi_text">Distance(mi):</string>
+    <string name="run_history_page_duration_label_text">Duration:</string>
+    <string name="run_history_page_calories_label_text">Calories:</string>
+
+    <string name="run_history_page_alert_title">Delete this run journal?</string>
+    <string name="run_history_page_alert_message">Are you sure that you want to delete this run journal? This action cannot be undone.</string>
+
+    <!-- View Run Page -->
+    <string name="view_run_distance_label_km_text">Distance(km)</string>
+    <string name="view_run_distance_label_mi_text">Distance(mi)</string>
+    <string name="view_run_duration_label_text">Duration</string>
+    <string name="view_run_calories_label_text">Calories</string>
+    <string name="view_run_heart_rate_label_text">Heart rate:</string>
+    <string name="view_run_feeling_label_text">Feeling:</string>
+    <string name="view_run_area_label_text">Area:</string>
+    <string name="view_run_weather_label_text">Weather:</string>
+    <string name="view_run_start_time_label_text">Start time:</string>
+    <string name="view_run_note_label_text">Note:</string>
+
 
     <!-- Weight Strings -->
-    <string name="weight_hint">Enter Weight (lbs)</string>
+    <string name="weight_hint_generic">Enter Weight</string>
+    <string name="weight_hint_lbs">Enter Weight (lbs)</string>
+    <string name="weight_hint_kg">Enter Weight (kg)</string>
     <string name="weight_swap_graph">View in Graph Mode</string>
     <string name="weight_swap_list">View in List Mode</string>
 
@@ -61,4 +120,17 @@
     <string name="weight_summary">Would you like weights to be displayed in Kilograms or Pounds?</string>
     <string name="distance_title">Distance Unit</string>
     <string name="distance_summary">Would you like distance to be displayed in Kilometers or Miles?</string>
+
+    <!-- Credits Strings -->
+    <string name="credits_image_header">Images</string>
+    <string name="credits_image_link_1">https://www.pexels.com/photo/woman-girl-silhouette-jogger-40751/</string>
+    <string name="credits_image_link_2">https://www.pexels.com/photo/sunset-men-sunrise-jogging-39308/</string>
+    <string name="credits_androidplot">AndroidPlot API</string>
+    <string name="credits_androitplot_link">https://bitbucket.org/androidplot/androidplot</string>
+    <string name="credits_picasso">Picasso API</string>
+    <string name="credits_picasso_link">http://square.github.io/picasso/</string>
+    <string name="credits_openweathermap">OpenWeatherMap API</string>
+    <string name="credits_openweathermap_link">https://openweathermap.org/</string>
+    <string name="credits_volley">Volley API</string>
+    <string name="credits_volley_link">https://github.com/google/volley</string>
 </resources>

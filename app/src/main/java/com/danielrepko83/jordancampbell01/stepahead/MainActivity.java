@@ -1,5 +1,6 @@
 package com.danielrepko83.jordancampbell01.stepahead;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
@@ -7,6 +8,7 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
+import android.support.v7.app.AlertDialog;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -18,6 +20,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 
 import com.twitter.sdk.android.core.Twitter;
+import com.twitter.sdk.android.tweetui.UserTimeline;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener,
@@ -26,7 +29,12 @@ public class MainActivity extends AppCompatActivity
                     WeightFragment.OnFragmentInteractionListener,
                     WeightListFragment.OnFragmentInteractionListener,
                     WeightGraphFragment.OnFragmentInteractionListener,
-                    TwitterFragment.OnFragmentInteractionListener {
+                    TwitterFragment.OnFragmentInteractionListener,
+                    CreditsFragment.OnFragmentInteractionListener,
+                    RunHistoryFragment.OnFragmentInteractionListener,
+                    CreateJournalFragment.OnFragmentInteractionListener,
+                    ViewRunFragment.OnFragmentInteractionListener,
+                    RunPhotoFragment.OnFragmentInteractionListener{
 
     FragmentManager fm;
     static FloatingActionButton fab;
@@ -44,6 +52,10 @@ public class MainActivity extends AppCompatActivity
             FragmentTransaction trans = fm.beginTransaction();
             trans.replace(R.id.content, new MainFragment());
             trans.commit();
+
+            CustomDialog dialog = new CustomDialog(this);
+            dialog.show();
+
         }
 
         fab = (FloatingActionButton) findViewById(R.id.fab);
@@ -55,6 +67,8 @@ public class MainActivity extends AppCompatActivity
             }
         });
         fab.hide();
+
+        new UserTimeline.Builder().screenName("StepAheadApp").build();
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
@@ -106,23 +120,140 @@ public class MainActivity extends AppCompatActivity
         int id = item.getItemId();
 
         FragmentTransaction trans = fm.beginTransaction();
+        trans.setCustomAnimations(R.anim.enter_from_right_medium, R.anim.exit_to_left_medium, R.anim.enter_from_left_medium, R.anim.exit_to_right_medium);
 
         if (id == R.id.nav_home) {
-            trans.replace(R.id.content, new MainFragment());
-            trans.addToBackStack(null);
-            trans.commit();
+            if(fm.findFragmentByTag("CreateJournal") != null){
+                new AlertDialog.Builder(this)
+                        .setTitle("Leave Page?")
+                        .setMessage("Are you sure you want to leave the page? Changes will not be saved.")
+                        .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int which) {
+                                fm.popBackStack();
+                                FragmentTransaction trans = fm.beginTransaction();
+                                trans.setCustomAnimations(R.anim.enter_from_right_medium, R.anim.exit_to_left_medium, R.anim.enter_from_left_medium, R.anim.exit_to_right_medium);
+                                trans.replace(R.id.content, new MainFragment());
+                                trans.addToBackStack(null);
+                                trans.commit();
+                            }
+                        })
+                        .setNegativeButton("No", null)
+                        .show();
+            } else {
+                trans.replace(R.id.content, new MainFragment());
+                trans.addToBackStack(null);
+                trans.commit();
+            }
+        } else if (id == R.id.nav_journals) {
+            if(fm.findFragmentByTag("CreateJournal") != null){
+                new AlertDialog.Builder(this)
+                        .setTitle("Leave Page?")
+                        .setMessage("Are you sure you want to leave the page? Changes will not be saved.")
+                        .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int which) {
+                                fm.popBackStack();
+                                FragmentTransaction trans = fm.beginTransaction();
+                                trans.setCustomAnimations(R.anim.enter_from_right_medium, R.anim.exit_to_left_medium, R.anim.enter_from_left_medium, R.anim.exit_to_right_medium);
+                                trans.replace(R.id.content, new RunHistoryFragment());
+                                trans.addToBackStack(null);
+                                trans.commit();
+                            }
+                        })
+                        .setNegativeButton("No", null)
+                        .show();
+            } else {
+                trans.replace(R.id.content, new RunHistoryFragment());
+                trans.addToBackStack(null);
+                trans.commit();
+            }
         } else if (id == R.id.nav_reminder) {
-            trans.replace(R.id.content, new ReminderFragment());
-            trans.addToBackStack(null);
-            trans.commit();
+            if(fm.findFragmentByTag("CreateJournal") != null){
+                new AlertDialog.Builder(this)
+                        .setTitle("Leave Page?")
+                        .setMessage("Are you sure you want to leave the page? Changes will not be saved.")
+                        .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int which) {
+                                fm.popBackStack();
+                                FragmentTransaction trans = fm.beginTransaction();
+                                trans.setCustomAnimations(R.anim.enter_from_right_medium, R.anim.exit_to_left_medium, R.anim.enter_from_left_medium, R.anim.exit_to_right_medium);
+                                trans.replace(R.id.content, new ReminderFragment());
+                                trans.addToBackStack(null);
+                                trans.commit();
+                            }
+                        })
+                        .setNegativeButton("No", null)
+                        .show();
+            } else {
+                trans.replace(R.id.content, new ReminderFragment());
+                trans.addToBackStack(null);
+                trans.commit();
+            }
         } else if (id == R.id.nav_weight) {
-            trans.replace(R.id.content, new WeightFragment());
-            trans.addToBackStack(null);
-            trans.commit();
+            if(fm.findFragmentByTag("CreateJournal") != null){
+                new AlertDialog.Builder(this)
+                        .setTitle("Leave Page?")
+                        .setMessage("Are you sure you want to leave the page? Changes will not be saved.")
+                        .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int which) {
+                                fm.popBackStack();
+                                FragmentTransaction trans = fm.beginTransaction();
+                                trans.setCustomAnimations(R.anim.enter_from_right_medium, R.anim.exit_to_left_medium, R.anim.enter_from_left_medium, R.anim.exit_to_right_medium);
+                                trans.replace(R.id.content, new WeightFragment());
+                                trans.addToBackStack(null);
+                                trans.commit();
+                            }
+                        })
+                        .setNegativeButton("No", null)
+                        .show();
+            } else {
+                trans.replace(R.id.content, new WeightFragment());
+                trans.addToBackStack(null);
+                trans.commit();
+            }
+        } else if (id == R.id.nav_credits) {
+            if(fm.findFragmentByTag("CreateJournal") != null){
+                new AlertDialog.Builder(this)
+                        .setTitle("Leave Page?")
+                        .setMessage("Are you sure you want to leave the page? Changes will not be saved.")
+                        .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int which) {
+                                fm.popBackStack();
+                                FragmentTransaction trans = fm.beginTransaction();
+                                trans.setCustomAnimations(R.anim.enter_from_right_medium, R.anim.exit_to_left_medium, R.anim.enter_from_left_medium, R.anim.exit_to_right_medium);
+                                trans.replace(R.id.content, new CreditsFragment());
+                                trans.addToBackStack(null);
+                                trans.commit();
+                            }
+                        })
+                        .setNegativeButton("No", null)
+                        .show();
+            } else {
+                trans.replace(R.id.content, new CreditsFragment());
+                trans.addToBackStack(null);
+                trans.commit();
+            }
         } else if (id == R.id.nav_twitter) {
-            trans.replace(R.id.content, new TwitterFragment());
-            trans.addToBackStack(null);
-            trans.commit();
+            if(fm.findFragmentByTag("CreateJournal") != null){
+                new AlertDialog.Builder(this)
+                        .setTitle("Leave Page?")
+                        .setMessage("Are you sure you want to leave the page? Changes will not be saved.")
+                        .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int which) {
+                                fm.popBackStack();
+                                FragmentTransaction trans = fm.beginTransaction();
+                                trans.setCustomAnimations(R.anim.enter_from_right_medium, R.anim.exit_to_left_medium, R.anim.enter_from_left_medium, R.anim.exit_to_right_medium);
+                                trans.replace(R.id.content, new TwitterFragment());
+                                trans.addToBackStack(null);
+                                trans.commit();
+                            }
+                        })
+                        .setNegativeButton("No", null)
+                        .show();
+            } else {
+                trans.replace(R.id.content, new TwitterFragment());
+                trans.addToBackStack(null);
+                trans.commit();
+            }
         } else if (id == R.id.nav_email) {
             String[] email = {"support@stepaheadapp.ca"};
             Intent intent = new Intent(Intent.ACTION_SENDTO);
@@ -146,7 +277,6 @@ public class MainActivity extends AppCompatActivity
         drawer.closeDrawer(GravityCompat.START);
         return true;
     }
-
 
     @Override
     public void onFragmentInteraction(Uri uri) {
