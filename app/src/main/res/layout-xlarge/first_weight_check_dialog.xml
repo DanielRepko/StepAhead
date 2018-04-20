@@ -59,13 +59,15 @@ checks the user's weight on first initial app launch -->
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="@string/home_page_first_weight_check_measurement_kg" />
+            android:text="@string/home_page_first_weight_check_measurement_kg"
+            android:textSize="@dimen/home_page_weight_check_weight_radio_buttons_text_size" />
 
         <RadioButton
             android:id="@+id/poundsOption"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="@string/home_page_first_weight_check_measurement_lbs" />
+            android:text="@string/home_page_first_weight_check_measurement_lbs"
+            android:textSize="@dimen/home_page_weight_check_weight_radio_buttons_text_size" />
     </RadioGroup>
 </LinearLayout>
