@@ -1,22 +1,26 @@
 <!-- This is the layout that will be used for the dialog that
-checks the user's weight on first initial app launch-->
+checks the user's weight on first initial app launch -->
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginLeft="@dimen/all_pages_side_margin"
+    android:layout_marginRight="@dimen/all_pages_side_margin"
     android:orientation="vertical">
 
     <TextView
         android:id="@+id/titleText"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/home_page_first_weight_check_title" />
+        android:text="@string/home_page_first_weight_check_title"
+        android:textSize="24sp" />
 
     <TextView
         android:id="@+id/messageText"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/home_page_first_weight_check_message" />
+        android:text="@string/home_page_first_weight_check_message"
+        android:textSize="16sp" />
 
 
     <LinearLayout
@@ -29,7 +33,9 @@ checks the user's weight on first initial app launch-->
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="TextView" />
+            android:text="@string/home_page_first_weight_check_weight_label"
+            android:textAlignment="viewStart"
+            android:textSize="18sp" />
 
         <EditText
             android:id="@+id/weight"
@@ -45,20 +51,21 @@ checks the user's weight on first initial app launch-->
         android:id="@+id/measurementGroup"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:checkedButton="@+id/kgOption"
         android:orientation="horizontal">
 
         <RadioButton
-            android:id="@+id/kmOption"
+            android:id="@+id/kgOption"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="RadioButton" />
+            android:text="@string/home_page_first_weight_check_measurement_kg" />
 
         <RadioButton
             android:id="@+id/poundsOption"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="RadioButton" />
+            android:text="@string/home_page_first_weight_check_measurement_lbs" />
     </RadioGroup>
 </LinearLayout>
