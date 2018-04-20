@@ -32,7 +32,15 @@
     <dimen name="view_run_viewpager_height">255dp</dimen>
 
     <!-- Weight Pages -->
-    <dimen name="weight_text_size">20sp</dimen>
+    <dimen name="weight_text_size">30sp</dimen>
+    <dimen name="weight_date_text_size">14sp</dimen>
+    <dimen name="weight_button_text_size">21sp</dimen>
+    <dimen name="weight_button_height">75dp</dimen>
+
+    <!-- Reminder Page -->
+    <dimen name="reminder_text_size">21sp</dimen>
+    <dimen name="reminder_editable_height">60dp</dimen>
+    <dimen name="reminder_button_height">75dp</dimen>
 
     <!-- Credits font sizes -->
     <dimen name="credits_header_size">24sp</dimen>

@@ -82,8 +82,9 @@ public class ReminderFragment extends Fragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_reminder, container, false);
 
-        //stop LocationTracker if it is running
+        //stop LocationTracker if it is running, and hide the FAB
         getActivity().stopService(new Intent(getActivity(), LocationTracker.class));
+        MainActivity.fab.hide();
 
         //Grab the current elements on the page
         final Spinner typeSpinner = view.findViewById(R.id.typeSpinner);

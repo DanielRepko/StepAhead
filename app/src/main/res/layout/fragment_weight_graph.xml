@@ -18,7 +18,7 @@
         android:id="@+id/weightGraph"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        ap:rangeTitle="Weight (lbs)"
+        ap:rangeTitle="Weight"
         ap:paddingBottom="15dp"
         ap:paddingRight="15dp"
         ap:paddingTop="10dp"
