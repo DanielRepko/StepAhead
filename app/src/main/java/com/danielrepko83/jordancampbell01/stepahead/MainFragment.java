@@ -239,9 +239,6 @@ public class MainFragment extends Fragment{
         finish.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                FragmentTransaction trans = fm.beginTransaction();
-                trans.addToBackStack(null);
-                trans.replace(R.id.content, new CreateJournalFragment());
 
                 //add data to run journal
                 runJournal.setDistanceKM(Double.parseDouble(distance.getText().toString()));
@@ -305,6 +302,9 @@ public class MainFragment extends Fragment{
 
                 getActivity().stopService(new Intent(getActivity(), LocationTracker.class));
 
+                FragmentTransaction trans = fm.beginTransaction();
+                trans.addToBackStack(null);
+                trans.replace(R.id.content, new CreateJournalFragment(), "CreateJournal");
                 trans.commit();
 
             }

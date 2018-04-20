@@ -77,7 +77,7 @@ public class CustomAdapterRun extends RecyclerView.Adapter {
                 FragmentManager fm = activity.getSupportFragmentManager();
                 FragmentTransaction transaction = fm.beginTransaction();
                 transaction.replace(R.id.content,
-                        CreateJournalFragment.newInstance(runs.get(location)));
+                        CreateJournalFragment.newInstance(runs.get(location)), "CreateJournal");
                 transaction.addToBackStack(null);
                 transaction.commit();
             }
