@@ -52,6 +52,15 @@
     <string name="permission_description_write_storage">In order for the camera feature to work, the Step Ahead app needs to
         be able to store the images it takes on your device.</string>
 
+    <string name="home_page_first_weight_check_title">Enter your weight</string>
+    <string name="home_page_first_weight_check_message">Please enter your weight. This will allow us to calculate the calories you burn during
+        during your runs. You can always change this by entering a new weight on the Weight Journals page.</string>
+    <string name="home_page_first_weight_check_weight_label">Weight:</string>
+    <string name="home_page_first_weight_check_measurement_kg">kg</string>
+    <string name="home_page_first_weight_check_measurement_lbs">lbs</string>
+    <string name="home_page_first_weight_check_submit_button_text">Submit</string>
+    <string name="home_page_first_weight_check_nothanks_button_text">No thanks</string>
+
     <!-- Create Journal Strings -->
     <string name="create_journal_feeling_label_text">How you felt:</string>
     <string name="create_journal_area_label_text">Type of area:</string>

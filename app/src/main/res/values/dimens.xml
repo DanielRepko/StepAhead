@@ -14,6 +14,9 @@
     <dimen name="home_page_distance_label_text_size">16sp</dimen>
     <dimen name="home_page_duration_calories_text_size">34sp</dimen>
     <dimen name="home_page_duration_calories_label_text_size">15sp</dimen>
+    <dimen name="home_page_weight_check_title_text_size">24sp</dimen>
+    <dimen name="home_page_weight_check_message_text_size">16sp</dimen>
+    <dimen name="home_page_weight_check_weight_label_text_size">18sp</dimen>
 
     <dimen name="home_page_start_run_button_left_right_padding">20dp</dimen>
     <dimen name="home_page_start_run_button_top_bottom_padding">25dp</dimen>
@@ -23,6 +26,7 @@
     <dimen name="home_page_cancel_button_top_margin">45dp</dimen>
     <dimen name="home_page_pause_finish_dividing_margin">20dp</dimen>
     <dimen name="home_page_pause_finish_button_width">150dp</dimen>
+
 
     <!-- Create Journal Page -->
     <dimen name="create_journal_page_help_width_height">60dp</dimen>
