@@ -118,27 +118,39 @@ public class MainActivity extends AppCompatActivity
 
         if (id == R.id.nav_home) {
             trans.replace(R.id.content, new MainFragment());
-            trans.addToBackStack(null);
+            if(fm.findFragmentByTag("CreateJournal") == null){
+                trans.addToBackStack(null);
+            }
             trans.commit();
         } else if (id == R.id.nav_journals) {
             trans.replace(R.id.content, new RunHistoryFragment());
-            trans.addToBackStack(null);
+            if(fm.findFragmentByTag("CreateJournal") == null){
+                trans.addToBackStack(null);
+            }
             trans.commit();
         } else if (id == R.id.nav_reminder) {
             trans.replace(R.id.content, new ReminderFragment());
-            trans.addToBackStack(null);
+            if(fm.findFragmentByTag("CreateJournal") == null){
+                trans.addToBackStack(null);
+            }
             trans.commit();
         } else if (id == R.id.nav_weight) {
             trans.replace(R.id.content, new WeightFragment());
-            trans.addToBackStack(null);
+            if(fm.findFragmentByTag("CreateJournal") == null){
+                trans.addToBackStack(null);
+            }
             trans.commit();
         } else if (id == R.id.nav_credits) {
             trans.replace(R.id.content, new CreditsFragment());
-            trans.addToBackStack(null);
+            if(fm.findFragmentByTag("CreateJournal") == null){
+                trans.addToBackStack(null);
+            }
             trans.commit();
         } else if (id == R.id.nav_twitter) {
             trans.replace(R.id.content, new TwitterFragment());
-            trans.addToBackStack(null);
+            if(fm.findFragmentByTag("CreateJournal") == null){
+                trans.addToBackStack(null);
+            }
             trans.commit();
         } else if (id == R.id.nav_email) {
             String[] email = {"support@stepaheadapp.ca"};
