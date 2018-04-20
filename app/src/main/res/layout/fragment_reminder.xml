@@ -19,12 +19,13 @@
             android:layout_height="wrap_content"
             android:layout_weight="0"
             android:padding="5dp"
-            android:text="@string/reminder_type" />
+            android:text="@string/reminder_type"
+            android:textSize="@dimen/reminder_text_size" />
 
         <Spinner
             android:id="@+id/typeSpinner"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="@dimen/reminder_editable_height"
             android:layout_weight="1" />
     </LinearLayout>
 
@@ -40,12 +41,13 @@
             android:layout_height="wrap_content"
             android:layout_weight="0"
             android:padding="5dp"
-            android:text="@string/reminder_date" />
+            android:text="@string/reminder_date"
+            android:textSize="@dimen/reminder_text_size" />
 
         <EditText
             android:id="@+id/dateEditText"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="@dimen/reminder_editable_height"
             android:layout_weight="0"
             android:ems="10"
             android:focusable="false"
@@ -65,12 +67,13 @@
             android:layout_height="wrap_content"
             android:layout_weight="0"
             android:padding="5dp"
-            android:text="@string/reminder_time" />
+            android:text="@string/reminder_time"
+            android:textSize="@dimen/reminder_text_size" />
 
         <EditText
             android:id="@+id/timeEditText"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="@dimen/reminder_editable_height"
             android:layout_weight="0"
             android:ems="10"
             android:focusable="false"
@@ -90,12 +93,13 @@
             android:layout_height="wrap_content"
             android:layout_weight="0"
             android:padding="5dp"
-            android:text="@string/reminder_description" />
+            android:text="@string/reminder_description"
+            android:textSize="@dimen/reminder_text_size" />
 
         <EditText
             android:id="@+id/descriptionEditText"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="@dimen/reminder_editable_height"
             android:layout_weight="1"
             android:ems="10"
             android:inputType="text" />
@@ -111,9 +115,10 @@
         <Button
             android:id="@+id/submitButton"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="@dimen/reminder_button_height"
             android:layout_weight="1"
-            android:text="@string/reminder_create" />
+            android:text="@string/reminder_create"
+            android:textSize="@dimen/reminder_text_size" />
     </LinearLayout>
 
 </LinearLayout>
