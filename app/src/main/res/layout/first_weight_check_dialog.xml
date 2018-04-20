@@ -68,4 +68,28 @@ checks the user's weight on first initial app launch -->
             android:layout_weight="1"
             android:text="@string/home_page_first_weight_check_measurement_lbs" />
     </RadioGroup>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/noThanks"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="@color/ap_transparent"
+            android:text="@string/home_page_first_weight_check_nothanks_button_text"
+            android:textColor="@color/colorAccent" />
+
+        <Button
+            android:id="@+id/submit"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="@color/ap_transparent"
+            android:text="@string/home_page_first_weight_check_submit_button_text"
+            android:textColor="@color/colorAccent" />
+    </LinearLayout>
 </LinearLayout>

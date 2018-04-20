@@ -58,6 +58,8 @@
     <string name="home_page_first_weight_check_weight_label">Weight:</string>
     <string name="home_page_first_weight_check_measurement_kg">kg</string>
     <string name="home_page_first_weight_check_measurement_lbs">lbs</string>
+    <string name="home_page_first_weight_check_submit_button_text">Submit</string>
+    <string name="home_page_first_weight_check_nothanks_button_text">No thanks</string>
 
     <!-- Create Journal Strings -->
     <string name="create_journal_feeling_label_text">How you felt:</string>

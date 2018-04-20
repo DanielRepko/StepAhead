@@ -52,7 +52,6 @@ public class MainActivity extends AppCompatActivity
             trans.replace(R.id.content, new MainFragment());
             trans.commit();
 
-
         }
 
         fab = (FloatingActionButton) findViewById(R.id.fab);
