@@ -68,6 +68,9 @@ public class RunHistoryFragment extends Fragment {
         }
     }
 
+    public RecyclerView list;
+    public ArrayList<RunJournal> runList;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -77,11 +80,11 @@ public class RunHistoryFragment extends Fragment {
         //stop LocationTracker if it is running
         getActivity().stopService(new Intent(getActivity(), LocationTracker.class));
 
-        RecyclerView list = view.findViewById(R.id.runRecycler);
+        list = view.findViewById(R.id.runRecycler);
 
         //grab all records in the run table from the database
         DatabaseHandler db = new DatabaseHandler(getContext());
-        ArrayList<RunJournal> runList = db.getAllRuns();
+        runList = db.getAllRuns();
         Collections.reverse(runList);
 
         //create and set the recyclerview adapter
@@ -94,6 +97,13 @@ public class RunHistoryFragment extends Fragment {
 
 
         return view;
+    }
+
+    @Override
+    public void onResume(){
+        super.onResume();
+        CustomAdapterRun adapter = new CustomAdapterRun(runList);
+        list.setAdapter(adapter);
     }
 
     // TODO: Rename method, update argument and hook method into UI event
