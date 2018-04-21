@@ -253,7 +253,12 @@ public class MainFragment extends Fragment{
             public void onClick(View v) {
 
                 //add data to run journal
-                runJournal.setDistanceKM(Double.parseDouble(distance.getText().toString()));
+                SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(getContext());
+                if(Integer.parseInt(sharedPref.getString("distance_preference", "0")) == 0) {
+                    runJournal.setDistanceKM(Double.parseDouble(distance.getText().toString()));
+                } else {
+                    runJournal.setDistanceMI(Double.parseDouble(distance.getText().toString()));
+                }
                 runJournal.setDuration(duration.getText().toString());
                 runJournal.setCalories(Integer.parseInt(calories.getText().toString()));
 
