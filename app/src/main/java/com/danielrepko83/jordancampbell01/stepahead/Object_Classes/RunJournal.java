@@ -93,7 +93,7 @@ public class RunJournal implements Parcelable{
 
     public void setDistanceKM(double distanceKM) {
         this.distanceKM = distanceKM;
-        this.distanceMI = this.distanceKM * 0.62137;
+        this.distanceMI = Double.parseDouble(String.format("%.2f",this.distanceKM * 0.62137));
     }
 
     public double getDistanceMI() {
@@ -102,7 +102,7 @@ public class RunJournal implements Parcelable{
 
     public void setDistanceMI(double distanceMI) {
         this.distanceMI = distanceMI;
-        this.distanceKM = this.distanceMI / 0.62137;
+        this.distanceKM = Double.parseDouble(String.format("%.2f",this.distanceMI / 0.62137));
     }
 
     public String getDuration() {

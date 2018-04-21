@@ -1,9 +1,11 @@
 package com.danielrepko83.jordancampbell01.stepahead;
 
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Parcelable;
+import android.preference.PreferenceManager;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
@@ -67,6 +69,9 @@ public class ViewRunFragment extends Fragment {
 
     ArrayList<Picture> picList;
 
+    public TextView distance;
+    public TextView distanceLabel;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -75,7 +80,8 @@ public class ViewRunFragment extends Fragment {
         MainActivity.fab.hide();
 
         TextView duration = view.findViewById(R.id.duration);
-        TextView distance = view.findViewById(R.id.distance);
+        distance = view.findViewById(R.id.distance);
+        distanceLabel = view.findViewById(R.id.distanceLabel);
         TextView calories = view.findViewById(R.id.calories);
         TextView heartRate = view.findViewById(R.id.heartRate);
         TextView feeling = view.findViewById(R.id.feeling);
@@ -99,8 +105,18 @@ public class ViewRunFragment extends Fragment {
 
         //set the text in the fields to the values of the run journal selected
         duration.setText(mParam1.getDuration());
-        distance.setText(mParam1.getDistanceKM()+"");
         calories.setText(mParam1.getCalories()+"");
+
+        //set text of distanceLabel and distance according to the measurement selected in settings
+        SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(getContext());
+        if(Integer.parseInt(sharedPref.getString("distance_preference", "0")) == 0) {
+            distanceLabel.setText(R.string.home_page_distance_label_km_text);
+            distance.setText(mParam1.getDistanceKM()+"");
+        } else {
+            distanceLabel.setText(R.string.home_page_distance_label_mi_text);
+            distance.setText(mParam1.getDistanceMI()+"");
+        }
+
 
         if(mParam1.getHeartRate() != 0) {
             heartRate.setText(mParam1.getHeartRate() + "");
@@ -210,6 +226,20 @@ public class ViewRunFragment extends Fragment {
                 // This page is way off-screen to the right.
                 view.setAlpha(0);
             }
+        }
+    }
+
+    @Override
+    public void onResume(){
+        super.onResume();
+
+        SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(getContext());
+        if(Integer.parseInt(sharedPref.getString("distance_preference", "0")) == 0) {
+            distanceLabel.setText(R.string.home_page_distance_label_km_text);
+            distance.setText(mParam1.getDistanceKM()+"");
+        } else {
+            distanceLabel.setText(R.string.home_page_distance_label_mi_text);
+            distance.setText(mParam1.getDistanceMI()+"");
         }
     }
 
