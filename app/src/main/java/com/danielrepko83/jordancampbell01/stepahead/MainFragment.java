@@ -6,11 +6,13 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
 import android.os.SystemClock;
+import android.preference.PreferenceManager;
 import android.provider.MediaStore;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
@@ -107,6 +109,8 @@ public class MainFragment extends Fragment{
     public static TextView duration;
     public static TextView calories;
 
+    public TextView distanceLabel;
+
     private static final int CAMERA_INTENT_LABEL = 1;
     private String imageLocation;
     //this ArrayList will hold all of image resources to be used inside of CreateRunFragment
@@ -130,7 +134,7 @@ public class MainFragment extends Fragment{
         getActivity().stopService(new Intent(getActivity(), LocationTracker.class));
 
         distance = view.findViewById(R.id.distance);
-        TextView distanceLabel = view.findViewById(R.id.distanceLabel);
+        distanceLabel = view.findViewById(R.id.distanceLabel);
         duration = view.findViewById(R.id.duration);
         TextView durationLabel = view.findViewById(R.id.durationLabel);
         calories = view.findViewById(R.id.calories);
@@ -140,6 +144,14 @@ public class MainFragment extends Fragment{
         final Button pause = view.findViewById(R.id.pause);
         final Button finish = view.findViewById(R.id.finish);
         runPictures = new ArrayList<>();
+
+        //set text of distanceLabel according to the measurement selected in settings
+        SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(getContext());
+        if(Integer.parseInt(sharedPref.getString("distance_preference", "0")) == 0) {
+            distanceLabel.setText(R.string.home_page_distance_label_km_text);
+        } else {
+            distanceLabel.setText(R.string.home_page_distance_label_mi_text);
+        }
 
 
         //Start Run click listener
@@ -241,7 +253,13 @@ public class MainFragment extends Fragment{
             public void onClick(View v) {
 
                 //add data to run journal
-                runJournal.setDistanceKM(Double.parseDouble(distance.getText().toString()));
+                SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(getContext());
+                if(Integer.parseInt(sharedPref.getString("distance_preference", "0")) == 0) {
+                    runJournal.setDistanceKM(Double.parseDouble(distance.getText().toString()));
+                } else {
+                    runJournal.setDistanceMI(Double.parseDouble(distance.getText().toString()));
+                }
+                
                 runJournal.setDuration(duration.getText().toString());
                 runJournal.setCalories(Integer.parseInt(calories.getText().toString()));
 
@@ -421,6 +439,20 @@ public class MainFragment extends Fragment{
         File picture  = File.createTempFile(fileName, ".jpg", directory);
         imageLocation = picture.getAbsolutePath();
         return picture;
+    }
+
+    @Override
+    public void onResume(){
+        super.onResume();
+
+        SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(getContext());
+        int pref = Integer.parseInt(sharedPref.getString("distance_preference", "0"));
+        LocationTracker.adjustUnit(pref);
+        if(pref == 0) {
+            distanceLabel.setText(R.string.home_page_distance_label_km_text);
+        } else {
+            distanceLabel.setText(R.string.home_page_distance_label_mi_text);
+        }
     }
 
     // TODO: Rename method, update argument and hook method into UI event

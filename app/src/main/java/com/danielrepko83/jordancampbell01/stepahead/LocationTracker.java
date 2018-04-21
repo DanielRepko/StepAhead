@@ -5,11 +5,13 @@ import android.app.PendingIntent;
 import android.app.Service;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.location.Location;
 import android.os.Handler;
 import android.os.IBinder;
 import android.os.SystemClock;
+import android.preference.PreferenceManager;
 import android.support.v4.app.NotificationCompat;
 import android.support.v4.content.ContextCompat;
 import android.view.LayoutInflater;
@@ -30,11 +32,12 @@ import com.google.android.gms.location.LocationServices;
 public class LocationTracker extends Service {
 
     //properties for location tracking
-    private double currentDistance;
-    private TextView distanceLabel;
+    private static double currentDistance;
+    private static TextView distanceLabel;
     public static Location lastLocation;
     private LocationCallback callBack;
     private static boolean paused = false;
+    private static int distanceUnit = 0;
 
     //properties for timer
     private static long startTime = 0L;
@@ -110,16 +113,28 @@ public class LocationTracker extends Service {
                             //check if this is the first location update
                             if (lastLocation != null) {
                                 //if not calculate the distance from the last location update
-                                currentDistance += location.distanceTo(lastLocation) / 1000;
+                                if(distanceUnit == 0){
+                                    currentDistance += location.distanceTo(lastLocation) / 1000;
+                                } else if(distanceUnit == 1){
+                                    currentDistance += location.distanceTo(lastLocation) * 0.00062137;
+                                }
+
+                                System.out.println(currentDistance);
+
 
                                 //update the distance textview
                                 distanceLabel.setText(String.format("%.2f", currentDistance));
                                 //set the last location
                                 lastLocation = location;
 
+                                //add calories
                                 if(weight != null) {
                                     //add distance traveled in meters onto distanceInterval
-                                    distanceInterval += currentDistance * 1000;
+                                    if(distanceUnit == 0) {
+                                        distanceInterval += currentDistance * 1000;
+                                    } else if(distanceUnit == 1) {
+                                        distanceInterval += currentDistance / 0.00062137;
+                                    }
                                     if (distanceInterval >= 533) {
                                         calories += weight.getPounds() * 0.25;
                                         calorieLabel.setText(Math.round(calories) + "");
@@ -178,6 +193,37 @@ public class LocationTracker extends Service {
 
         }
     };
+
+    //change the unit of measurement for distance travelled if necessary
+    public static void adjustUnit(int preference){
+        //check if currentDistance has a value
+        //if not then there is no need to convert it
+        if(currentDistance != 0){
+            //check to see if the current preference is different
+            //this is because the method may be called even if the preference was not changed
+            if(preference != distanceUnit){
+                //make sure LocationTracker is using the unit selected in settings
+                distanceUnit = preference;
+
+                switch(distanceUnit){
+                    //if the unit has gone from miles to km
+                    case 0:
+                        //convert distance travelled to km
+                        currentDistance/= 0.62137;
+                        distanceLabel.setText(String.format("%.2f", currentDistance));
+                        break;
+                    //if the unit has gone from km to miles
+                    case 1:
+                        //convert distance travelled to miles
+                        currentDistance*= 0.62137;
+                        distanceLabel.setText(String.format("%.2f", currentDistance));
+                        break;
+                    default:
+                        break;
+                }
+            }
+        }
+    }
 
     @Override
     public void onDestroy() {
