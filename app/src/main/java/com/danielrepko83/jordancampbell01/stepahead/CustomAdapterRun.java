@@ -3,6 +3,8 @@ package com.danielrepko83.jordancampbell01.stepahead;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.SharedPreferences;
+import android.preference.PreferenceManager;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.widget.RecyclerView;
@@ -89,7 +91,17 @@ public class CustomAdapterRun extends RecyclerView.Adapter {
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
         RunJournal runJournal = runs.get(position);
-        ((CustomViewHolder) holder).distance.setText(runJournal.getDistanceKM()+"");
+
+        TextView distance = ((CustomViewHolder) holder).distance;
+        TextView distanceLabel = ((CustomViewHolder) holder).distanceLabel;
+        SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(context);
+        if(Integer.parseInt(sharedPref.getString("distance_preference", "0")) == 0) {
+            distanceLabel.setText(R.string.run_history_page_distance_label_km_text);
+            distance.setText(runJournal.getDistanceKM()+"");
+        } else {
+            distanceLabel.setText(R.string.run_history_page_distance_label_mi_text);
+            distance.setText(runJournal.getDistanceMI()+"");
+        }
         ((CustomViewHolder) holder).duration.setText(runJournal.getDuration());
         ((CustomViewHolder) holder).calories.setText(runJournal.getCalories()+"");
     }
