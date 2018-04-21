@@ -145,6 +145,7 @@ public class MainFragment extends Fragment{
         final Button finish = view.findViewById(R.id.finish);
         runPictures = new ArrayList<>();
 
+        //set text of distanceLabel according to the measurement selected in settings
         SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(getContext());
         if(Integer.parseInt(sharedPref.getString("distance_preference", "0")) == 0) {
             distanceLabel.setText(R.string.home_page_distance_label_km_text);
