@@ -440,7 +440,9 @@ public class MainFragment extends Fragment{
         super.onResume();
 
         SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(getContext());
-        if(Integer.parseInt(sharedPref.getString("distance_preference", "0")) == 0) {
+        int pref = Integer.parseInt(sharedPref.getString("distance_preference", "0"));
+        LocationTracker.adjustUnit(pref);
+        if(pref == 0) {
             distanceLabel.setText(R.string.home_page_distance_label_km_text);
         } else {
             distanceLabel.setText(R.string.home_page_distance_label_mi_text);
