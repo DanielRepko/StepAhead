@@ -259,6 +259,7 @@ public class MainFragment extends Fragment{
                 } else {
                     runJournal.setDistanceMI(Double.parseDouble(distance.getText().toString()));
                 }
+                
                 runJournal.setDuration(duration.getText().toString());
                 runJournal.setCalories(Integer.parseInt(calories.getText().toString()));
 
