@@ -35,6 +35,7 @@ public class LocationTracker extends Service {
     public static Location lastLocation;
     private LocationCallback callBack;
     private static boolean paused = false;
+    private static int distanceUnit;
 
     //properties for timer
     private static long startTime = 0L;
@@ -178,6 +179,11 @@ public class LocationTracker extends Service {
 
         }
     };
+
+    //change the unit of measurement for distance travelled if necessary
+    public static void adjustUnit(int preference){
+
+    }
 
     @Override
     public void onDestroy() {
