@@ -85,6 +85,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_columnWeight="1"
+            android:layout_rowWeight="1"
             android:text="@string/view_run_heart_rate_label_text"
             android:textSize="@dimen/view_run_labels_text_size" />
 
@@ -93,6 +94,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_columnWeight="1"
+            android:layout_rowWeight="1"
             android:text="TextView"
             android:textAlignment="center"
             android:textSize="@dimen/view_run_other_values_text_size" />
@@ -102,6 +104,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_columnWeight="1"
+            android:layout_rowWeight="1"
             android:text="@string/view_run_feeling_label_text"
             android:textSize="@dimen/view_run_labels_text_size" />
 
@@ -110,6 +113,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_columnWeight="1"
+            android:layout_rowWeight="1"
             android:text="TextView"
             android:textAlignment="center"
             android:textSize="@dimen/view_run_other_values_text_size" />
@@ -119,6 +123,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_columnWeight="1"
+            android:layout_rowWeight="1"
             android:text="@string/view_run_area_label_text"
             android:textSize="@dimen/view_run_labels_text_size" />
 
@@ -127,6 +132,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_columnWeight="1"
+            android:layout_rowWeight="1"
             android:text="TextView"
             android:textAlignment="center"
             android:textSize="@dimen/view_run_other_values_text_size" />
@@ -136,6 +142,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_columnWeight="1"
+            android:layout_rowWeight="1"
             android:text="@string/view_run_weather_label_text"
             android:textSize="@dimen/view_run_labels_text_size" />
 
@@ -144,6 +151,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_columnWeight="1"
+            android:layout_rowWeight="1"
             android:text="TextView"
             android:textAlignment="center"
             android:textSize="@dimen/view_run_other_values_text_size" />
@@ -153,6 +161,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_columnWeight="1"
+            android:layout_rowWeight="1"
             android:text="@string/view_run_start_time_label_text"
             android:textSize="@dimen/view_run_labels_text_size" />
 
@@ -161,6 +170,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_columnWeight="1"
+            android:layout_rowWeight="1"
             android:text="TextView"
             android:textAlignment="center"
             android:textSize="@dimen/view_run_other_values_text_size" />
@@ -170,16 +180,16 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_columnWeight="1"
+            android:layout_rowWeight="1"
             android:text="@string/view_run_note_label_text"
             android:textSize="@dimen/view_run_labels_text_size" />
 
         <TextView
             android:id="@+id/note"
-            android:layout_width="wrap_content"
+            android:layout_width="@dimen/view_run_note_field_width"
             android:layout_height="wrap_content"
             android:layout_columnWeight="1"
             android:text="TextView"
-            android:textAlignment="textStart"
             android:textSize="@dimen/view_run_other_values_text_size" />
 
 
