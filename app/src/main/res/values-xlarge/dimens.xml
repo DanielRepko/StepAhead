@@ -37,6 +37,7 @@
     <dimen name="view_run_other_values_text_size">24sp</dimen>
     <dimen name="view_run_labels_text_size">26sp</dimen>
     <dimen name="view_run_viewpager_height">255dp</dimen>
+    <dimen name="view_run_note_field_width">40dp</dimen>
 
     <!-- Weight Pages -->
     <dimen name="weight_text_size">30sp</dimen>
